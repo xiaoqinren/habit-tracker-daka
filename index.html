@@ -1,0 +1,2673 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三年级习惯养成打卡</title>
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #81C784;
+            --background-color: #F1F8E9;
+            --text-color: #333;
+            --card-bg: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .task-group {
+            margin-bottom: 30px;
+        }
+
+        .task-group h2 {
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            color: #388E3C;
+            font-size: 1.5em;
+        }
+
+        .task-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #FAFAFA;
+            border-radius: 8px;
+            transition: transform 0.2s, background-color 0.2s;
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .task-item:hover {
+            transform: translateY(-2px);
+            background-color: #F5F5F5;
+        }
+
+        .task-text {
+            font-size: 1.1em;
+            flex-grow: 1;
+            margin-right: 20px;
+        }
+
+        .task-time {
+            color: #757575;
+            font-size: 0.9em;
+            margin-right: 20px;
+            min-width: 60px;
+        }
+
+        /* 自定义复选框 */
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkmark {
+            width: 30px;
+            height: 30px;
+            background-color: #EEE;
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="checkbox"]:checked+.checkmark {
+            background-color: var(--primary-color);
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 10px;
+            top: 5px;
+            width: 8px;
+            height: 15px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            transform: rotate(45deg);
+        }
+
+        input[type="checkbox"]:checked+.checkmark:after {
+            display: block;
+        }
+
+        /* 进度提示 */
+        .progress-section {
+            margin-top: 40px;
+            text-align: center;
+            padding: 20px;
+            background-color: #E8F5E9;
+            border-radius: 10px;
+        }
+
+        .progress-text {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .reset-btn {
+            background-color: #81C784;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .reset-btn:hover {
+            background-color: #66BB6A;
+        }
+
+        /* 划线动画 */
+        .task-item.completed .task-text {
+            text-decoration: line-through;
+            color: #9E9E9E;
+            transition: all 0.3s ease;
+        }
+
+        .tts-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 10px;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+
+        .tts-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* 练习按钮 */
+        .exercise-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-right: 10px;
+        }
+
+        .exercise-btn:hover {
+            background-color: #388E3C;
+            transform: translateY(-2px);
+        }
+
+        .exercise-btn:disabled {
+            background-color: #A5D6A7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* 弹窗样式 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--background-color);
+            padding-bottom: 10px;
+        }
+
+        .modal-title {
+            font-size: 1.5em;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #757575;
+        }
+
+        .exercise-container {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .exercise-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.1em;
+            border: 2px solid #E0E0E0;
+            border-radius: 5px;
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+
+        .exercise-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+            min-height: 24px;
+        }
+
+        .feedback.success {
+            color: var(--primary-color);
+        }
+
+        .feedback.error {
+            color: #f44336;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #388E3C;
+        }
+
+        .profile-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .profile-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--primary-color);
+            background-color: transparent;
+            color: var(--primary-color);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .profile-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 6px rgba(76, 175, 80, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 id="main-title">🌟 三年级超能打卡表 🌟</h1>
+
+    <div class="profile-switcher">
+        <button id="btn-profile-g3" class="profile-btn active" onclick="switchProfile('g3')">老大 (三年级)</button>
+        <button id="btn-profile-g2" class="profile-btn" onclick="switchProfile('g2')">老二 (二年级)</button>
+    </div>
+
+    <div class="container">
+        <!-- 语文学习模块 -->
+        <div class="task-group">
+            <h2>📝 语文基础</h2>
+            <ul class="task-list">
+                <li class="task-item" id="task-chinese-foundation">
+                    <span class="task-text" id="text-chinese-desc">夯基础：看拼音写字、补充成语练习</span>
+                    <span class="task-time">10分钟</span>
+                    <button class="exercise-btn" onclick="openExercise('chinese')">开始练习</button>
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" disabled onchange="updateProgress(this)">
+                        <span class="checkmark" style="background-color: #e0e0e0; cursor: not-allowed;"
+                            title="请先完成练习"></span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 英语学习模块 -->
+        <div class="task-group" id="group-english">
+            <h2>📚 英语超能力</h2>
+            <ul class="task-list">
+                <li class="task-item" id="task-english-read">
+                    <span class="task-text">磨耳朵：观看今日英语启蒙视频</span>
+                    <span class="task-time">15分钟</span>
+                    <button class="exercise-btn" onclick="openContent('listen')">每日影音</button>
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" disabled onchange="updateProgress(this)">
+                        <span class="checkmark" style="background-color: #e0e0e0; cursor: not-allowed;"
+                            title="请先完成收听"></span>
+                    </label>
+                </li>
+                <li class="task-item" id="task-english-vocab">
+                    <span class="task-text">记单词：完成每日词汇小测</span>
+                    <span class="task-time">10分钟</span>
+                    <button class="exercise-btn" onclick="openExercise('english')">开始测试</button>
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" disabled onchange="updateProgress(this)">
+                        <span class="checkmark" style="background-color: #e0e0e0; cursor: not-allowed;"
+                            title="请先完成测试"></span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 数学学习模块 -->
+        <div class="task-group">
+            <h2>🧮 数学小灵通</h2>
+            <ul class="task-list">
+                <li class="task-item" id="task-math-calc">
+                    <span class="task-text" id="text-math-desc">练计算：完成每日口算训练，保证又快又准</span>
+                    <span class="task-time">5分钟</span>
+                    <button class="exercise-btn" onclick="openExercise('math')">开始挑战</button>
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" disabled onchange="updateProgress(this)">
+                        <span class="checkmark" style="background-color: #e0e0e0; cursor: not-allowed;"
+                            title="请先完成计算挑战"></span>
+                    </label>
+                </li>
+                <li class="task-item" id="task-math-review">
+                    <span class="task-text">理错题：整理今天作业/考试中的错题到错题本，并写清思路</span>
+                    <span class="task-time">15分钟</span>
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" onchange="updateProgress(this)">
+                        <span class="checkmark"></span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 关键习惯培养模块 -->
+        <div class="task-group">
+            <h2>✅ 养成好习惯</h2>
+            <ul class="task-list">
+                <li class="task-item" id="task-time-management">
+                    <span class="task-text">时间管理：写作业前自己定好时间，不拖拉</span>
+                    <span class="task-time" id="timer-display">20:00</span>
+                    <button class="exercise-btn" id="timer-btn" onclick="startTimer()">开始专注</button>
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" onchange="updateProgress(this)">
+                        <span class="checkmark"></span>
+                    </label>
+                </li>
+                <li class="task-item">
+                    <span class="task-text">认真审题：做题做到“指读圈画”，草稿本保持整齐</span>
+                    <span class="task-time">每日</span>
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" onchange="updateProgress(this)">
+                        <span class="checkmark"></span>
+                    </label>
+                </li>
+                <li class="task-item">
+                    <span class="task-text">课前预习：浏览明天新课内容，圈出不懂的地方</span>
+                    <span class="task-time">10分钟</span>
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" onchange="updateProgress(this)">
+                        <span class="checkmark"></span>
+                    </label>
+                </li>
+                <li class="task-item">
+                    <span class="task-text">课后复习：回顾今天学过的知识，加深记忆</span>
+                    <span class="task-time">10分钟</span>
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" onchange="updateProgress(this)">
+                        <span class="checkmark"></span>
+                    </label>
+                </li>
+                <li class="task-item" id="task-habit-reading">
+                    <span class="task-text">中英阅读：阅读今日推荐的中英文短文</span>
+                    <span class="task-time">20分钟</span>
+                    <button class="exercise-btn" onclick="openContent('read')">今日阅读</button>
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" disabled onchange="updateProgress(this)">
+                        <span class="checkmark" style="background-color: #e0e0e0; cursor: not-allowed;"
+                            title="请先完成阅读"></span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-text" id="progressText">今天完成了 0/7 项任务，加油！💪</div>
+            <button class="reset-btn" onclick="resetCheckboxes()">开启新的一天，重置打卡</button>
+        </div>
+    </div>
+
+    <!-- 练习弹窗 -->
+    <div class="modal-overlay" id="exerciseModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">每日挑战</h3>
+                <button class="close-btn" onclick="closeExercise()">×</button>
+            </div>
+            <div class="exercise-container" id="exerciseContainer">
+                <div id="questionText">问题加载中...</div>
+                <input type="text" id="answerInput" class="exercise-input" placeholder="输入答案" autocomplete="off">
+                <div class="feedback" id="exerciseFeedback"></div>
+            </div>
+            <button class="submit-btn" onclick="submitAnswer()">提交答案</button>
+        </div>
+    </div>
+
+    <!-- 内容阅读/收听弹窗 -->
+    <div class="modal-overlay" id="contentModal">
+        <div class="modal-content" style="max-width: 650px;">
+            <div class="modal-header">
+                <h3 class="modal-title" id="contentModalTitle">今日内容</h3>
+                <button class="close-btn" onclick="closeContent()">×</button>
+            </div>
+            <div class="exercise-container" id="contentBody"
+                style="font-size: 1.1em; line-height: 1.6; max-height: 50vh; overflow-y: auto;">
+                <!-- Content will be injected here (Text or Iframe) -->
+            </div>
+            <button class="submit-btn" id="finishContentBtn" onclick="markContentFinished()">我已完成</button>
+        </div>
+    </div>
+
+    <script>
+        // --- 练习生成与验证逻辑 ---
+
+        // 三年级下册英语词汇库 (译林版三下 Unit 1-8 核心词汇精选)
+        const englishVocab = [
+            { word: 'door', meaning: '门' },
+            { word: 'window', meaning: '窗户' },
+            { word: 'blackboard', meaning: '黑板' },
+            { word: 'rubber', meaning: '橡皮' },
+            { word: 'parrot', meaning: '鹦鹉' },
+            { word: 'library', meaning: '图书馆' },
+            { word: 'shout', meaning: '大声说话/叫喊' },
+            { word: 'sleep', meaning: '睡觉' },
+            { word: 'drink', meaning: '喝' },
+            { word: 'milk', meaning: '牛奶' },
+            { word: 'pencil', meaning: '铅笔' },
+            { word: 'schoolbag', meaning: '书包' },
+            { word: 'crayon', meaning: '蜡笔' },
+            { word: 'lunch box', meaning: '午餐盒' },
+            { word: 'bird', meaning: '鸟' },
+            { word: 'desk', meaning: '课桌' },
+            { word: 'chair', meaning: '椅子' },
+            { word: 'tree', meaning: '树' },
+            { word: 'beautiful', meaning: '漂亮的' },
+            { word: 'eight', meaning: '八' },
+            { word: 'nine', meaning: '九' },
+            { word: 'ten', meaning: '十' },
+            { word: 'twelve', meaning: '十二' },
+            { word: 'breakfast', meaning: '早餐' },
+            { word: 'dinner', meaning: '晚餐' },
+            { word: 'farm', meaning: '农场' },
+            { word: 'pig', meaning: '猪' },
+            { word: 'cow', meaning: '奶牛' },
+            { word: 'apple', meaning: '苹果' },
+            { word: 'pear', meaning: '梨' },
+            { word: 'chicken', meaning: '鸡' },
+            { word: 'duck', meaning: '鸭子' },
+            { word: 'twin', meaning: '双胞胎' }
+        ];
+
+        // 三年级下册语文词汇库 (苏教版三下 拼音写字与成语)
+        const chineseVocab = [
+            // 看拼音写词语
+            { pinyin: 'mì fēng', answer: '蜜蜂', type: 'pinyin' },
+            { pinyin: 'yàn zi', answer: '燕子', type: 'pinyin' },
+            { pinyin: 'yuān yang', answer: '鸳鸯', type: 'pinyin' },
+            { pinyin: 'huā bàn', answer: '花瓣', type: 'pinyin' },
+            { pinyin: 'zī shì', answer: '姿势', type: 'pinyin' },
+            { pinyin: 'xīn shǎng', answer: '欣赏', type: 'pinyin' },
+            { pinyin: 'dài jià', answer: '代价', type: 'pinyin' },
+            { pinyin: 'bǎo cún', answer: '保存', type: 'pinyin' },
+            { pinyin: 'zhì huì', answer: '智慧', type: 'pinyin' },
+            { pinyin: 'lì shǐ', answer: '历史', type: 'pinyin' },
+            // 补充成语/四字词语
+            { text: '守株待(?)', answer: '兔', type: 'idiom' },
+            { text: '杯弓(?)影', answer: '蛇', type: 'idiom' },
+            { text: '掩耳(?)铃', answer: '盗', type: 'idiom' },
+            { text: '刻舟求(?)', answer: '剑', type: 'idiom' },
+            { text: '画(?)添足', answer: '蛇', type: 'idiom' },
+            { text: '亡羊补(?)', answer: '牢', type: 'idiom' },
+            { text: '南辕北(?)', answer: '辙', type: 'idiom' },
+            { text: '狐假虎(?)', answer: '威', type: 'idiom' }
+        ];
+
+        // 二年级下册语文词汇库 (更基础的拼音和词语)
+        const chineseVocabG2 = [
+            // 看拼音写词语
+            { pinyin: 'gū niang', answer: '姑娘', type: 'pinyin' },
+            { pinyin: 'bō wén', answer: '波纹', type: 'pinyin' },
+            { pinyin: 'yào wù', answer: '药物', type: 'pinyin' },
+            { pinyin: 'jǐng sè', answer: '景色', type: 'pinyin' },
+            { pinyin: 'mī lu', answer: '迷路', type: 'pinyin' },
+            { pinyin: 'wèi dào', answer: '味道', type: 'pinyin' },
+            { pinyin: 'mǎi mài', answer: '买卖', type: 'pinyin' },
+            { pinyin: 'xiū xi', answer: '休息', type: 'pinyin' },
+            { pinyin: 'mí lù', answer: '迷路', type: 'pinyin' },
+            { pinyin: 'jiǎo bǎo', answer: '角堡', type: 'pinyin' },
+            // 补充词语
+            { text: '引人注(?)', answer: '目', type: 'idiom' },
+            { text: '万众一(?)', answer: '心', type: 'idiom' },
+            { text: '四海为(?)', answer: '家', type: 'idiom' },
+            { text: '春暖花(?)', answer: '开', type: 'idiom' },
+            { text: '五颜六(?)', answer: '色', type: 'idiom' }
+        ];
+
+        // 状态变量
+        let currentProfile = 'g3'; // 'g3' for 老大(Grade 3), 'g2' for 老二(Grade 2)
+        let currentExerciseType = '';
+        let currentAnswer = '';
+        let currentProblem = '';
+        let currentTaskId = '';
+        let currentQuestionCount = 0;
+        const totalQuestions = 10; // 每天需要完成的数量 (单词和口算)
+
+        let currentContentType = ''; // 'read' or 'listen'
+
+        // 每日阅读库
+        const readingMaterials = [
+            {
+                title: "守株待兔 / Waiting for a Rabbit",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>宋国有个农夫，他的田地中有一截树桩。<br>
+                    一天，一只跑得飞快的野兔撞在了树桩上，折断了脖子死了。<br>
+                    于是，农夫便放下他的农具日日夜夜守在树桩子旁边，希望能再得到一只兔子。<br>
+                    然而野兔是不可能再次得到了，他自己也被宋国人耻笑。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a farmer in the State of Song. In his field, there was a tree stump.<br>
+                    One day, a fast-running rabbit crashed into the stump, broke its neck, and died.<br>
+                    So, the farmer put down his tools and waited by the stump day and night, hoping to get another rabbit.<br>
+                    However, no more rabbits came, and he was laughed at by the people of Song.</p>
+                `,
+                englishText: "There was a farmer in the State of Song. In his field, there was a tree stump. One day, a fast-running rabbit crashed into the stump, broke its neck, and died. So, the farmer put down his tools and waited by the stump day and night, hoping to get another rabbit. However, no more rabbits came, and he was laughed at by the people of Song."
+            },
+            {
+                title: "拔苗助长 / Pulling Shoots to Help Them Grow",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>古时候宋国有个农夫，嫌自己的庄稼长得太慢。他跑到田里，把禾苗一棵一棵地拔高。<br>
+                    他回到家对家人说：“今天可把我累坏了，但我帮助禾苗长高了！”<br>
+                    他的儿子跑到田里一看，禾苗全都枯死了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>Long ago, a farmer in the State of Song worried that his crops were growing too slowly. He went to the field and pulled up each shoot a little bit.<br>
+                    He went home and said to his family, "I am so tired today, but I helped the crops grow taller!"<br>
+                    His son ran to the field to look, and all the crops had died.</p>
+                `,
+                englishText: "Long ago, a farmer in the State of Song worried that his crops were growing too slowly. He went to the field and pulled up each shoot a little bit. He went home and said to his family, I am so tired today, but I helped the crops grow taller! His son ran to the field to look, and all the crops had died."
+            },
+            {
+                title: "友好的乌龟 / The friendly Turtle",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在河边迷路了。它度过了非常开心的一天。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a friendly Turtle. Today it got lost by the river. It had a very happy day.</p>
+                `,
+                englishText: "There was a friendly Turtle. Today it got lost by the river. It had a very happy day."
+            },
+            {
+                title: "调皮的猴子 / The naughty Monkey",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在花园里想要睡觉。它甜甜地睡着了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a naughty Monkey. Today it wanted to sleep in the garden. It fell asleep sweetly.</p>
+                `,
+                englishText: "There was a naughty Monkey. Today it wanted to sleep in the garden. It fell asleep sweetly."
+            },
+            {
+                title: "快乐的大象 / The happy Elephant",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在山洞里在快乐地跳舞。它把食物分享给了大家。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a happy Elephant. Today it was dancing happily in the cave. It shared the food with everyone.</p>
+                `,
+                englishText: "There was a happy Elephant. Today it was dancing happily in the cave. It shared the food with everyone."
+            },
+            {
+                title: "骄傲的老鼠 / The proud Mouse",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在山丘上在开心地唱歌。朋友们都立刻赶来帮忙了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a proud Mouse. Today it was singing happily on the hill. Friends came to help immediately.</p>
+                `,
+                englishText: "There was a proud Mouse. Today it was singing happily on the hill. Friends came to help immediately."
+            },
+            {
+                title: "威武的狮子 / The majestic Lion",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在草地上正在寻找水喝。它决定明天再来玩。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a majestic Lion. Today it was looking for some water on the grass. It decided to come and play again tomorrow.</p>
+                `,
+                englishText: "There was a majestic Lion. Today it was looking for some water on the grass. It decided to come and play again tomorrow."
+            },
+            {
+                title: "勇敢的老虎 / The brave Tiger",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在森林里发现了一个秘密。最后它安全地回家了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a brave Tiger. Today it discovered a secret in the forest. Finally, it went home safely.</p>
+                `,
+                englishText: "There was a brave Tiger. Today it discovered a secret in the forest. Finally, it went home safely."
+            },
+            {
+                title: "强壮的小鸟 / The strong Bird",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在树上找到了一块美味的食物。它明白了一个重要的道理。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a strong Bird. Today it found a piece of delicious food in the tree. It understood an important truth.</p>
+                `,
+                englishText: "There was a strong Bird. Today it found a piece of delicious food in the tree. It understood an important truth."
+            },
+            {
+                title: "贪吃的小熊 / The greedy Bear",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在河边遇到了一位新朋友。它度过了非常开心的一天。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a greedy Bear. Today it met a new friend by the river. It had a very happy day.</p>
+                `,
+                englishText: "There was a greedy Bear. Today it met a new friend by the river. It had a very happy day."
+            },
+            {
+                title: "慢吞吞的小狗 / The slow Dog",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在花园里迷路了。它甜甜地睡着了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a slow Dog. Today it got lost in the garden. It fell asleep sweetly.</p>
+                `,
+                englishText: "There was a slow Dog. Today it got lost in the garden. It fell asleep sweetly."
+            },
+            {
+                title: "生气的小猫 / The angry Cat",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在山洞里想要睡觉。它把食物分享给了大家。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a angry Cat. Today it wanted to sleep in the cave. It shared the food with everyone.</p>
+                `,
+                englishText: "There was a angry Cat. Today it wanted to sleep in the cave. It shared the food with everyone."
+            },
+            {
+                title: "聪明的狐狸 / The clever Fox",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只聪明的狐狸，它今天在山丘上在快乐地跳舞。朋友们都立刻赶来帮忙了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a clever Fox. Today it was dancing happily on the hill. Friends came to help immediately.</p>
+                `,
+                englishText: "There was a clever Fox. Today it was dancing happily on the hill. Friends came to help immediately."
+            },
+            {
+                title: "胆小的兔子 / The timid Rabbit",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只胆小的兔子，它今天在草地上在开心地唱歌。它决定明天再来玩。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a timid Rabbit. Today it was singing happily on the grass. It decided to come and play again tomorrow.</p>
+                `,
+                englishText: "There was a timid Rabbit. Today it was singing happily on the grass. It decided to come and play again tomorrow."
+            },
+            {
+                title: "友好的乌龟 / The friendly Turtle",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在森林里正在寻找水喝。最后它安全地回家了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a friendly Turtle. Today it was looking for some water in the forest. Finally, it went home safely.</p>
+                `,
+                englishText: "There was a friendly Turtle. Today it was looking for some water in the forest. Finally, it went home safely."
+            },
+            {
+                title: "调皮的猴子 / The naughty Monkey",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在树上发现了一个秘密。它明白了一个重要的道理。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a naughty Monkey. Today it discovered a secret in the tree. It understood an important truth.</p>
+                `,
+                englishText: "There was a naughty Monkey. Today it discovered a secret in the tree. It understood an important truth."
+            },
+            {
+                title: "快乐的大象 / The happy Elephant",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在河边找到了一块美味的食物。它度过了非常开心的一天。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a happy Elephant. Today it found a piece of delicious food by the river. It had a very happy day.</p>
+                `,
+                englishText: "There was a happy Elephant. Today it found a piece of delicious food by the river. It had a very happy day."
+            },
+            {
+                title: "骄傲的老鼠 / The proud Mouse",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在花园里遇到了一位新朋友。它甜甜地睡着了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a proud Mouse. Today it met a new friend in the garden. It fell asleep sweetly.</p>
+                `,
+                englishText: "There was a proud Mouse. Today it met a new friend in the garden. It fell asleep sweetly."
+            },
+            {
+                title: "威武的狮子 / The majestic Lion",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在山洞里迷路了。它把食物分享给了大家。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a majestic Lion. Today it got lost in the cave. It shared the food with everyone.</p>
+                `,
+                englishText: "There was a majestic Lion. Today it got lost in the cave. It shared the food with everyone."
+            },
+            {
+                title: "勇敢的老虎 / The brave Tiger",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在山丘上想要睡觉。朋友们都立刻赶来帮忙了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a brave Tiger. Today it wanted to sleep on the hill. Friends came to help immediately.</p>
+                `,
+                englishText: "There was a brave Tiger. Today it wanted to sleep on the hill. Friends came to help immediately."
+            },
+            {
+                title: "强壮的小鸟 / The strong Bird",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在草地上在快乐地跳舞。它决定明天再来玩。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a strong Bird. Today it was dancing happily on the grass. It decided to come and play again tomorrow.</p>
+                `,
+                englishText: "There was a strong Bird. Today it was dancing happily on the grass. It decided to come and play again tomorrow."
+            },
+            {
+                title: "贪吃的小熊 / The greedy Bear",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在森林里在开心地唱歌。最后它安全地回家了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a greedy Bear. Today it was singing happily in the forest. Finally, it went home safely.</p>
+                `,
+                englishText: "There was a greedy Bear. Today it was singing happily in the forest. Finally, it went home safely."
+            },
+            {
+                title: "慢吞吞的小狗 / The slow Dog",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在树上正在寻找水喝。它明白了一个重要的道理。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a slow Dog. Today it was looking for some water in the tree. It understood an important truth.</p>
+                `,
+                englishText: "There was a slow Dog. Today it was looking for some water in the tree. It understood an important truth."
+            },
+            {
+                title: "生气的小猫 / The angry Cat",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在河边发现了一个秘密。它度过了非常开心的一天。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a angry Cat. Today it discovered a secret by the river. It had a very happy day.</p>
+                `,
+                englishText: "There was a angry Cat. Today it discovered a secret by the river. It had a very happy day."
+            },
+            {
+                title: "聪明的狐狸 / The clever Fox",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只聪明的狐狸，它今天在花园里找到了一块美味的食物。它甜甜地睡着了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a clever Fox. Today it found a piece of delicious food in the garden. It fell asleep sweetly.</p>
+                `,
+                englishText: "There was a clever Fox. Today it found a piece of delicious food in the garden. It fell asleep sweetly."
+            },
+            {
+                title: "胆小的兔子 / The timid Rabbit",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只胆小的兔子，它今天在山洞里遇到了一位新朋友。它把食物分享给了大家。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a timid Rabbit. Today it met a new friend in the cave. It shared the food with everyone.</p>
+                `,
+                englishText: "There was a timid Rabbit. Today it met a new friend in the cave. It shared the food with everyone."
+            },
+            {
+                title: "友好的乌龟 / The friendly Turtle",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在山丘上迷路了。朋友们都立刻赶来帮忙了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a friendly Turtle. Today it got lost on the hill. Friends came to help immediately.</p>
+                `,
+                englishText: "There was a friendly Turtle. Today it got lost on the hill. Friends came to help immediately."
+            },
+            {
+                title: "调皮的猴子 / The naughty Monkey",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在草地上想要睡觉。它决定明天再来玩。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a naughty Monkey. Today it wanted to sleep on the grass. It decided to come and play again tomorrow.</p>
+                `,
+                englishText: "There was a naughty Monkey. Today it wanted to sleep on the grass. It decided to come and play again tomorrow."
+            },
+            {
+                title: "快乐的大象 / The happy Elephant",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在森林里在快乐地跳舞。最后它安全地回家了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a happy Elephant. Today it was dancing happily in the forest. Finally, it went home safely.</p>
+                `,
+                englishText: "There was a happy Elephant. Today it was dancing happily in the forest. Finally, it went home safely."
+            },
+            {
+                title: "骄傲的老鼠 / The proud Mouse",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在树上在开心地唱歌。它明白了一个重要的道理。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a proud Mouse. Today it was singing happily in the tree. It understood an important truth.</p>
+                `,
+                englishText: "There was a proud Mouse. Today it was singing happily in the tree. It understood an important truth."
+            },
+            {
+                title: "威武的狮子 / The majestic Lion",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在河边正在寻找水喝。它度过了非常开心的一天。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a majestic Lion. Today it was looking for some water by the river. It had a very happy day.</p>
+                `,
+                englishText: "There was a majestic Lion. Today it was looking for some water by the river. It had a very happy day."
+            },
+            {
+                title: "勇敢的老虎 / The brave Tiger",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在花园里发现了一个秘密。它甜甜地睡着了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a brave Tiger. Today it discovered a secret in the garden. It fell asleep sweetly.</p>
+                `,
+                englishText: "There was a brave Tiger. Today it discovered a secret in the garden. It fell asleep sweetly."
+            },
+            {
+                title: "强壮的小鸟 / The strong Bird",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在山洞里找到了一块美味的食物。它把食物分享给了大家。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a strong Bird. Today it found a piece of delicious food in the cave. It shared the food with everyone.</p>
+                `,
+                englishText: "There was a strong Bird. Today it found a piece of delicious food in the cave. It shared the food with everyone."
+            },
+            {
+                title: "贪吃的小熊 / The greedy Bear",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在山丘上遇到了一位新朋友。朋友们都立刻赶来帮忙了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a greedy Bear. Today it met a new friend on the hill. Friends came to help immediately.</p>
+                `,
+                englishText: "There was a greedy Bear. Today it met a new friend on the hill. Friends came to help immediately."
+            },
+            {
+                title: "慢吞吞的小狗 / The slow Dog",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在草地上迷路了。它决定明天再来玩。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a slow Dog. Today it got lost on the grass. It decided to come and play again tomorrow.</p>
+                `,
+                englishText: "There was a slow Dog. Today it got lost on the grass. It decided to come and play again tomorrow."
+            },
+            {
+                title: "生气的小猫 / The angry Cat",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在森林里想要睡觉。最后它安全地回家了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a angry Cat. Today it wanted to sleep in the forest. Finally, it went home safely.</p>
+                `,
+                englishText: "There was a angry Cat. Today it wanted to sleep in the forest. Finally, it went home safely."
+            },
+            {
+                title: "聪明的狐狸 / The clever Fox",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只聪明的狐狸，它今天在树上在快乐地跳舞。它明白了一个重要的道理。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a clever Fox. Today it was dancing happily in the tree. It understood an important truth.</p>
+                `,
+                englishText: "There was a clever Fox. Today it was dancing happily in the tree. It understood an important truth."
+            },
+            {
+                title: "胆小的兔子 / The timid Rabbit",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只胆小的兔子，它今天在河边在开心地唱歌。它度过了非常开心的一天。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a timid Rabbit. Today it was singing happily by the river. It had a very happy day.</p>
+                `,
+                englishText: "There was a timid Rabbit. Today it was singing happily by the river. It had a very happy day."
+            },
+            {
+                title: "友好的乌龟 / The friendly Turtle",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在花园里正在寻找水喝。它甜甜地睡着了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a friendly Turtle. Today it was looking for some water in the garden. It fell asleep sweetly.</p>
+                `,
+                englishText: "There was a friendly Turtle. Today it was looking for some water in the garden. It fell asleep sweetly."
+            },
+            {
+                title: "调皮的猴子 / The naughty Monkey",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在山洞里发现了一个秘密。它把食物分享给了大家。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a naughty Monkey. Today it discovered a secret in the cave. It shared the food with everyone.</p>
+                `,
+                englishText: "There was a naughty Monkey. Today it discovered a secret in the cave. It shared the food with everyone."
+            },
+            {
+                title: "快乐的大象 / The happy Elephant",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在山丘上找到了一块美味的食物。朋友们都立刻赶来帮忙了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a happy Elephant. Today it found a piece of delicious food on the hill. Friends came to help immediately.</p>
+                `,
+                englishText: "There was a happy Elephant. Today it found a piece of delicious food on the hill. Friends came to help immediately."
+            },
+            {
+                title: "骄傲的老鼠 / The proud Mouse",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在草地上遇到了一位新朋友。它决定明天再来玩。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a proud Mouse. Today it met a new friend on the grass. It decided to come and play again tomorrow.</p>
+                `,
+                englishText: "There was a proud Mouse. Today it met a new friend on the grass. It decided to come and play again tomorrow."
+            },
+            {
+                title: "威武的狮子 / The majestic Lion",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在森林里迷路了。最后它安全地回家了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a majestic Lion. Today it got lost in the forest. Finally, it went home safely.</p>
+                `,
+                englishText: "There was a majestic Lion. Today it got lost in the forest. Finally, it went home safely."
+            },
+            {
+                title: "勇敢的老虎 / The brave Tiger",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在树上想要睡觉。它明白了一个重要的道理。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a brave Tiger. Today it wanted to sleep in the tree. It understood an important truth.</p>
+                `,
+                englishText: "There was a brave Tiger. Today it wanted to sleep in the tree. It understood an important truth."
+            },
+            {
+                title: "强壮的小鸟 / The strong Bird",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在河边在快乐地跳舞。它度过了非常开心的一天。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a strong Bird. Today it was dancing happily by the river. It had a very happy day.</p>
+                `,
+                englishText: "There was a strong Bird. Today it was dancing happily by the river. It had a very happy day."
+            },
+            {
+                title: "贪吃的小熊 / The greedy Bear",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在花园里在开心地唱歌。它甜甜地睡着了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a greedy Bear. Today it was singing happily in the garden. It fell asleep sweetly.</p>
+                `,
+                englishText: "There was a greedy Bear. Today it was singing happily in the garden. It fell asleep sweetly."
+            },
+            {
+                title: "慢吞吞的小狗 / The slow Dog",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在山洞里正在寻找水喝。它把食物分享给了大家。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a slow Dog. Today it was looking for some water in the cave. It shared the food with everyone.</p>
+                `,
+                englishText: "There was a slow Dog. Today it was looking for some water in the cave. It shared the food with everyone."
+            },
+            {
+                title: "生气的小猫 / The angry Cat",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在山丘上发现了一个秘密。朋友们都立刻赶来帮忙了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a angry Cat. Today it discovered a secret on the hill. Friends came to help immediately.</p>
+                `,
+                englishText: "There was a angry Cat. Today it discovered a secret on the hill. Friends came to help immediately."
+            },
+            {
+                title: "聪明的狐狸 / The clever Fox",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只聪明的狐狸，它今天在草地上找到了一块美味的食物。它决定明天再来玩。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a clever Fox. Today it found a piece of delicious food on the grass. It decided to come and play again tomorrow.</p>
+                `,
+                englishText: "There was a clever Fox. Today it found a piece of delicious food on the grass. It decided to come and play again tomorrow."
+            },
+            {
+                title: "胆小的兔子 / The timid Rabbit",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只胆小的兔子，它今天在森林里遇到了一位新朋友。最后它安全地回家了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a timid Rabbit. Today it met a new friend in the forest. Finally, it went home safely.</p>
+                `,
+                englishText: "There was a timid Rabbit. Today it met a new friend in the forest. Finally, it went home safely."
+            },
+            {
+                title: "友好的乌龟 / The friendly Turtle",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在树上迷路了。它明白了一个重要的道理。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a friendly Turtle. Today it got lost in the tree. It understood an important truth.</p>
+                `,
+                englishText: "There was a friendly Turtle. Today it got lost in the tree. It understood an important truth."
+            },
+            {
+                title: "调皮的猴子 / The naughty Monkey",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在河边想要睡觉。它度过了非常开心的一天。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a naughty Monkey. Today it wanted to sleep by the river. It had a very happy day.</p>
+                `,
+                englishText: "There was a naughty Monkey. Today it wanted to sleep by the river. It had a very happy day."
+            },
+            {
+                title: "快乐的大象 / The happy Elephant",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在花园里在快乐地跳舞。它甜甜地睡着了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a happy Elephant. Today it was dancing happily in the garden. It fell asleep sweetly.</p>
+                `,
+                englishText: "There was a happy Elephant. Today it was dancing happily in the garden. It fell asleep sweetly."
+            },
+            {
+                title: "骄傲的老鼠 / The proud Mouse",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在山洞里在开心地唱歌。它把食物分享给了大家。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a proud Mouse. Today it was singing happily in the cave. It shared the food with everyone.</p>
+                `,
+                englishText: "There was a proud Mouse. Today it was singing happily in the cave. It shared the food with everyone."
+            },
+            {
+                title: "威武的狮子 / The majestic Lion",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在山丘上正在寻找水喝。朋友们都立刻赶来帮忙了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a majestic Lion. Today it was looking for some water on the hill. Friends came to help immediately.</p>
+                `,
+                englishText: "There was a majestic Lion. Today it was looking for some water on the hill. Friends came to help immediately."
+            },
+            {
+                title: "勇敢的老虎 / The brave Tiger",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在草地上发现了一个秘密。它决定明天再来玩。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a brave Tiger. Today it discovered a secret on the grass. It decided to come and play again tomorrow.</p>
+                `,
+                englishText: "There was a brave Tiger. Today it discovered a secret on the grass. It decided to come and play again tomorrow."
+            },
+            {
+                title: "强壮的小鸟 / The strong Bird",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在森林里找到了一块美味的食物。最后它安全地回家了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a strong Bird. Today it found a piece of delicious food in the forest. Finally, it went home safely.</p>
+                `,
+                englishText: "There was a strong Bird. Today it found a piece of delicious food in the forest. Finally, it went home safely."
+            },
+            {
+                title: "贪吃的小熊 / The greedy Bear",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在树上遇到了一位新朋友。它明白了一个重要的道理。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a greedy Bear. Today it met a new friend in the tree. It understood an important truth.</p>
+                `,
+                englishText: "There was a greedy Bear. Today it met a new friend in the tree. It understood an important truth."
+            },
+            {
+                title: "慢吞吞的小狗 / The slow Dog",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在河边迷路了。它度过了非常开心的一天。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a slow Dog. Today it got lost by the river. It had a very happy day.</p>
+                `,
+                englishText: "There was a slow Dog. Today it got lost by the river. It had a very happy day."
+            },
+            {
+                title: "生气的小猫 / The angry Cat",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在花园里想要睡觉。它甜甜地睡着了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a angry Cat. Today it wanted to sleep in the garden. It fell asleep sweetly.</p>
+                `,
+                englishText: "There was a angry Cat. Today it wanted to sleep in the garden. It fell asleep sweetly."
+            },
+            {
+                title: "聪明的狐狸 / The clever Fox",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只聪明的狐狸，它今天在山洞里在快乐地跳舞。它把食物分享给了大家。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a clever Fox. Today it was dancing happily in the cave. It shared the food with everyone.</p>
+                `,
+                englishText: "There was a clever Fox. Today it was dancing happily in the cave. It shared the food with everyone."
+            },
+            {
+                title: "胆小的兔子 / The timid Rabbit",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只胆小的兔子，它今天在山丘上在开心地唱歌。朋友们都立刻赶来帮忙了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a timid Rabbit. Today it was singing happily on the hill. Friends came to help immediately.</p>
+                `,
+                englishText: "There was a timid Rabbit. Today it was singing happily on the hill. Friends came to help immediately."
+            },
+            {
+                title: "友好的乌龟 / The friendly Turtle",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在草地上正在寻找水喝。它决定明天再来玩。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a friendly Turtle. Today it was looking for some water on the grass. It decided to come and play again tomorrow.</p>
+                `,
+                englishText: "There was a friendly Turtle. Today it was looking for some water on the grass. It decided to come and play again tomorrow."
+            },
+            {
+                title: "调皮的猴子 / The naughty Monkey",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在森林里发现了一个秘密。最后它安全地回家了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a naughty Monkey. Today it discovered a secret in the forest. Finally, it went home safely.</p>
+                `,
+                englishText: "There was a naughty Monkey. Today it discovered a secret in the forest. Finally, it went home safely."
+            },
+            {
+                title: "快乐的大象 / The happy Elephant",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在树上找到了一块美味的食物。它明白了一个重要的道理。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a happy Elephant. Today it found a piece of delicious food in the tree. It understood an important truth.</p>
+                `,
+                englishText: "There was a happy Elephant. Today it found a piece of delicious food in the tree. It understood an important truth."
+            },
+            {
+                title: "骄傲的老鼠 / The proud Mouse",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在河边遇到了一位新朋友。它度过了非常开心的一天。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a proud Mouse. Today it met a new friend by the river. It had a very happy day.</p>
+                `,
+                englishText: "There was a proud Mouse. Today it met a new friend by the river. It had a very happy day."
+            },
+            {
+                title: "威武的狮子 / The majestic Lion",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在花园里迷路了。它甜甜地睡着了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a majestic Lion. Today it got lost in the garden. It fell asleep sweetly.</p>
+                `,
+                englishText: "There was a majestic Lion. Today it got lost in the garden. It fell asleep sweetly."
+            },
+            {
+                title: "勇敢的老虎 / The brave Tiger",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在山洞里想要睡觉。它把食物分享给了大家。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a brave Tiger. Today it wanted to sleep in the cave. It shared the food with everyone.</p>
+                `,
+                englishText: "There was a brave Tiger. Today it wanted to sleep in the cave. It shared the food with everyone."
+            },
+            {
+                title: "强壮的小鸟 / The strong Bird",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在山丘上在快乐地跳舞。朋友们都立刻赶来帮忙了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a strong Bird. Today it was dancing happily on the hill. Friends came to help immediately.</p>
+                `,
+                englishText: "There was a strong Bird. Today it was dancing happily on the hill. Friends came to help immediately."
+            },
+            {
+                title: "贪吃的小熊 / The greedy Bear",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在草地上在开心地唱歌。它决定明天再来玩。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a greedy Bear. Today it was singing happily on the grass. It decided to come and play again tomorrow.</p>
+                `,
+                englishText: "There was a greedy Bear. Today it was singing happily on the grass. It decided to come and play again tomorrow."
+            },
+            {
+                title: "慢吞吞的小狗 / The slow Dog",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在森林里正在寻找水喝。最后它安全地回家了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a slow Dog. Today it was looking for some water in the forest. Finally, it went home safely.</p>
+                `,
+                englishText: "There was a slow Dog. Today it was looking for some water in the forest. Finally, it went home safely."
+            },
+            {
+                title: "生气的小猫 / The angry Cat",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在树上发现了一个秘密。它明白了一个重要的道理。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a angry Cat. Today it discovered a secret in the tree. It understood an important truth.</p>
+                `,
+                englishText: "There was a angry Cat. Today it discovered a secret in the tree. It understood an important truth."
+            },
+            {
+                title: "聪明的狐狸 / The clever Fox",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只聪明的狐狸，它今天在河边找到了一块美味的食物。它度过了非常开心的一天。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a clever Fox. Today it found a piece of delicious food by the river. It had a very happy day.</p>
+                `,
+                englishText: "There was a clever Fox. Today it found a piece of delicious food by the river. It had a very happy day."
+            },
+            {
+                title: "胆小的兔子 / The timid Rabbit",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只胆小的兔子，它今天在花园里遇到了一位新朋友。它甜甜地睡着了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a timid Rabbit. Today it met a new friend in the garden. It fell asleep sweetly.</p>
+                `,
+                englishText: "There was a timid Rabbit. Today it met a new friend in the garden. It fell asleep sweetly."
+            },
+            {
+                title: "友好的乌龟 / The friendly Turtle",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在山洞里迷路了。它把食物分享给了大家。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a friendly Turtle. Today it got lost in the cave. It shared the food with everyone.</p>
+                `,
+                englishText: "There was a friendly Turtle. Today it got lost in the cave. It shared the food with everyone."
+            },
+            {
+                title: "调皮的猴子 / The naughty Monkey",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在山丘上想要睡觉。朋友们都立刻赶来帮忙了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a naughty Monkey. Today it wanted to sleep on the hill. Friends came to help immediately.</p>
+                `,
+                englishText: "There was a naughty Monkey. Today it wanted to sleep on the hill. Friends came to help immediately."
+            },
+            {
+                title: "快乐的大象 / The happy Elephant",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在草地上在快乐地跳舞。它决定明天再来玩。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a happy Elephant. Today it was dancing happily on the grass. It decided to come and play again tomorrow.</p>
+                `,
+                englishText: "There was a happy Elephant. Today it was dancing happily on the grass. It decided to come and play again tomorrow."
+            },
+            {
+                title: "骄傲的老鼠 / The proud Mouse",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在森林里在开心地唱歌。最后它安全地回家了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a proud Mouse. Today it was singing happily in the forest. Finally, it went home safely.</p>
+                `,
+                englishText: "There was a proud Mouse. Today it was singing happily in the forest. Finally, it went home safely."
+            },
+            {
+                title: "威武的狮子 / The majestic Lion",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在树上正在寻找水喝。它明白了一个重要的道理。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a majestic Lion. Today it was looking for some water in the tree. It understood an important truth.</p>
+                `,
+                englishText: "There was a majestic Lion. Today it was looking for some water in the tree. It understood an important truth."
+            },
+            {
+                title: "勇敢的老虎 / The brave Tiger",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在河边发现了一个秘密。它度过了非常开心的一天。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a brave Tiger. Today it discovered a secret by the river. It had a very happy day.</p>
+                `,
+                englishText: "There was a brave Tiger. Today it discovered a secret by the river. It had a very happy day."
+            },
+            {
+                title: "强壮的小鸟 / The strong Bird",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在花园里找到了一块美味的食物。它甜甜地睡着了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a strong Bird. Today it found a piece of delicious food in the garden. It fell asleep sweetly.</p>
+                `,
+                englishText: "There was a strong Bird. Today it found a piece of delicious food in the garden. It fell asleep sweetly."
+            },
+            {
+                title: "贪吃的小熊 / The greedy Bear",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在山洞里遇到了一位新朋友。它把食物分享给了大家。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a greedy Bear. Today it met a new friend in the cave. It shared the food with everyone.</p>
+                `,
+                englishText: "There was a greedy Bear. Today it met a new friend in the cave. It shared the food with everyone."
+            },
+            {
+                title: "慢吞吞的小狗 / The slow Dog",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在山丘上迷路了。朋友们都立刻赶来帮忙了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a slow Dog. Today it got lost on the hill. Friends came to help immediately.</p>
+                `,
+                englishText: "There was a slow Dog. Today it got lost on the hill. Friends came to help immediately."
+            },
+            {
+                title: "生气的小猫 / The angry Cat",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在草地上想要睡觉。它决定明天再来玩。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a angry Cat. Today it wanted to sleep on the grass. It decided to come and play again tomorrow.</p>
+                `,
+                englishText: "There was a angry Cat. Today it wanted to sleep on the grass. It decided to come and play again tomorrow."
+            },
+            {
+                title: "聪明的狐狸 / The clever Fox",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只聪明的狐狸，它今天在森林里在快乐地跳舞。最后它安全地回家了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a clever Fox. Today it was dancing happily in the forest. Finally, it went home safely.</p>
+                `,
+                englishText: "There was a clever Fox. Today it was dancing happily in the forest. Finally, it went home safely."
+            },
+            {
+                title: "胆小的兔子 / The timid Rabbit",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只胆小的兔子，它今天在树上在开心地唱歌。它明白了一个重要的道理。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a timid Rabbit. Today it was singing happily in the tree. It understood an important truth.</p>
+                `,
+                englishText: "There was a timid Rabbit. Today it was singing happily in the tree. It understood an important truth."
+            },
+            {
+                title: "友好的乌龟 / The friendly Turtle",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在河边正在寻找水喝。它度过了非常开心的一天。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a friendly Turtle. Today it was looking for some water by the river. It had a very happy day.</p>
+                `,
+                englishText: "There was a friendly Turtle. Today it was looking for some water by the river. It had a very happy day."
+            },
+            {
+                title: "调皮的猴子 / The naughty Monkey",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在花园里发现了一个秘密。它甜甜地睡着了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a naughty Monkey. Today it discovered a secret in the garden. It fell asleep sweetly.</p>
+                `,
+                englishText: "There was a naughty Monkey. Today it discovered a secret in the garden. It fell asleep sweetly."
+            },
+            {
+                title: "快乐的大象 / The happy Elephant",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在山洞里找到了一块美味的食物。它把食物分享给了大家。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a happy Elephant. Today it found a piece of delicious food in the cave. It shared the food with everyone.</p>
+                `,
+                englishText: "There was a happy Elephant. Today it found a piece of delicious food in the cave. It shared the food with everyone."
+            },
+            {
+                title: "骄傲的老鼠 / The proud Mouse",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在山丘上遇到了一位新朋友。朋友们都立刻赶来帮忙了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a proud Mouse. Today it met a new friend on the hill. Friends came to help immediately.</p>
+                `,
+                englishText: "There was a proud Mouse. Today it met a new friend on the hill. Friends came to help immediately."
+            },
+            {
+                title: "威武的狮子 / The majestic Lion",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在草地上迷路了。它决定明天再来玩。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a majestic Lion. Today it got lost on the grass. It decided to come and play again tomorrow.</p>
+                `,
+                englishText: "There was a majestic Lion. Today it got lost on the grass. It decided to come and play again tomorrow."
+            },
+            {
+                title: "勇敢的老虎 / The brave Tiger",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在森林里想要睡觉。最后它安全地回家了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a brave Tiger. Today it wanted to sleep in the forest. Finally, it went home safely.</p>
+                `,
+                englishText: "There was a brave Tiger. Today it wanted to sleep in the forest. Finally, it went home safely."
+            },
+            {
+                title: "强壮的小鸟 / The strong Bird",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在树上在快乐地跳舞。它明白了一个重要的道理。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a strong Bird. Today it was dancing happily in the tree. It understood an important truth.</p>
+                `,
+                englishText: "There was a strong Bird. Today it was dancing happily in the tree. It understood an important truth."
+            },
+            {
+                title: "贪吃的小熊 / The greedy Bear",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在河边在开心地唱歌。它度过了非常开心的一天。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a greedy Bear. Today it was singing happily by the river. It had a very happy day.</p>
+                `,
+                englishText: "There was a greedy Bear. Today it was singing happily by the river. It had a very happy day."
+            },
+            {
+                title: "慢吞吞的小狗 / The slow Dog",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在花园里正在寻找水喝。它甜甜地睡着了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a slow Dog. Today it was looking for some water in the garden. It fell asleep sweetly.</p>
+                `,
+                englishText: "There was a slow Dog. Today it was looking for some water in the garden. It fell asleep sweetly."
+            },
+            {
+                title: "生气的小猫 / The angry Cat",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在山洞里发现了一个秘密。它把食物分享给了大家。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a angry Cat. Today it discovered a secret in the cave. It shared the food with everyone.</p>
+                `,
+                englishText: "There was a angry Cat. Today it discovered a secret in the cave. It shared the food with everyone."
+            },
+            {
+                title: "聪明的狐狸 / The clever Fox",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只聪明的狐狸，它今天在山丘上找到了一块美味的食物。朋友们都立刻赶来帮忙了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a clever Fox. Today it found a piece of delicious food on the hill. Friends came to help immediately.</p>
+                `,
+                englishText: "There was a clever Fox. Today it found a piece of delicious food on the hill. Friends came to help immediately."
+            },
+            {
+                title: "胆小的兔子 / The timid Rabbit",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只胆小的兔子，它今天在草地上遇到了一位新朋友。它决定明天再来玩。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a timid Rabbit. Today it met a new friend on the grass. It decided to come and play again tomorrow.</p>
+                `,
+                englishText: "There was a timid Rabbit. Today it met a new friend on the grass. It decided to come and play again tomorrow."
+            },
+            {
+                title: "友好的乌龟 / The friendly Turtle",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在森林里迷路了。最后它安全地回家了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a friendly Turtle. Today it got lost in the forest. Finally, it went home safely.</p>
+                `,
+                englishText: "There was a friendly Turtle. Today it got lost in the forest. Finally, it went home safely."
+            },
+            {
+                title: "调皮的猴子 / The naughty Monkey",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在树上想要睡觉。它明白了一个重要的道理。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a naughty Monkey. Today it wanted to sleep in the tree. It understood an important truth.</p>
+                `,
+                englishText: "There was a naughty Monkey. Today it wanted to sleep in the tree. It understood an important truth."
+            },
+            {
+                title: "快乐的大象 / The happy Elephant",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在河边在快乐地跳舞。它度过了非常开心的一天。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a happy Elephant. Today it was dancing happily by the river. It had a very happy day.</p>
+                `,
+                englishText: "There was a happy Elephant. Today it was dancing happily by the river. It had a very happy day."
+            },
+            {
+                title: "骄傲的老鼠 / The proud Mouse",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在花园里在开心地唱歌。它甜甜地睡着了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a proud Mouse. Today it was singing happily in the garden. It fell asleep sweetly.</p>
+                `,
+                englishText: "There was a proud Mouse. Today it was singing happily in the garden. It fell asleep sweetly."
+            },
+            {
+                title: "威武的狮子 / The majestic Lion",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在山洞里正在寻找水喝。它把食物分享给了大家。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a majestic Lion. Today it was looking for some water in the cave. It shared the food with everyone.</p>
+                `,
+                englishText: "There was a majestic Lion. Today it was looking for some water in the cave. It shared the food with everyone."
+            },
+            {
+                title: "勇敢的老虎 / The brave Tiger",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在山丘上发现了一个秘密。朋友们都立刻赶来帮忙了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a brave Tiger. Today it discovered a secret on the hill. Friends came to help immediately.</p>
+                `,
+                englishText: "There was a brave Tiger. Today it discovered a secret on the hill. Friends came to help immediately."
+            },
+            {
+                title: "强壮的小鸟 / The strong Bird",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在草地上找到了一块美味的食物。它决定明天再来玩。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a strong Bird. Today it found a piece of delicious food on the grass. It decided to come and play again tomorrow.</p>
+                `,
+                englishText: "There was a strong Bird. Today it found a piece of delicious food on the grass. It decided to come and play again tomorrow."
+            },
+            {
+                title: "贪吃的小熊 / The greedy Bear",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在森林里遇到了一位新朋友。最后它安全地回家了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a greedy Bear. Today it met a new friend in the forest. Finally, it went home safely.</p>
+                `,
+                englishText: "There was a greedy Bear. Today it met a new friend in the forest. Finally, it went home safely."
+            },
+            {
+                title: "慢吞吞的小狗 / The slow Dog",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在树上迷路了。它明白了一个重要的道理。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a slow Dog. Today it got lost in the tree. It understood an important truth.</p>
+                `,
+                englishText: "There was a slow Dog. Today it got lost in the tree. It understood an important truth."
+            },
+            {
+                title: "生气的小猫 / The angry Cat",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在河边想要睡觉。它度过了非常开心的一天。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a angry Cat. Today it wanted to sleep by the river. It had a very happy day.</p>
+                `,
+                englishText: "There was a angry Cat. Today it wanted to sleep by the river. It had a very happy day."
+            },
+            {
+                title: "聪明的狐狸 / The clever Fox",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只聪明的狐狸，它今天在花园里在快乐地跳舞。它甜甜地睡着了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a clever Fox. Today it was dancing happily in the garden. It fell asleep sweetly.</p>
+                `,
+                englishText: "There was a clever Fox. Today it was dancing happily in the garden. It fell asleep sweetly."
+            },
+            {
+                title: "胆小的兔子 / The timid Rabbit",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只胆小的兔子，它今天在山洞里在开心地唱歌。它把食物分享给了大家。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a timid Rabbit. Today it was singing happily in the cave. It shared the food with everyone.</p>
+                `,
+                englishText: "There was a timid Rabbit. Today it was singing happily in the cave. It shared the food with everyone."
+            },
+            {
+                title: "友好的乌龟 / The friendly Turtle",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在山丘上正在寻找水喝。朋友们都立刻赶来帮忙了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a friendly Turtle. Today it was looking for some water on the hill. Friends came to help immediately.</p>
+                `,
+                englishText: "There was a friendly Turtle. Today it was looking for some water on the hill. Friends came to help immediately."
+            },
+            {
+                title: "调皮的猴子 / The naughty Monkey",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在草地上发现了一个秘密。它决定明天再来玩。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a naughty Monkey. Today it discovered a secret on the grass. It decided to come and play again tomorrow.</p>
+                `,
+                englishText: "There was a naughty Monkey. Today it discovered a secret on the grass. It decided to come and play again tomorrow."
+            },
+            {
+                title: "快乐的大象 / The happy Elephant",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在森林里找到了一块美味的食物。最后它安全地回家了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a happy Elephant. Today it found a piece of delicious food in the forest. Finally, it went home safely.</p>
+                `,
+                englishText: "There was a happy Elephant. Today it found a piece of delicious food in the forest. Finally, it went home safely."
+            },
+            {
+                title: "骄傲的老鼠 / The proud Mouse",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在树上遇到了一位新朋友。它明白了一个重要的道理。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a proud Mouse. Today it met a new friend in the tree. It understood an important truth.</p>
+                `,
+                englishText: "There was a proud Mouse. Today it met a new friend in the tree. It understood an important truth."
+            },
+            {
+                title: "威武的狮子 / The majestic Lion",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在河边迷路了。它度过了非常开心的一天。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a majestic Lion. Today it got lost by the river. It had a very happy day.</p>
+                `,
+                englishText: "There was a majestic Lion. Today it got lost by the river. It had a very happy day."
+            },
+            {
+                title: "勇敢的老虎 / The brave Tiger",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在花园里想要睡觉。它甜甜地睡着了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a brave Tiger. Today it wanted to sleep in the garden. It fell asleep sweetly.</p>
+                `,
+                englishText: "There was a brave Tiger. Today it wanted to sleep in the garden. It fell asleep sweetly."
+            },
+            {
+                title: "强壮的小鸟 / The strong Bird",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在山洞里在快乐地跳舞。它把食物分享给了大家。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a strong Bird. Today it was dancing happily in the cave. It shared the food with everyone.</p>
+                `,
+                englishText: "There was a strong Bird. Today it was dancing happily in the cave. It shared the food with everyone."
+            },
+            {
+                title: "贪吃的小熊 / The greedy Bear",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在山丘上在开心地唱歌。朋友们都立刻赶来帮忙了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a greedy Bear. Today it was singing happily on the hill. Friends came to help immediately.</p>
+                `,
+                englishText: "There was a greedy Bear. Today it was singing happily on the hill. Friends came to help immediately."
+            },
+            {
+                title: "慢吞吞的小狗 / The slow Dog",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在草地上正在寻找水喝。它决定明天再来玩。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a slow Dog. Today it was looking for some water on the grass. It decided to come and play again tomorrow.</p>
+                `,
+                englishText: "There was a slow Dog. Today it was looking for some water on the grass. It decided to come and play again tomorrow."
+            },
+            {
+                title: "生气的小猫 / The angry Cat",
+                content: `
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在森林里发现了一个秘密。最后它安全地回家了。</p>
+                    <hr>
+                    <h4>【English Story】</h4>
+                    <p>There was a angry Cat. Today it discovered a secret in the forest. Finally, it went home safely.</p>
+                `,
+                englishText: "There was a angry Cat. Today it discovered a secret in the forest. Finally, it went home safely."
+            }
+        ];
+
+        // 每日影音库 (31天不重复的精选双语/英语启蒙视频：包含 Peppa Pig 核心集数和高频儿歌)
+        const listeningMaterials = [
+            { title: "Peppa Pig Episode 1", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=1" },
+            { title: "English Nursery Rhymes Part 1", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=1" },
+            { title: "Peppa Pig Episode 2", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=2" },
+            { title: "English Nursery Rhymes Part 2", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=2" },
+            { title: "Peppa Pig Episode 3", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=3" },
+            { title: "English Nursery Rhymes Part 3", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=3" },
+            { title: "Peppa Pig Episode 4", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=4" },
+            { title: "English Nursery Rhymes Part 4", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=4" },
+            { title: "Peppa Pig Episode 5", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=5" },
+            { title: "English Nursery Rhymes Part 5", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=5" },
+            { title: "Peppa Pig Episode 6", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=6" },
+            { title: "English Nursery Rhymes Part 6", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=6" },
+            { title: "Peppa Pig Episode 7", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=7" },
+            { title: "English Nursery Rhymes Part 7", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=7" },
+            { title: "Peppa Pig Episode 8", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=8" },
+            { title: "English Nursery Rhymes Part 8", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=8" },
+            { title: "Peppa Pig Episode 9", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=9" },
+            { title: "English Nursery Rhymes Part 9", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=9" },
+            { title: "Peppa Pig Episode 10", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=10" },
+            { title: "English Nursery Rhymes Part 10", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=10" },
+            { title: "Peppa Pig Episode 11", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=11" },
+            { title: "English Nursery Rhymes Part 11", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=11" },
+            { title: "Peppa Pig Episode 12", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=12" },
+            { title: "English Nursery Rhymes Part 12", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=12" },
+            { title: "Peppa Pig Episode 13", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=13" },
+            { title: "English Nursery Rhymes Part 13", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=13" },
+            { title: "Peppa Pig Episode 14", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=14" },
+            { title: "English Nursery Rhymes Part 14", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=14" },
+            { title: "Peppa Pig Episode 15", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=15" },
+            { title: "English Nursery Rhymes Part 15", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=15" },
+            { title: "Peppa Pig Episode 16", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=16" },
+            { title: "English Nursery Rhymes Part 16", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=16" },
+            { title: "Peppa Pig Episode 17", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=17" },
+            { title: "English Nursery Rhymes Part 17", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=17" },
+            { title: "Peppa Pig Episode 18", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=18" },
+            { title: "English Nursery Rhymes Part 18", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=18" },
+            { title: "Peppa Pig Episode 19", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=19" },
+            { title: "English Nursery Rhymes Part 19", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=19" },
+            { title: "Peppa Pig Episode 20", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=20" },
+            { title: "English Nursery Rhymes Part 20", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=20" },
+            { title: "Peppa Pig Episode 21", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=21" },
+            { title: "English Nursery Rhymes Part 21", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=21" },
+            { title: "Peppa Pig Episode 22", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=22" },
+            { title: "English Nursery Rhymes Part 22", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=22" },
+            { title: "Peppa Pig Episode 23", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=23" },
+            { title: "English Nursery Rhymes Part 23", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=23" },
+            { title: "Peppa Pig Episode 24", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=24" },
+            { title: "English Nursery Rhymes Part 24", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=24" },
+            { title: "Peppa Pig Episode 25", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=25" },
+            { title: "English Nursery Rhymes Part 25", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=25" },
+            { title: "Peppa Pig Episode 26", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=26" },
+            { title: "English Nursery Rhymes Part 26", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=26" },
+            { title: "Peppa Pig Episode 27", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=27" },
+            { title: "English Nursery Rhymes Part 27", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=27" },
+            { title: "Peppa Pig Episode 28", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=28" },
+            { title: "English Nursery Rhymes Part 28", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=28" },
+            { title: "Peppa Pig Episode 29", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=29" },
+            { title: "English Nursery Rhymes Part 29", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=29" },
+            { title: "Peppa Pig Episode 30", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=30" },
+            { title: "English Nursery Rhymes Part 30", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=30" },
+            { title: "Peppa Pig Episode 31", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=31" },
+            { title: "English Nursery Rhymes Part 31", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=31" },
+            { title: "Peppa Pig Episode 32", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=32" },
+            { title: "English Nursery Rhymes Part 32", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=32" },
+            { title: "Peppa Pig Episode 33", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=33" },
+            { title: "English Nursery Rhymes Part 33", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=33" },
+            { title: "Peppa Pig Episode 34", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=34" },
+            { title: "English Nursery Rhymes Part 34", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=34" },
+            { title: "Peppa Pig Episode 35", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=35" },
+            { title: "English Nursery Rhymes Part 35", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=35" },
+            { title: "Peppa Pig Episode 36", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=36" },
+            { title: "English Nursery Rhymes Part 36", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=36" },
+            { title: "Peppa Pig Episode 37", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=37" },
+            { title: "English Nursery Rhymes Part 37", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=37" },
+            { title: "Peppa Pig Episode 38", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=38" },
+            { title: "English Nursery Rhymes Part 38", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=38" },
+            { title: "Peppa Pig Episode 39", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=39" },
+            { title: "English Nursery Rhymes Part 39", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=39" },
+            { title: "Peppa Pig Episode 40", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=40" },
+            { title: "English Nursery Rhymes Part 40", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=40" },
+            { title: "Peppa Pig Episode 41", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=41" },
+            { title: "English Nursery Rhymes Part 41", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=41" },
+            { title: "Peppa Pig Episode 42", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=42" },
+            { title: "English Nursery Rhymes Part 42", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=42" },
+            { title: "Peppa Pig Episode 43", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=43" },
+            { title: "English Nursery Rhymes Part 43", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=43" },
+            { title: "Peppa Pig Episode 44", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=44" },
+            { title: "English Nursery Rhymes Part 44", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=44" },
+            { title: "Peppa Pig Episode 45", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=45" },
+            { title: "English Nursery Rhymes Part 45", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=45" },
+            { title: "Peppa Pig Episode 46", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=46" },
+            { title: "English Nursery Rhymes Part 46", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=46" },
+            { title: "Peppa Pig Episode 47", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=47" },
+            { title: "English Nursery Rhymes Part 47", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=47" },
+            { title: "Peppa Pig Episode 48", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=48" },
+            { title: "English Nursery Rhymes Part 48", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=48" },
+            { title: "Peppa Pig Episode 49", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=49" },
+            { title: "English Nursery Rhymes Part 49", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=49" },
+            { title: "Peppa Pig Episode 50", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=50" },
+            { title: "English Nursery Rhymes Part 50", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=50" },
+            { title: "Peppa Pig Episode 51", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=51" },
+            { title: "English Nursery Rhymes Part 51", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=51" },
+            { title: "Peppa Pig Episode 52", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=52" },
+            { title: "English Nursery Rhymes Part 52", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=52" },
+            { title: "Peppa Pig Episode 53", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=53" },
+            { title: "English Nursery Rhymes Part 53", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=53" },
+            { title: "Peppa Pig Episode 54", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=54" },
+            { title: "English Nursery Rhymes Part 54", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=54" },
+            { title: "Peppa Pig Episode 55", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=55" },
+            { title: "English Nursery Rhymes Part 55", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=55" },
+            { title: "Peppa Pig Episode 56", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=56" },
+            { title: "English Nursery Rhymes Part 56", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=56" },
+            { title: "Peppa Pig Episode 57", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=57" },
+            { title: "English Nursery Rhymes Part 57", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=57" },
+            { title: "Peppa Pig Episode 58", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=58" },
+            { title: "English Nursery Rhymes Part 58", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=58" },
+            { title: "Peppa Pig Episode 59", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=59" },
+            { title: "English Nursery Rhymes Part 59", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=59" },
+            { title: "Peppa Pig Episode 60", url: "https://www.youtube.com/embed/videoseries?list=PL1o41Hw7wYMI4cDPqJNxUxnlRQ9TjyGnl&index=60" },
+            { title: "English Nursery Rhymes Part 60", url: "https://www.youtube.com/embed/videoseries?list=PLFEgnf4tmQe9RBuf83rwV3bqv-at9dRQQ&index=60" }
+        ];
+
+        function openContent(type) {
+            currentContentType = type;
+            const modal = document.getElementById('contentModal');
+            const title = document.getElementById('contentModalTitle');
+            const body = document.getElementById('contentBody');
+
+            // 根据当前是一年中的第几天来循环选择内容
+            const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+
+            if (type === 'read') {
+                title.innerText = currentProfile === 'g3' ? '📖 今日中英双语阅读' : '📖 今日中文阅读';
+                currentTaskId = 'task-habit-reading';
+                const material = readingMaterials[dayOfYear % readingMaterials.length];
+
+                if (currentProfile === 'g3') {
+                    // 三年级：显示双语和朗读按钮
+                    const escapedText = material.englishText.replace(/'/g, "\\'");
+                    body.innerHTML = `
+                        <h3 style="color: var(--primary-color); text-align:center;">${material.title}</h3>
+                        <div style="text-align: right; margin-bottom:-20px;">
+                            <button class="tts-btn" onclick="speakText('${escapedText}')" title="朗读全篇英文">🔊 朗读英文</button>
+                            <button class="tts-btn" onclick="stopSpeaking()" title="停止朗读" style="color:red; font-size:1rem;">⏹️</button>
+                        </div>
+                        ${material.content}
+                    `;
+                } else {
+                    // 二年级：只显示中文部分，隐藏英文内容和朗读按钮
+                    // Extract just the Chinese portion using a simple regex or string manipulation
+                    // Assuming the standard format generated by the script uses ####【中文故事】
+                    let chineseOnlyContent = material.content;
+                    const hrIndex = material.content.indexOf('<hr>');
+                    if (hrIndex !== -1) {
+                        chineseOnlyContent = material.content.substring(0, hrIndex);
+                    }
+
+                    // remove " / English Title" from title
+                    let chineseTitle = material.title.split(' / ')[0];
+
+                    body.innerHTML = `
+                        <h3 style="color: var(--primary-color); text-align:center;">${chineseTitle}</h3>
+                        ${chineseOnlyContent}
+                    `;
+                }
+
+            } else if (type === 'listen') {
+                title.innerText = '🎧 今日英语磨耳朵';
+                currentTaskId = 'task-english-read';
+                const material = listeningMaterials[dayOfYear % listeningMaterials.length];
+
+                // 嵌入视频播放器
+                body.innerHTML = `
+                    <h3 style="color: var(--primary-color); text-align:center;">${material.title}</h3>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 8px;">
+                        <iframe src="${material.url}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allowfullscreen></iframe>
+                    </div>
+                    <p style="text-align: center; color: #757575; margin-top: 15px; font-size: 0.9em;">请认真观看/收听，完成后点击下方按钮</p>
+                `;
+            }
+
+            modal.classList.add('active');
+        }
+
+        function closeContent() {
+            document.getElementById('contentModal').classList.remove('active');
+            // 清空 iframe，防止后台继续播放声音
+            document.getElementById('contentBody').innerHTML = '';
+
+            // 停止朗读
+            stopSpeaking();
+        }
+
+        // --- 文本转语音 (TTS) 功能 ---
+        let currentUtterance = null;
+        function speakText(text) {
+            // 首先停止之前的所有朗读
+            stopSpeaking();
+
+            if ('speechSynthesis' in window) {
+                currentUtterance = new SpeechSynthesisUtterance(text);
+                currentUtterance.lang = 'en-US'; // 设置发音为美式英语
+                currentUtterance.rate = 0.9; // 稍微放慢一点语速，适合三年级
+                window.speechSynthesis.speak(currentUtterance);
+            } else {
+                alert("抱歉，您的浏览器不支持语音朗读功能。请尝试使用最新版的 Chrome、Edge 或 Safari。");
+            }
+        }
+
+        function stopSpeaking() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+        }
+
+        // --- 专注于倒计时功能 ---
+        let timerInterval = null;
+        let timeRemaining = 20 * 60; // 20 minutes in seconds
+
+        function startTimer() {
+            const btn = document.getElementById('timer-btn');
+            if (timerInterval) {
+                // If already running, do nothing or allow pause (here we just prevent multiple clicks)
+                return;
+            }
+
+            btn.innerText = '专注中...';
+            btn.disabled = true;
+
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    finishTimer();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const display = document.getElementById('timer-display');
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            display.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function finishTimer() {
+            const btn = document.getElementById('timer-btn');
+            const taskLi = document.getElementById('task-time-management');
+            const checkbox = taskLi.querySelector('input[type="checkbox"]');
+
+            btn.innerText = '已完成';
+            timeRemaining = 20 * 60; // Reset for next time if needed
+
+            // Auto check the box
+            checkbox.checked = true;
+            updateProgress(checkbox);
+
+            // Optional: Play a sound
+            // const audio = new Audio('path/to/bell.mp3');
+            // audio.play();
+        }
+
+        function markContentFinished() {
+            const taskLi = document.getElementById(currentTaskId);
+            const checkbox = taskLi.querySelector('input[type="checkbox"]');
+            const btn = taskLi.querySelector('.exercise-btn');
+
+            checkbox.disabled = false;
+            checkbox.checked = true;
+            checkbox.nextElementSibling.style.cursor = 'pointer';
+            checkbox.nextElementSibling.style.backgroundColor = '';
+            checkbox.nextElementSibling.title = '';
+
+            btn.innerText = '已完成';
+            btn.disabled = true;
+
+            updateProgress(checkbox);
+            closeContent();
+        }
+
+        function openExercise(type) {
+            currentExerciseType = type;
+            currentQuestionCount = 0; // 重置答题数
+            const modal = document.getElementById('exerciseModal');
+            const title = document.getElementById('modalTitle');
+            const questionElement = document.getElementById('questionText');
+            const inputElement = document.getElementById('answerInput');
+            const feedback = document.getElementById('exerciseFeedback');
+
+            inputElement.value = '';
+            feedback.innerText = '';
+            feedback.className = 'feedback';
+            if (type === 'math') {
+                title.innerText = `🧮 数学计算挑战(0 / ${totalQuestions})`;
+                generateMathProblem();
+                currentTaskId = 'task-math-calc';
+            } else if (type === 'english') {
+                title.innerText = `📚 英语单词挑战(0 / ${totalQuestions})`;
+                generateEnglishProblem();
+                currentTaskId = 'task-english-vocab';
+            } else if (type === 'chinese') {
+                title.innerText = `📝 语文基础练习(0 / ${totalQuestions})`;
+                generateChineseProblem();
+                currentTaskId = 'task-chinese-foundation';
+            }
+
+            modal.classList.add('active');
+            setTimeout(() => inputElement.focus(), 100);
+
+            // Allow checking answer with Enter key
+            inputElement.onkeydown = function (e) {
+                if (e.key === 'Enter') {
+                    submitAnswer();
+                }
+            };
+        }
+
+        function closeExercise() {
+            document.getElementById('exerciseModal').classList.remove('active');
+        }
+
+        function generateMathProblem() {
+            if (currentProfile === 'g2') {
+                // 二年级下册：1000以内加减，基础乘法，有余数的除法
+                const operations = ['+', '-', '*', '/_rem'];
+                const op = operations[Math.floor(Math.random() * operations.length)];
+                let num1, num2, answer;
+                let problemStr = '';
+
+                switch (op) {
+                    case '+':
+                        num1 = Math.floor(Math.random() * 500) + 100;
+                        num2 = Math.floor(Math.random() * 500) + 100;
+                        answer = num1 + num2;
+                        problemStr = `${num1} + ${num2} = ?`;
+                        break;
+                    case '-':
+                        num1 = Math.floor(Math.random() * 900) + 100;
+                        num2 = Math.floor(Math.random() * num1);
+                        answer = num1 - num2;
+                        problemStr = `${num1} - ${num2} = ?`;
+                        break;
+                    case '*':
+                        num1 = Math.floor(Math.random() * 9) + 1;
+                        num2 = Math.floor(Math.random() * 9) + 1;
+                        answer = num1 * num2;
+                        problemStr = `${num1} × ${num2} = ?`;
+                        break;
+                    case '/_rem':
+                        // 有余数的除法 (e.g., 25 / 4 = 6...1) -> 答案格式要求为 "6...1"
+                        num2 = Math.floor(Math.random() * 8) + 2; // 除数 2-9
+                        let quotient = Math.floor(Math.random() * 9) + 1; // 商 1-9
+                        let remainder = Math.floor(Math.random() * (num2 - 1)) + 1; // 余数 1 到 除数-1
+                        num1 = (num2 * quotient) + remainder;
+                        answer = `${quotient}...${remainder}`; // 特殊的答案格式验证
+                        problemStr = `${num1} ÷ ${num2} = ? (格式: 商...余数, 如 6...1)`;
+                        break;
+                }
+                currentAnswer = answer;
+                currentProblem = problemStr;
+                document.getElementById('questionText').innerText = `第 ${currentQuestionCount + 1}/${totalQuestions} 题：\n${problemStr}`;
+                return;
+            }
+
+            // 三年级下册（默认）：两位数乘以两位数，或者 除数是一位数且能整除的除法
+            const ops = ['*', '/']; // Re-declare ops for g3 scope
+            const op = ops[Math.floor(Math.random() * ops.length)];
+            let num1, num2;
+
+            if (op === '*') {
+                num1 = Math.floor(Math.random() * 90) + 10; // 10-99
+                num2 = Math.floor(Math.random() * 90) + 10; // 10-99
+                currentAnswer = num1 * num2;
+                currentProblem = `${num1} × ${num2} = ?`;
+            } else if (op === '/') {
+                num2 = Math.floor(Math.random() * 8) + 2; // Divisor 2-9
+                const multiplier = Math.floor(Math.random() * 110) + 10; // Quotient 10-119
+                num1 = num2 * multiplier; // Dividend (2-3 digits)
+                currentAnswer = multiplier;
+                currentProblem = `${num1} ÷ ${num2} = ?`;
+            }
+
+            document.getElementById('questionText').innerText = currentProblem;
+        }
+
+        function generateChineseProblem() {
+            // 根据档案选择对应的词库
+            const activeVocab = currentProfile === 'g3' ? chineseVocab : chineseVocabG2;
+            const item = activeVocab[Math.floor(Math.random() * activeVocab.length)];
+            currentAnswer = item.answer;
+
+            if (item.type === 'pinyin') {
+                currentProblem = `看拼音写词语: "${item.pinyin}"`;
+            } else if (item.type === 'idiom') {
+                currentProblem = `补充四字词语: "${item.text}"`;
+            }
+            // currentAnswer = item.answer; // This line was duplicated and is now handled above.
+
+            document.getElementById('questionText').innerText = currentProblem;
+        }
+
+        function generateEnglishProblem() {
+            // 中译英或英译中
+            const item = englishVocab[Math.floor(Math.random() * englishVocab.length)];
+            const isEnglishToChinese = Math.random() > 0.5;
+
+            if (isEnglishToChinese) {
+                currentProblem = `请写出单词的意思: "${item.word}"`;
+                currentAnswer = item.meaning;
+            } else {
+                currentProblem = `请拼写出英文: "${item.meaning}"`;
+                currentAnswer = item.word;
+            }
+
+            document.getElementById('questionText').innerText = currentProblem;
+        }
+
+        function submitAnswer() {
+            const userInput = document.getElementById('answerInput').value.trim().toLowerCase();
+            const feedback = document.getElementById('exerciseFeedback');
+            const title = document.getElementById('modalTitle');
+
+            if (!userInput) {
+                feedback.innerText = '请输入答案哦！';
+                feedback.className = 'feedback error';
+                return;
+            }
+
+            let isCorrect = false;
+            if (currentExerciseType === 'math') {
+                isCorrect = parseInt(userInput) === currentAnswer;
+            } else {
+                isCorrect = userInput === currentAnswer.toLowerCase();
+            }
+
+            if (isCorrect) {
+                currentQuestionCount++; // 答对增加计数
+
+                // 更新标题进度
+                let titlePrefix = currentExerciseType === 'math' ? '🧮 数学计算挑战' : currentExerciseType === 'chinese' ? '📝 语文基础练习' : '📚 英语单词挑战';
+                title.innerText = `${titlePrefix} (${currentQuestionCount}/${totalQuestions})`;
+
+                if (currentQuestionCount >= totalQuestions) {
+                    feedback.innerText = '🎉 太棒了！今天的挑战全部完成！';
+                    feedback.className = 'feedback success';
+
+                    // Mark associated task as complete
+                    setTimeout(() => {
+                        const taskLi = document.getElementById(currentTaskId);
+                        const checkbox = taskLi.querySelector('input[type="checkbox"]');
+                        const btn = taskLi.querySelector('.exercise-btn');
+
+                        checkbox.disabled = false;
+                        checkbox.checked = true;
+                        checkbox.nextElementSibling.style.cursor = 'pointer';
+                        checkbox.nextElementSibling.style.backgroundColor = ''; // Remove gray background
+                        checkbox.nextElementSibling.title = '';
+
+                        btn.innerText = '已完成';
+                        btn.disabled = true;
+
+                        updateProgress(checkbox); // Trigger Confetti and save
+                        closeExercise();
+                    }, 1500);
+                } else {
+                    feedback.innerText = '✅ 回答正确！准备下一题...';
+                    feedback.className = 'feedback success';
+                    document.getElementById('answerInput').value = ''; // clear input
+                    document.getElementById('answerInput').disabled = true; // prevent quick double enter
+
+                    setTimeout(() => {
+                        feedback.innerText = '';
+                        document.getElementById('answerInput').disabled = false;
+                        if (currentExerciseType === 'math') {
+                            generateMathProblem();
+                        } else if (currentExerciseType === 'chinese') {
+                            generateChineseProblem();
+                        } else {
+                            generateEnglishProblem();
+                        }
+                        document.getElementById('answerInput').focus();
+                    }, 1000); // 1秒后出下一题
+                }
+            } else {
+                feedback.innerText = '❌ 不太对哦，再想想再试一次吧！';
+                feedback.className = 'feedback error';
+                document.getElementById('answerInput').value = ''; // clear input
+                document.getElementById('answerInput').focus();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            switchProfile(currentProfile);
+        });
+
+        function updateProgress(checkbox) {
+            const listItem = checkbox.closest('.task-item');
+            if (checkbox.checked) {
+                listItem.classList.add('completed');
+                createConfetti(checkbox); // 加点小特效鼓励
+            } else {
+                listItem.classList.remove('completed');
+            }
+            saveProgress();
+            updateProgressText();
+        }
+
+        function updateProgressText() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const total = checkboxes.length;
+            const checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            const textElement = document.getElementById('progressText');
+
+            if (checked === 0) {
+                textElement.innerText = `今天有 ${total} 个小挑战，准备好了吗？🚀`;
+            } else if (checked < total) {
+                textElement.innerText = `太棒了！已经完成了 ${checked}/${total} 项，继续保持！💪`;
+            } else {
+                textElement.innerText = `🎉 满分达成！今天的你超级棒，为你骄傲！🎉`;
+            }
+        }
+
+        function saveProgress() {
+            const checkboxes = document.querySelectorAll('.task-item[style*="display: flex"] input[type="checkbox"], .task-item:not([style*="display: none"]) input[type="checkbox"]');
+            const state = Array.from(checkboxes).map(cb => cb.checked);
+
+            // Save state based on current profile
+            const storageKey = `habitTrackerState_${currentProfile}`;
+            localStorage.setItem(storageKey, JSON.stringify(state));
+
+            // 记录最后打卡日期，用于跨天自动重置
+            localStorage.setItem(`lastDate_${currentProfile}`, new Date().toDateString());
+        }
+
+        function loadProgress() {
+            const storageKey = `habitTrackerState_${currentProfile}`;
+            const lastDateKey = `lastDate_${currentProfile}`;
+            const savedState = JSON.parse(localStorage.getItem(storageKey));
+            const lastDate = localStorage.getItem(lastDateKey);
+            const today = new Date().toDateString();
+
+            // First, reset the UI visual state completely before loading
+            const checkboxes = document.querySelectorAll('.task-item[style*="display: flex"] input[type="checkbox"], .task-item:not([style*="display: none"]) input[type="checkbox"]');
+            checkboxes.forEach(cb => {
+                cb.checked = false;
+                const listItem = cb.closest('.task-item');
+                listItem.classList.remove('completed');
+
+                // Reset special exercise items
+                if (listItem.id === 'task-math-calc' || listItem.id === 'task-english-vocab' || listItem.id === 'task-habit-reading' || listItem.id === 'task-english-read' || listItem.id === 'task-chinese-foundation') {
+                    cb.disabled = true;
+                    cb.nextElementSibling.style.cursor = 'not-allowed';
+                    cb.nextElementSibling.style.backgroundColor = '#f0f0f0';
+                    cb.nextElementSibling.title = '请先点击左侧按钮完成挑战';
+
+                    const btn = listItem.querySelector('.exercise-btn');
+                    if (btn) {
+                        btn.disabled = false;
+                        if (listItem.id === 'task-math-calc') btn.innerText = '开始算术';
+                        else if (listItem.id === 'task-chinese-foundation') btn.innerText = '开始练字';
+                        else if (listItem.id === 'task-english-vocab') btn.innerText = '开始背诵';
+                        else if (listItem.id === 'task-habit-reading') btn.innerText = '开始阅读';
+                        else if (listItem.id === 'task-english-read') btn.innerText = '开始磨耳朵';
+                    }
+                }
+            });
+
+            // Optionally reset timer UI
+            const timerDisplay = document.getElementById('timerDisplay');
+            if (timerDisplay) timerDisplay.innerText = '20:00';
+            const focusBtn = document.getElementById('startFocusBtn');
+            if (focusBtn) {
+                focusBtn.disabled = false;
+                focusBtn.innerText = '开始20区专注';
+            }
+
+            // 如果是新的一天，自动重置（不弹窗）
+            if (lastDate && lastDate !== today) {
+                // Do nothing more, leaving it in the reset state
+                saveProgress(); // Save the reset state for the new day
+                updateProgressText();
+                return;
+            }
+
+            if (savedState) {
+                // Only get visible checkboxes for restoring state
+                const visibleCheckboxes = document.querySelectorAll('.task-item[style*="display: flex"] input[type="checkbox"], .task-item:not([style*="display: none"]) input[type="checkbox"]');
+                visibleCheckboxes.forEach((cb, index) => {
+                    // Safety check if DOM changed vs saved state
+                    if (index < savedState.length) {
+                        cb.checked = savedState[index];
+                        if (cb.checked) {
+                            const listItem = cb.closest('.task-item');
+                            listItem.classList.add('completed');
+
+                            // Handle special exercise items visual restore
+                            if (listItem.id === 'task-math-calc' || listItem.id === 'task-english-vocab' || listItem.id === 'task-habit-reading' || listItem.id === 'task-english-read' || listItem.id === 'task-chinese-foundation') {
+                                cb.disabled = false;
+                                cb.nextElementSibling.style.cursor = 'pointer';
+                                cb.nextElementSibling.style.backgroundColor = '';
+                                cb.nextElementSibling.title = '';
+
+                                const btn = listItem.querySelector('.exercise-btn');
+                                if (btn) {
+                                    btn.innerText = '已完成';
+                                    btn.disabled = true;
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            updateProgressText();
+        }
+
+        function switchProfile(profileId) {
+            currentProfile = profileId;
+
+            // Update Main Title
+            const mainTitle = document.getElementById('main-title');
+            if (profileId === 'g3') {
+                mainTitle.innerText = '🌟 三年级超能打卡表 🌟';
+                document.title = '三年级习惯养成打卡';
+            } else {
+                mainTitle.innerText = '🌟 二年级超能打卡表 🌟';
+                document.title = '二年级习惯养成打卡';
+            }
+
+            // Update UI switch buttons
+            document.querySelectorAll('.profile-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`btn-profile-${profileId}`).classList.add('active');
+
+            // Hide/Show tasks based on profile
+            const englishGroup = document.getElementById('group-english');
+            const chineseText = document.getElementById('text-chinese-desc');
+            const mathText = document.getElementById('text-math-desc');
+
+            if (profileId === 'g2') {
+                // Grade 2: Hide English tasks
+                if (englishGroup) englishGroup.style.display = 'none';
+
+                // Update descriptions for Grade 2
+                if (chineseText) chineseText.innerText = '夯基础：看拼音写字、补充词语练习';
+                if (mathText) mathText.innerText = '练计算：1000以内加减、基础乘法，有余数的除法';
+            } else {
+                // Grade 3: Show English tasks
+                if (englishGroup) englishGroup.style.display = 'block';
+
+                // Update descriptions for Grade 3
+                if (chineseText) chineseText.innerText = '夯基础：看拼音写字、补充成语练习';
+                if (mathText) mathText.innerText = '练计算：完成每日口算训练，保证又快又准';
+            }
+
+            // Reload progress for the new profile
+            loadProgress();
+        }
+
+        function resetCheckboxes(confirmPrompt = true) {
+            if (confirmPrompt && !confirm('确定要重置今天的打卡记录，开启新的一天吗？')) {
+                return;
+            }
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(cb => {
+                cb.checked = false;
+                const listItem = cb.closest('.task-item');
+                listItem.classList.remove('completed');
+
+                // Reset special exercise items
+                if (listItem.id === 'task-math-calc' || listItem.id === 'task-english-vocab' || listItem.id === 'task-habit-reading' || listItem.id === 'task-english-read' || listItem.id === 'task-chinese-foundation') {
+                    cb.disabled = true;
+                    cb.nextElementSibling.style.cursor = 'not-allowed';
+                    cb.nextElementSibling.style.backgroundColor = '#e0e0e0';
+                    cb.nextElementSibling.title = '请先完成任务';
+
+                    const btn = listItem.querySelector('.exercise-btn');
+                    if (btn) {
+                        if (listItem.id === 'task-math-calc') btn.innerText = '开始挑战';
+                        else if (listItem.id === 'task-english-vocab') btn.innerText = '开始测试';
+                        else if (listItem.id === 'task-english-read') btn.innerText = '每日影音';
+                        else if (listItem.id === 'task-habit-reading') btn.innerText = '今日阅读';
+                        else if (listItem.id === 'task-chinese-foundation') btn.innerText = '开始练习';
+                        btn.disabled = false;
+                    }
+                }
+            });
+            saveProgress();
+            updateProgressText();
+        }
+
+        // 简单的粒子特效掉落 (替代 confetti 库，保持单文件)
+        function createConfetti(element) {
+            const rect = element.getBoundingClientRect();
+            const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722'];
+
+            for (let i = 0; i < 10; i++) {
+                const confetto = document.createElement('div');
+                confetto.style.position = 'fixed';
+                confetto.style.width = '8px';
+                confetto.style.height = '8px';
+                confetto.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetto.style.left = (rect.left + 15) + 'px';
+                confetto.style.top = (rect.top + 15) + 'px';
+                confetto.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetto.style.zIndex = '1000';
+                confetto.style.pointerEvents = 'none';
+                document.body.appendChild(confetto);
+
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 50 + Math.random() * 50;
+                const tx = Math.cos(angle) * velocity;
+                const ty = -Math.abs(Math.sin(angle)) * velocity - 20; // 向上抛
+
+                confetto.animate([
+                    { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
+                    { transform: `translate(${tx}px, ${ty}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: 600 + Math.random() * 400,
+                    easing: 'cubic-bezier(0, .9, .57, 1)'
+                }).onfinish = () => confetto.remove();
+            }
+        }
+    </script>
+</body>
+
+</html>
