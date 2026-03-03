@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>涓夊勾绾т範鎯吇鎴愭墦鍗?/title>
+    <title>三年级习惯养成打卡</title>
     <style>
         :root {
             --primary-color: #4CAF50;
@@ -88,7 +88,7 @@
             min-width: 60px;
         }
 
-        /* 鑷畾涔夊閫夋 */
+        /* 自定义复选框 */
         .checkbox-wrapper {
             display: flex;
             align-items: center;
@@ -130,7 +130,7 @@
             display: block;
         }
 
-        /* 杩涘害鎻愮ず */
+        /* 进度提示 */
         .progress-section {
             margin-top: 40px;
             text-align: center;
@@ -161,7 +161,7 @@
             background-color: #66BB6A;
         }
 
-        /* 鍒掔嚎鍔ㄧ敾 */
+        /* 划线动画 */
         .task-item.completed .task-text {
             text-decoration: line-through;
             color: #9E9E9E;
@@ -183,7 +183,7 @@
             background-color: #f0f0f0;
         }
 
-        /* 缁冧範鎸夐挳 */
+        /* 练习按钮 */
         .exercise-btn {
             background-color: var(--primary-color);
             color: white;
@@ -207,7 +207,7 @@
             transform: none;
         }
 
-        /* 寮圭獥鏍峰紡 */
+        /* 弹窗样式 */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -347,75 +347,75 @@
 
 <body>
 
-    <h1 id="main-title">馃専 涓夊勾绾ц秴鑳芥墦鍗¤〃 馃専</h1>
+    <h1 id="main-title">🌟 三年级超能打卡表 🌟</h1>
 
     <div class="profile-switcher">
-        <button id="btn-profile-g3" class="profile-btn active" onclick="switchProfile('g3')">鑰佸ぇ (涓夊勾绾?</button>
-        <button id="btn-profile-g2" class="profile-btn" onclick="switchProfile('g2')">鑰佷簩 (浜屽勾绾?</button>
+        <button id="btn-profile-g3" class="profile-btn active" onclick="switchProfile('g3')">老大 (三年级)</button>
+        <button id="btn-profile-g2" class="profile-btn" onclick="switchProfile('g2')">老二 (二年级)</button>
     </div>
 
     <div class="container">
-        <!-- 璇枃瀛︿範妯″潡 -->
+        <!-- 语文学习模块 -->
         <div class="task-group">
-            <h2>馃摑 璇枃鍩虹</h2>
+            <h2>📝 语文基础</h2>
             <ul class="task-list">
                 <li class="task-item" id="task-chinese-foundation">
-                    <span class="task-text" id="text-chinese-desc">澶熀纭€锛氱湅鎷奸煶鍐欏瓧銆佽ˉ鍏呮垚璇粌涔?/span>
-                    <span class="task-time">10鍒嗛挓</span>
-                    <button class="exercise-btn" onclick="openExercise('chinese')">寮€濮嬬粌涔?/button>
+                    <span class="task-text" id="text-chinese-desc">夯基础：看拼音写字、补充成语练习</span>
+                    <span class="task-time">10分钟</span>
+                    <button class="exercise-btn" onclick="openExercise('chinese')">开始练习</button>
                     <label class="checkbox-wrapper">
                         <input type="checkbox" disabled onchange="updateProgress(this)">
                         <span class="checkmark" style="background-color: #e0e0e0; cursor: not-allowed;"
-                            title="璇峰厛瀹屾垚缁冧範"></span>
+                            title="请先完成练习"></span>
                     </label>
                 </li>
             </ul>
         </div>
 
-        <!-- 鑻辫瀛︿範妯″潡 -->
+        <!-- 英语学习模块 -->
         <div class="task-group" id="group-english">
-            <h2>馃摎 鑻辫瓒呰兘鍔?/h2>
+            <h2>📚 英语超能力</h2>
             <ul class="task-list">
                 <li class="task-item" id="task-english-read">
-                    <span class="task-text">纾ㄨ€虫湹锛氳鐪嬩粖鏃ヨ嫳璇惎钂欒棰?/span>
-                    <span class="task-time">15鍒嗛挓</span>
-                    <button class="exercise-btn" onclick="openContent('listen')">姣忔棩褰遍煶</button>
+                    <span class="task-text">磨耳朵：观看今日英语启蒙视频</span>
+                    <span class="task-time">15分钟</span>
+                    <button class="exercise-btn" onclick="openContent('listen')">每日影音</button>
                     <label class="checkbox-wrapper">
                         <input type="checkbox" disabled onchange="updateProgress(this)">
                         <span class="checkmark" style="background-color: #e0e0e0; cursor: not-allowed;"
-                            title="璇峰厛瀹屾垚鏀跺惉"></span>
+                            title="请先完成收听"></span>
                     </label>
                 </li>
                 <li class="task-item" id="task-english-vocab">
-                    <span class="task-text">璁板崟璇嶏細瀹屾垚姣忔棩璇嶆眹灏忔祴</span>
-                    <span class="task-time">10鍒嗛挓</span>
-                    <button class="exercise-btn" onclick="openExercise('english')">寮€濮嬫祴璇?/button>
+                    <span class="task-text">记单词：完成每日词汇小测</span>
+                    <span class="task-time">10分钟</span>
+                    <button class="exercise-btn" onclick="openExercise('english')">开始测试</button>
                     <label class="checkbox-wrapper">
                         <input type="checkbox" disabled onchange="updateProgress(this)">
                         <span class="checkmark" style="background-color: #e0e0e0; cursor: not-allowed;"
-                            title="璇峰厛瀹屾垚娴嬭瘯"></span>
+                            title="请先完成测试"></span>
                     </label>
                 </li>
             </ul>
         </div>
 
-        <!-- 鏁板瀛︿範妯″潡 -->
+        <!-- 数学学习模块 -->
         <div class="task-group">
-            <h2>馃М 鏁板灏忕伒閫?/h2>
+            <h2>🧮 数学小灵通</h2>
             <ul class="task-list">
                 <li class="task-item" id="task-math-calc">
-                    <span class="task-text" id="text-math-desc">缁冭绠楋細瀹屾垚姣忔棩鍙ｇ畻璁粌锛屼繚璇佸張蹇張鍑?/span>
-                    <span class="task-time">5鍒嗛挓</span>
-                    <button class="exercise-btn" onclick="openExercise('math')">寮€濮嬫寫鎴?/button>
+                    <span class="task-text" id="text-math-desc">练计算：完成每日口算训练，保证又快又准</span>
+                    <span class="task-time">5分钟</span>
+                    <button class="exercise-btn" onclick="openExercise('math')">开始挑战</button>
                     <label class="checkbox-wrapper">
                         <input type="checkbox" disabled onchange="updateProgress(this)">
                         <span class="checkmark" style="background-color: #e0e0e0; cursor: not-allowed;"
-                            title="璇峰厛瀹屾垚璁＄畻鎸戞垬"></span>
+                            title="请先完成计算挑战"></span>
                     </label>
                 </li>
                 <li class="task-item" id="task-math-review">
-                    <span class="task-text">鐞嗛敊棰橈細鏁寸悊浠婂ぉ浣滀笟/鑰冭瘯涓殑閿欓鍒伴敊棰樻湰锛屽苟鍐欐竻鎬濊矾</span>
-                    <span class="task-time">15鍒嗛挓</span>
+                    <span class="task-text">理错题：整理今天作业/考试中的错题到错题本，并写清思路</span>
+                    <span class="task-time">15分钟</span>
                     <label class="checkbox-wrapper">
                         <input type="checkbox" onchange="updateProgress(this)">
                         <span class="checkmark"></span>
@@ -424,201 +424,201 @@
             </ul>
         </div>
 
-        <!-- 鍏抽敭涔犳儻鍩瑰吇妯″潡 -->
+        <!-- 关键习惯培养模块 -->
         <div class="task-group">
-            <h2>鉁?鍏绘垚濂戒範鎯?/h2>
+            <h2>✅ 养成好习惯</h2>
             <ul class="task-list">
                 <li class="task-item" id="task-time-management">
-                    <span class="task-text">鏃堕棿绠＄悊锛氬啓浣滀笟鍓嶈嚜宸卞畾濂芥椂闂达紝涓嶆嫋鎷?/span>
+                    <span class="task-text">时间管理：写作业前自己定好时间，不拖拉</span>
                     <span class="task-time" id="timer-display">20:00</span>
-                    <button class="exercise-btn" id="timer-btn" onclick="startTimer()">寮€濮嬩笓娉?/button>
+                    <button class="exercise-btn" id="timer-btn" onclick="startTimer()">开始专注</button>
                     <label class="checkbox-wrapper">
                         <input type="checkbox" onchange="updateProgress(this)">
                         <span class="checkmark"></span>
                     </label>
                 </li>
                 <li class="task-item">
-                    <span class="task-text">璁ょ湡瀹￠锛氬仛棰樺仛鍒扳€滄寚璇诲湀鐢烩€濓紝鑽夌鏈繚鎸佹暣榻?/span>
-                    <span class="task-time">姣忔棩</span>
+                    <span class="task-text">认真审题：做题做到“指读圈画”，草稿本保持整齐</span>
+                    <span class="task-time">每日</span>
                     <label class="checkbox-wrapper">
                         <input type="checkbox" onchange="updateProgress(this)">
                         <span class="checkmark"></span>
                     </label>
                 </li>
                 <li class="task-item">
-                    <span class="task-text">璇惧墠棰勪範锛氭祻瑙堟槑澶╂柊璇惧唴瀹癸紝鍦堝嚭涓嶆噦鐨勫湴鏂?/span>
-                    <span class="task-time">10鍒嗛挓</span>
+                    <span class="task-text">课前预习：浏览明天新课内容，圈出不懂的地方</span>
+                    <span class="task-time">10分钟</span>
                     <label class="checkbox-wrapper">
                         <input type="checkbox" onchange="updateProgress(this)">
                         <span class="checkmark"></span>
                     </label>
                 </li>
                 <li class="task-item">
-                    <span class="task-text">璇惧悗澶嶄範锛氬洖椤句粖澶╁杩囩殑鐭ヨ瘑锛屽姞娣辫蹇?/span>
-                    <span class="task-time">10鍒嗛挓</span>
+                    <span class="task-text">课后复习：回顾今天学过的知识，加深记忆</span>
+                    <span class="task-time">10分钟</span>
                     <label class="checkbox-wrapper">
                         <input type="checkbox" onchange="updateProgress(this)">
                         <span class="checkmark"></span>
                     </label>
                 </li>
                 <li class="task-item" id="task-habit-reading">
-                    <span class="task-text">涓嫳闃呰锛氶槄璇讳粖鏃ユ帹鑽愮殑涓嫳鏂囩煭鏂?/span>
-                    <span class="task-time">20鍒嗛挓</span>
-                    <button class="exercise-btn" onclick="openContent('read')">浠婃棩闃呰</button>
+                    <span class="task-text">中英阅读：阅读今日推荐的中英文短文</span>
+                    <span class="task-time">20分钟</span>
+                    <button class="exercise-btn" onclick="openContent('read')">今日阅读</button>
                     <label class="checkbox-wrapper">
                         <input type="checkbox" disabled onchange="updateProgress(this)">
                         <span class="checkmark" style="background-color: #e0e0e0; cursor: not-allowed;"
-                            title="璇峰厛瀹屾垚闃呰"></span>
+                            title="请先完成阅读"></span>
                     </label>
                 </li>
             </ul>
         </div>
 
         <div class="progress-section">
-            <div class="progress-text" id="progressText">浠婂ぉ瀹屾垚浜?0/7 椤逛换鍔★紝鍔犳补锛侌煉?/div>
-            <button class="reset-btn" onclick="resetCheckboxes()">寮€鍚柊鐨勪竴澶╋紝閲嶇疆鎵撳崱</button>
+            <div class="progress-text" id="progressText">今天完成了 0/7 项任务，加油！💪</div>
+            <button class="reset-btn" onclick="resetCheckboxes()">开启新的一天，重置打卡</button>
         </div>
     </div>
 
-    <!-- 缁冧範寮圭獥 -->
+    <!-- 练习弹窗 -->
     <div class="modal-overlay" id="exerciseModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="modalTitle">姣忔棩鎸戞垬</h3>
-                <button class="close-btn" onclick="closeExercise()">脳</button>
+                <h3 class="modal-title" id="modalTitle">每日挑战</h3>
+                <button class="close-btn" onclick="closeExercise()">×</button>
             </div>
             <div class="exercise-container" id="exerciseContainer">
-                <div id="questionText">闂鍔犺浇涓?..</div>
-                <input type="text" id="answerInput" class="exercise-input" placeholder="杈撳叆绛旀" autocomplete="off">
+                <div id="questionText">问题加载中...</div>
+                <input type="text" id="answerInput" class="exercise-input" placeholder="输入答案" autocomplete="off">
                 <div class="feedback" id="exerciseFeedback"></div>
             </div>
-            <button class="submit-btn" onclick="submitAnswer()">鎻愪氦绛旀</button>
+            <button class="submit-btn" onclick="submitAnswer()">提交答案</button>
         </div>
     </div>
 
-    <!-- 鍐呭闃呰/鏀跺惉寮圭獥 -->
+    <!-- 内容阅读/收听弹窗 -->
     <div class="modal-overlay" id="contentModal">
         <div class="modal-content" style="max-width: 650px;">
             <div class="modal-header">
-                <h3 class="modal-title" id="contentModalTitle">浠婃棩鍐呭</h3>
-                <button class="close-btn" onclick="closeContent()">脳</button>
+                <h3 class="modal-title" id="contentModalTitle">今日内容</h3>
+                <button class="close-btn" onclick="closeContent()">×</button>
             </div>
             <div class="exercise-container" id="contentBody"
                 style="font-size: 1.1em; line-height: 1.6; max-height: 50vh; overflow-y: auto;">
                 <!-- Content will be injected here (Text or Iframe) -->
             </div>
-            <button class="submit-btn" id="finishContentBtn" onclick="markContentFinished()">鎴戝凡瀹屾垚</button>
+            <button class="submit-btn" id="finishContentBtn" onclick="markContentFinished()">我已完成</button>
         </div>
     </div>
 
     <script>
-        // --- 缁冧範鐢熸垚涓庨獙璇侀€昏緫 ---
+        // --- 练习生成与验证逻辑 ---
 
-        // 涓夊勾绾т笅鍐岃嫳璇瘝姹囧簱 (璇戞灄鐗堜笁涓?Unit 1-8 鏍稿績璇嶆眹绮鹃€?
+        // 三年级下册英语词汇库 (译林版三下 Unit 1-8 核心词汇精选)
         const englishVocab = [
-            { word: 'door', meaning: '闂? },
-            { word: 'window', meaning: '绐楁埛' },
-            { word: 'blackboard', meaning: '榛戞澘' },
-            { word: 'rubber', meaning: '姗＄毊' },
-            { word: 'parrot', meaning: '楣﹂箟' },
-            { word: 'library', meaning: '鍥句功棣? },
-            { word: 'shout', meaning: '澶у０璇磋瘽/鍙枈' },
-            { word: 'sleep', meaning: '鐫¤' },
-            { word: 'drink', meaning: '鍠? },
-            { word: 'milk', meaning: '鐗涘ザ' },
-            { word: 'pencil', meaning: '閾呯瑪' },
-            { word: 'schoolbag', meaning: '涔﹀寘' },
-            { word: 'crayon', meaning: '铚＄瑪' },
-            { word: 'lunch box', meaning: '鍗堥鐩? },
-            { word: 'bird', meaning: '楦? },
-            { word: 'desk', meaning: '璇炬' },
-            { word: 'chair', meaning: '妞呭瓙' },
-            { word: 'tree', meaning: '鏍? },
-            { word: 'beautiful', meaning: '婕備寒鐨? },
-            { word: 'eight', meaning: '鍏? },
-            { word: 'nine', meaning: '涔? },
-            { word: 'ten', meaning: '鍗? },
-            { word: 'twelve', meaning: '鍗佷簩' },
-            { word: 'breakfast', meaning: '鏃╅' },
-            { word: 'dinner', meaning: '鏅氶' },
-            { word: 'farm', meaning: '鍐滃満' },
-            { word: 'pig', meaning: '鐚? },
-            { word: 'cow', meaning: '濂剁墰' },
-            { word: 'apple', meaning: '鑻规灉' },
-            { word: 'pear', meaning: '姊? },
-            { word: 'chicken', meaning: '楦? },
-            { word: 'duck', meaning: '楦瓙' },
-            { word: 'twin', meaning: '鍙岃優鑳? }
+            { word: 'door', meaning: '门' },
+            { word: 'window', meaning: '窗户' },
+            { word: 'blackboard', meaning: '黑板' },
+            { word: 'rubber', meaning: '橡皮' },
+            { word: 'parrot', meaning: '鹦鹉' },
+            { word: 'library', meaning: '图书馆' },
+            { word: 'shout', meaning: '大声说话/叫喊' },
+            { word: 'sleep', meaning: '睡觉' },
+            { word: 'drink', meaning: '喝' },
+            { word: 'milk', meaning: '牛奶' },
+            { word: 'pencil', meaning: '铅笔' },
+            { word: 'schoolbag', meaning: '书包' },
+            { word: 'crayon', meaning: '蜡笔' },
+            { word: 'lunch box', meaning: '午餐盒' },
+            { word: 'bird', meaning: '鸟' },
+            { word: 'desk', meaning: '课桌' },
+            { word: 'chair', meaning: '椅子' },
+            { word: 'tree', meaning: '树' },
+            { word: 'beautiful', meaning: '漂亮的' },
+            { word: 'eight', meaning: '八' },
+            { word: 'nine', meaning: '九' },
+            { word: 'ten', meaning: '十' },
+            { word: 'twelve', meaning: '十二' },
+            { word: 'breakfast', meaning: '早餐' },
+            { word: 'dinner', meaning: '晚餐' },
+            { word: 'farm', meaning: '农场' },
+            { word: 'pig', meaning: '猪' },
+            { word: 'cow', meaning: '奶牛' },
+            { word: 'apple', meaning: '苹果' },
+            { word: 'pear', meaning: '梨' },
+            { word: 'chicken', meaning: '鸡' },
+            { word: 'duck', meaning: '鸭子' },
+            { word: 'twin', meaning: '双胞胎' }
         ];
 
-        // 涓夊勾绾т笅鍐岃鏂囪瘝姹囧簱 (鑻忔暀鐗堜笁涓?鎷奸煶鍐欏瓧涓庢垚璇?
+        // 三年级下册语文词汇库 (苏教版三下 拼音写字与成语)
         const chineseVocab = [
-            // 鐪嬫嫾闊冲啓璇嶈
-            { pinyin: 'm矛 f膿ng', answer: '铚滆渹', type: 'pinyin' },
-            { pinyin: 'y脿n zi', answer: '鐕曞瓙', type: 'pinyin' },
-            { pinyin: 'yu膩n yang', answer: '楦抽腐', type: 'pinyin' },
-            { pinyin: 'hu膩 b脿n', answer: '鑺辩摚', type: 'pinyin' },
-            { pinyin: 'z墨 sh矛', answer: '濮垮娍', type: 'pinyin' },
-            { pinyin: 'x墨n sh菐ng', answer: '娆ｈ祻', type: 'pinyin' },
-            { pinyin: 'd脿i ji脿', answer: '浠ｄ环', type: 'pinyin' },
-            { pinyin: 'b菐o c煤n', answer: '淇濆瓨', type: 'pinyin' },
-            { pinyin: 'zh矛 hu矛', answer: '鏅烘収', type: 'pinyin' },
-            { pinyin: 'l矛 sh菒', answer: '鍘嗗彶', type: 'pinyin' },
-            // 琛ュ厖鎴愯/鍥涘瓧璇嶈
-            { text: '瀹堟牚寰??)', answer: '鍏?, type: 'idiom' },
-            { text: '鏉紦(?)褰?, answer: '铔?, type: 'idiom' },
-            { text: '鎺╄€??)閾?, answer: '鐩?, type: 'idiom' },
-            { text: '鍒昏垷姹??)', answer: '鍓?, type: 'idiom' },
-            { text: '鐢??)娣昏冻', answer: '铔?, type: 'idiom' },
-            { text: '浜＄緤琛??)', answer: '鐗?, type: 'idiom' },
-            { text: '鍗楄緯鍖??)', answer: '杈?, type: 'idiom' },
-            { text: '鐙愬亣铏??)', answer: '濞?, type: 'idiom' }
+            // 看拼音写词语
+            { pinyin: 'mì fēng', answer: '蜜蜂', type: 'pinyin' },
+            { pinyin: 'yàn zi', answer: '燕子', type: 'pinyin' },
+            { pinyin: 'yuān yang', answer: '鸳鸯', type: 'pinyin' },
+            { pinyin: 'huā bàn', answer: '花瓣', type: 'pinyin' },
+            { pinyin: 'zī shì', answer: '姿势', type: 'pinyin' },
+            { pinyin: 'xīn shǎng', answer: '欣赏', type: 'pinyin' },
+            { pinyin: 'dài jià', answer: '代价', type: 'pinyin' },
+            { pinyin: 'bǎo cún', answer: '保存', type: 'pinyin' },
+            { pinyin: 'zhì huì', answer: '智慧', type: 'pinyin' },
+            { pinyin: 'lì shǐ', answer: '历史', type: 'pinyin' },
+            // 补充成语/四字词语
+            { text: '守株待(?)', answer: '兔', type: 'idiom' },
+            { text: '杯弓(?)影', answer: '蛇', type: 'idiom' },
+            { text: '掩耳(?)铃', answer: '盗', type: 'idiom' },
+            { text: '刻舟求(?)', answer: '剑', type: 'idiom' },
+            { text: '画(?)添足', answer: '蛇', type: 'idiom' },
+            { text: '亡羊补(?)', answer: '牢', type: 'idiom' },
+            { text: '南辕北(?)', answer: '辙', type: 'idiom' },
+            { text: '狐假虎(?)', answer: '威', type: 'idiom' }
         ];
 
-        // 浜屽勾绾т笅鍐岃鏂囪瘝姹囧簱 (鏇村熀纭€鐨勬嫾闊冲拰璇嶈)
+        // 二年级下册语文词汇库 (更基础的拼音和词语)
         const chineseVocabG2 = [
-            // 鐪嬫嫾闊冲啓璇嶈
-            { pinyin: 'g奴 niang', answer: '濮戝', type: 'pinyin' },
-            { pinyin: 'b艒 w茅n', answer: '娉㈢汗', type: 'pinyin' },
-            { pinyin: 'y脿o w霉', answer: '鑽墿', type: 'pinyin' },
-            { pinyin: 'j菒ng s猫', answer: '鏅壊', type: 'pinyin' },
-            { pinyin: 'm墨 lu', answer: '杩疯矾', type: 'pinyin' },
-            { pinyin: 'w猫i d脿o', answer: '鍛抽亾', type: 'pinyin' },
-            { pinyin: 'm菐i m脿i', answer: '涔板崠', type: 'pinyin' },
-            { pinyin: 'xi奴 xi', answer: '浼戞伅', type: 'pinyin' },
-            { pinyin: 'm铆 l霉', answer: '杩疯矾', type: 'pinyin' },
-            { pinyin: 'ji菐o b菐o', answer: '瑙掑牎', type: 'pinyin' },
-            // 琛ュ厖璇嶈
-            { text: '寮曚汉娉??)', answer: '鐩?, type: 'idiom' },
-            { text: '涓囦紬涓€(?)', answer: '蹇?, type: 'idiom' },
-            { text: '鍥涙捣涓??)', answer: '瀹?, type: 'idiom' },
-            { text: '鏄ユ殩鑺??)', answer: '寮€', type: 'idiom' },
-            { text: '浜旈鍏??)', answer: '鑹?, type: 'idiom' }
+            // 看拼音写词语
+            { pinyin: 'gū niang', answer: '姑娘', type: 'pinyin' },
+            { pinyin: 'bō wén', answer: '波纹', type: 'pinyin' },
+            { pinyin: 'yào wù', answer: '药物', type: 'pinyin' },
+            { pinyin: 'jǐng sè', answer: '景色', type: 'pinyin' },
+            { pinyin: 'mī lu', answer: '迷路', type: 'pinyin' },
+            { pinyin: 'wèi dào', answer: '味道', type: 'pinyin' },
+            { pinyin: 'mǎi mài', answer: '买卖', type: 'pinyin' },
+            { pinyin: 'xiū xi', answer: '休息', type: 'pinyin' },
+            { pinyin: 'mí lù', answer: '迷路', type: 'pinyin' },
+            { pinyin: 'jiǎo bǎo', answer: '角堡', type: 'pinyin' },
+            // 补充词语
+            { text: '引人注(?)', answer: '目', type: 'idiom' },
+            { text: '万众一(?)', answer: '心', type: 'idiom' },
+            { text: '四海为(?)', answer: '家', type: 'idiom' },
+            { text: '春暖花(?)', answer: '开', type: 'idiom' },
+            { text: '五颜六(?)', answer: '色', type: 'idiom' }
         ];
 
-        // 鐘舵€佸彉閲?
-        let currentProfile = 'g3'; // 'g3' for 鑰佸ぇ(Grade 3), 'g2' for 鑰佷簩(Grade 2)
+        // 状态变量
+        let currentProfile = 'g3'; // 'g3' for 老大(Grade 3), 'g2' for 老二(Grade 2)
         let currentExerciseType = '';
         let currentAnswer = '';
         let currentProblem = '';
         let currentTaskId = '';
         let currentQuestionCount = 0;
-        const totalQuestions = 10; // 姣忓ぉ闇€瑕佸畬鎴愮殑鏁伴噺 (鍗曡瘝鍜屽彛绠?
+        const totalQuestions = 10; // 每天需要完成的数量 (单词和口算)
 
         let currentContentType = ''; // 'read' or 'listen'
 
-        // 姣忔棩闃呰搴?
+        // 每日阅读库
         const readingMaterials = [
             {
-                title: "瀹堟牚寰呭厰 / Waiting for a Rabbit",
+                title: "守株待兔 / Waiting for a Rabbit",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>瀹嬪浗鏈変釜鍐滃か锛屼粬鐨勭敯鍦颁腑鏈変竴鎴爲妗┿€?br>
-                    涓€澶╋紝涓€鍙窇寰楅蹇殑閲庡厰鎾炲湪浜嗘爲妗╀笂锛屾姌鏂簡鑴栧瓙姝讳簡銆?br>
-                    浜庢槸锛屽啘澶究鏀句笅浠栫殑鍐滃叿鏃ユ棩澶滃瀹堝湪鏍戞々瀛愭梺杈癸紝甯屾湜鑳藉啀寰楀埌涓€鍙厰瀛愩€?br>
-                    鐒惰€岄噹鍏旀槸涓嶅彲鑳藉啀娆″緱鍒颁簡锛屼粬鑷繁涔熻瀹嬪浗浜鸿€荤瑧銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>宋国有个农夫，他的田地中有一截树桩。<br>
+                    一天，一只跑得飞快的野兔撞在了树桩上，折断了脖子死了。<br>
+                    于是，农夫便放下他的农具日日夜夜守在树桩子旁边，希望能再得到一只兔子。<br>
+                    然而野兔是不可能再次得到了，他自己也被宋国人耻笑。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a farmer in the State of Song. In his field, there was a tree stump.<br>
                     One day, a fast-running rabbit crashed into the stump, broke its neck, and died.<br>
                     So, the farmer put down his tools and waited by the stump day and night, hoping to get another rabbit.<br>
@@ -627,14 +627,14 @@
                 englishText: "There was a farmer in the State of Song. In his field, there was a tree stump. One day, a fast-running rabbit crashed into the stump, broke its neck, and died. So, the farmer put down his tools and waited by the stump day and night, hoping to get another rabbit. However, no more rabbits came, and he was laughed at by the people of Song."
             },
             {
-                title: "鎷旇嫍鍔╅暱 / Pulling Shoots to Help Them Grow",
+                title: "拔苗助长 / Pulling Shoots to Help Them Grow",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鍙ゆ椂鍊欏畫鍥芥湁涓啘澶紝瀚岃嚜宸辩殑搴勭闀垮緱澶參銆備粬璺戝埌鐢伴噷锛屾妸绂捐嫍涓€妫典竴妫靛湴鎷旈珮銆?br>
-                    浠栧洖鍒板瀵瑰浜鸿锛氣€滀粖澶╁彲鎶婃垜绱潖浜嗭紝浣嗘垜甯姪绂捐嫍闀块珮浜嗭紒鈥?br>
-                    浠栫殑鍎垮瓙璺戝埌鐢伴噷涓€鐪嬶紝绂捐嫍鍏ㄩ兘鏋浜嗐€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>古时候宋国有个农夫，嫌自己的庄稼长得太慢。他跑到田里，把禾苗一棵一棵地拔高。<br>
+                    他回到家对家人说：“今天可把我累坏了，但我帮助禾苗长高了！”<br>
+                    他的儿子跑到田里一看，禾苗全都枯死了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>Long ago, a farmer in the State of Song worried that his crops were growing too slowly. He went to the field and pulled up each shoot a little bit.<br>
                     He went home and said to his family, "I am so tired today, but I helped the crops grow taller!"<br>
                     His son ran to the field to look, and all the crops had died.</p>
@@ -642,1338 +642,1338 @@
                 englishText: "Long ago, a farmer in the State of Song worried that his crops were growing too slowly. He went to the field and pulled up each shoot a little bit. He went home and said to his family, I am so tired today, but I helped the crops grow taller! His son ran to the field to look, and all the crops had died."
             },
             {
-                title: "鍙嬪ソ鐨勪箤榫?/ The friendly Turtle",
+                title: "友好的乌龟 / The friendly Turtle",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙弸濂界殑涔岄緹锛屽畠浠婂ぉ鍦ㄦ渤杈硅糠璺簡銆傚畠搴﹁繃浜嗛潪甯稿紑蹇冪殑涓€澶┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在河边迷路了。它度过了非常开心的一天。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a friendly Turtle. Today it got lost by the river. It had a very happy day.</p>
                 `,
                 englishText: "There was a friendly Turtle. Today it got lost by the river. It had a very happy day."
             },
             {
-                title: "璋冪毊鐨勭尨瀛?/ The naughty Monkey",
+                title: "调皮的猴子 / The naughty Monkey",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙皟鐨殑鐚村瓙锛屽畠浠婂ぉ鍦ㄨ姳鍥噷鎯宠鐫¤銆傚畠鐢滅敎鍦扮潯鐫€浜嗐€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在花园里想要睡觉。它甜甜地睡着了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a naughty Monkey. Today it wanted to sleep in the garden. It fell asleep sweetly.</p>
                 `,
                 englishText: "There was a naughty Monkey. Today it wanted to sleep in the garden. It fell asleep sweetly."
             },
             {
-                title: "蹇箰鐨勫ぇ璞?/ The happy Elephant",
+                title: "快乐的大象 / The happy Elephant",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙揩涔愮殑澶ц薄锛屽畠浠婂ぉ鍦ㄥ北娲為噷鍦ㄥ揩涔愬湴璺宠垶銆傚畠鎶婇鐗╁垎浜粰浜嗗ぇ瀹躲€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在山洞里在快乐地跳舞。它把食物分享给了大家。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a happy Elephant. Today it was dancing happily in the cave. It shared the food with everyone.</p>
                 `,
                 englishText: "There was a happy Elephant. Today it was dancing happily in the cave. It shared the food with everyone."
             },
             {
-                title: "楠勫偛鐨勮€侀紶 / The proud Mouse",
+                title: "骄傲的老鼠 / The proud Mouse",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙獎鍌茬殑鑰侀紶锛屽畠浠婂ぉ鍦ㄥ北涓樹笂鍦ㄥ紑蹇冨湴鍞辨瓕銆傛湅鍙嬩滑閮界珛鍒昏刀鏉ュ府蹇欎簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在山丘上在开心地唱歌。朋友们都立刻赶来帮忙了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a proud Mouse. Today it was singing happily on the hill. Friends came to help immediately.</p>
                 `,
                 englishText: "There was a proud Mouse. Today it was singing happily on the hill. Friends came to help immediately."
             },
             {
-                title: "濞佹鐨勭嫯瀛?/ The majestic Lion",
+                title: "威武的狮子 / The majestic Lion",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙▉姝︾殑鐙瓙锛屽畠浠婂ぉ鍦ㄨ崏鍦颁笂姝ｅ湪瀵绘壘姘村枬銆傚畠鍐冲畾鏄庡ぉ鍐嶆潵鐜┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在草地上正在寻找水喝。它决定明天再来玩。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a majestic Lion. Today it was looking for some water on the grass. It decided to come and play again tomorrow.</p>
                 `,
                 englishText: "There was a majestic Lion. Today it was looking for some water on the grass. It decided to come and play again tomorrow."
             },
             {
-                title: "鍕囨暍鐨勮€佽檸 / The brave Tiger",
+                title: "勇敢的老虎 / The brave Tiger",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙媷鏁㈢殑鑰佽檸锛屽畠浠婂ぉ鍦ㄦ．鏋楅噷鍙戠幇浜嗕竴涓瀵嗐€傛渶鍚庡畠瀹夊叏鍦板洖瀹朵簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在森林里发现了一个秘密。最后它安全地回家了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a brave Tiger. Today it discovered a secret in the forest. Finally, it went home safely.</p>
                 `,
                 englishText: "There was a brave Tiger. Today it discovered a secret in the forest. Finally, it went home safely."
             },
             {
-                title: "寮哄．鐨勫皬楦?/ The strong Bird",
+                title: "强壮的小鸟 / The strong Bird",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙己澹殑灏忛笩锛屽畠浠婂ぉ鍦ㄦ爲涓婃壘鍒颁簡涓€鍧楃編鍛崇殑椋熺墿銆傚畠鏄庣櫧浜嗕竴涓噸瑕佺殑閬撶悊銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在树上找到了一块美味的食物。它明白了一个重要的道理。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a strong Bird. Today it found a piece of delicious food in the tree. It understood an important truth.</p>
                 `,
                 englishText: "There was a strong Bird. Today it found a piece of delicious food in the tree. It understood an important truth."
             },
             {
-                title: "璐悆鐨勫皬鐔?/ The greedy Bear",
+                title: "贪吃的小熊 / The greedy Bear",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙椽鍚冪殑灏忕唺锛屽畠浠婂ぉ鍦ㄦ渤杈归亣鍒颁簡涓€浣嶆柊鏈嬪弸銆傚畠搴﹁繃浜嗛潪甯稿紑蹇冪殑涓€澶┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在河边遇到了一位新朋友。它度过了非常开心的一天。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a greedy Bear. Today it met a new friend by the river. It had a very happy day.</p>
                 `,
                 englishText: "There was a greedy Bear. Today it met a new friend by the river. It had a very happy day."
             },
             {
-                title: "鎱㈠悶鍚炵殑灏忕嫍 / The slow Dog",
+                title: "慢吞吞的小狗 / The slow Dog",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙參鍚炲悶鐨勫皬鐙楋紝瀹冧粖澶╁湪鑺卞洯閲岃糠璺簡銆傚畠鐢滅敎鍦扮潯鐫€浜嗐€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在花园里迷路了。它甜甜地睡着了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a slow Dog. Today it got lost in the garden. It fell asleep sweetly.</p>
                 `,
                 englishText: "There was a slow Dog. Today it got lost in the garden. It fell asleep sweetly."
             },
             {
-                title: "鐢熸皵鐨勫皬鐚?/ The angry Cat",
+                title: "生气的小猫 / The angry Cat",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙敓姘旂殑灏忕尗锛屽畠浠婂ぉ鍦ㄥ北娲為噷鎯宠鐫¤銆傚畠鎶婇鐗╁垎浜粰浜嗗ぇ瀹躲€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在山洞里想要睡觉。它把食物分享给了大家。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a angry Cat. Today it wanted to sleep in the cave. It shared the food with everyone.</p>
                 `,
                 englishText: "There was a angry Cat. Today it wanted to sleep in the cave. It shared the food with everyone."
             },
             {
-                title: "鑱槑鐨勭嫄鐙?/ The clever Fox",
+                title: "聪明的狐狸 / The clever Fox",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙仾鏄庣殑鐙愮嫺锛屽畠浠婂ぉ鍦ㄥ北涓樹笂鍦ㄥ揩涔愬湴璺宠垶銆傛湅鍙嬩滑閮界珛鍒昏刀鏉ュ府蹇欎簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只聪明的狐狸，它今天在山丘上在快乐地跳舞。朋友们都立刻赶来帮忙了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a clever Fox. Today it was dancing happily on the hill. Friends came to help immediately.</p>
                 `,
                 englishText: "There was a clever Fox. Today it was dancing happily on the hill. Friends came to help immediately."
             },
             {
-                title: "鑳嗗皬鐨勫厰瀛?/ The timid Rabbit",
+                title: "胆小的兔子 / The timid Rabbit",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙儐灏忕殑鍏斿瓙锛屽畠浠婂ぉ鍦ㄨ崏鍦颁笂鍦ㄥ紑蹇冨湴鍞辨瓕銆傚畠鍐冲畾鏄庡ぉ鍐嶆潵鐜┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只胆小的兔子，它今天在草地上在开心地唱歌。它决定明天再来玩。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a timid Rabbit. Today it was singing happily on the grass. It decided to come and play again tomorrow.</p>
                 `,
                 englishText: "There was a timid Rabbit. Today it was singing happily on the grass. It decided to come and play again tomorrow."
             },
             {
-                title: "鍙嬪ソ鐨勪箤榫?/ The friendly Turtle",
+                title: "友好的乌龟 / The friendly Turtle",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙弸濂界殑涔岄緹锛屽畠浠婂ぉ鍦ㄦ．鏋楅噷姝ｅ湪瀵绘壘姘村枬銆傛渶鍚庡畠瀹夊叏鍦板洖瀹朵簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在森林里正在寻找水喝。最后它安全地回家了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a friendly Turtle. Today it was looking for some water in the forest. Finally, it went home safely.</p>
                 `,
                 englishText: "There was a friendly Turtle. Today it was looking for some water in the forest. Finally, it went home safely."
             },
             {
-                title: "璋冪毊鐨勭尨瀛?/ The naughty Monkey",
+                title: "调皮的猴子 / The naughty Monkey",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙皟鐨殑鐚村瓙锛屽畠浠婂ぉ鍦ㄦ爲涓婂彂鐜颁簡涓€涓瀵嗐€傚畠鏄庣櫧浜嗕竴涓噸瑕佺殑閬撶悊銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在树上发现了一个秘密。它明白了一个重要的道理。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a naughty Monkey. Today it discovered a secret in the tree. It understood an important truth.</p>
                 `,
                 englishText: "There was a naughty Monkey. Today it discovered a secret in the tree. It understood an important truth."
             },
             {
-                title: "蹇箰鐨勫ぇ璞?/ The happy Elephant",
+                title: "快乐的大象 / The happy Elephant",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙揩涔愮殑澶ц薄锛屽畠浠婂ぉ鍦ㄦ渤杈规壘鍒颁簡涓€鍧楃編鍛崇殑椋熺墿銆傚畠搴﹁繃浜嗛潪甯稿紑蹇冪殑涓€澶┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在河边找到了一块美味的食物。它度过了非常开心的一天。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a happy Elephant. Today it found a piece of delicious food by the river. It had a very happy day.</p>
                 `,
                 englishText: "There was a happy Elephant. Today it found a piece of delicious food by the river. It had a very happy day."
             },
             {
-                title: "楠勫偛鐨勮€侀紶 / The proud Mouse",
+                title: "骄傲的老鼠 / The proud Mouse",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙獎鍌茬殑鑰侀紶锛屽畠浠婂ぉ鍦ㄨ姳鍥噷閬囧埌浜嗕竴浣嶆柊鏈嬪弸銆傚畠鐢滅敎鍦扮潯鐫€浜嗐€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在花园里遇到了一位新朋友。它甜甜地睡着了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a proud Mouse. Today it met a new friend in the garden. It fell asleep sweetly.</p>
                 `,
                 englishText: "There was a proud Mouse. Today it met a new friend in the garden. It fell asleep sweetly."
             },
             {
-                title: "濞佹鐨勭嫯瀛?/ The majestic Lion",
+                title: "威武的狮子 / The majestic Lion",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙▉姝︾殑鐙瓙锛屽畠浠婂ぉ鍦ㄥ北娲為噷杩疯矾浜嗐€傚畠鎶婇鐗╁垎浜粰浜嗗ぇ瀹躲€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在山洞里迷路了。它把食物分享给了大家。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a majestic Lion. Today it got lost in the cave. It shared the food with everyone.</p>
                 `,
                 englishText: "There was a majestic Lion. Today it got lost in the cave. It shared the food with everyone."
             },
             {
-                title: "鍕囨暍鐨勮€佽檸 / The brave Tiger",
+                title: "勇敢的老虎 / The brave Tiger",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙媷鏁㈢殑鑰佽檸锛屽畠浠婂ぉ鍦ㄥ北涓樹笂鎯宠鐫¤銆傛湅鍙嬩滑閮界珛鍒昏刀鏉ュ府蹇欎簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在山丘上想要睡觉。朋友们都立刻赶来帮忙了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a brave Tiger. Today it wanted to sleep on the hill. Friends came to help immediately.</p>
                 `,
                 englishText: "There was a brave Tiger. Today it wanted to sleep on the hill. Friends came to help immediately."
             },
             {
-                title: "寮哄．鐨勫皬楦?/ The strong Bird",
+                title: "强壮的小鸟 / The strong Bird",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙己澹殑灏忛笩锛屽畠浠婂ぉ鍦ㄨ崏鍦颁笂鍦ㄥ揩涔愬湴璺宠垶銆傚畠鍐冲畾鏄庡ぉ鍐嶆潵鐜┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在草地上在快乐地跳舞。它决定明天再来玩。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a strong Bird. Today it was dancing happily on the grass. It decided to come and play again tomorrow.</p>
                 `,
                 englishText: "There was a strong Bird. Today it was dancing happily on the grass. It decided to come and play again tomorrow."
             },
             {
-                title: "璐悆鐨勫皬鐔?/ The greedy Bear",
+                title: "贪吃的小熊 / The greedy Bear",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙椽鍚冪殑灏忕唺锛屽畠浠婂ぉ鍦ㄦ．鏋楅噷鍦ㄥ紑蹇冨湴鍞辨瓕銆傛渶鍚庡畠瀹夊叏鍦板洖瀹朵簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在森林里在开心地唱歌。最后它安全地回家了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a greedy Bear. Today it was singing happily in the forest. Finally, it went home safely.</p>
                 `,
                 englishText: "There was a greedy Bear. Today it was singing happily in the forest. Finally, it went home safely."
             },
             {
-                title: "鎱㈠悶鍚炵殑灏忕嫍 / The slow Dog",
+                title: "慢吞吞的小狗 / The slow Dog",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙參鍚炲悶鐨勫皬鐙楋紝瀹冧粖澶╁湪鏍戜笂姝ｅ湪瀵绘壘姘村枬銆傚畠鏄庣櫧浜嗕竴涓噸瑕佺殑閬撶悊銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在树上正在寻找水喝。它明白了一个重要的道理。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a slow Dog. Today it was looking for some water in the tree. It understood an important truth.</p>
                 `,
                 englishText: "There was a slow Dog. Today it was looking for some water in the tree. It understood an important truth."
             },
             {
-                title: "鐢熸皵鐨勫皬鐚?/ The angry Cat",
+                title: "生气的小猫 / The angry Cat",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙敓姘旂殑灏忕尗锛屽畠浠婂ぉ鍦ㄦ渤杈瑰彂鐜颁簡涓€涓瀵嗐€傚畠搴﹁繃浜嗛潪甯稿紑蹇冪殑涓€澶┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在河边发现了一个秘密。它度过了非常开心的一天。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a angry Cat. Today it discovered a secret by the river. It had a very happy day.</p>
                 `,
                 englishText: "There was a angry Cat. Today it discovered a secret by the river. It had a very happy day."
             },
             {
-                title: "鑱槑鐨勭嫄鐙?/ The clever Fox",
+                title: "聪明的狐狸 / The clever Fox",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙仾鏄庣殑鐙愮嫺锛屽畠浠婂ぉ鍦ㄨ姳鍥噷鎵惧埌浜嗕竴鍧楃編鍛崇殑椋熺墿銆傚畠鐢滅敎鍦扮潯鐫€浜嗐€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只聪明的狐狸，它今天在花园里找到了一块美味的食物。它甜甜地睡着了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a clever Fox. Today it found a piece of delicious food in the garden. It fell asleep sweetly.</p>
                 `,
                 englishText: "There was a clever Fox. Today it found a piece of delicious food in the garden. It fell asleep sweetly."
             },
             {
-                title: "鑳嗗皬鐨勫厰瀛?/ The timid Rabbit",
+                title: "胆小的兔子 / The timid Rabbit",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙儐灏忕殑鍏斿瓙锛屽畠浠婂ぉ鍦ㄥ北娲為噷閬囧埌浜嗕竴浣嶆柊鏈嬪弸銆傚畠鎶婇鐗╁垎浜粰浜嗗ぇ瀹躲€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只胆小的兔子，它今天在山洞里遇到了一位新朋友。它把食物分享给了大家。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a timid Rabbit. Today it met a new friend in the cave. It shared the food with everyone.</p>
                 `,
                 englishText: "There was a timid Rabbit. Today it met a new friend in the cave. It shared the food with everyone."
             },
             {
-                title: "鍙嬪ソ鐨勪箤榫?/ The friendly Turtle",
+                title: "友好的乌龟 / The friendly Turtle",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙弸濂界殑涔岄緹锛屽畠浠婂ぉ鍦ㄥ北涓樹笂杩疯矾浜嗐€傛湅鍙嬩滑閮界珛鍒昏刀鏉ュ府蹇欎簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在山丘上迷路了。朋友们都立刻赶来帮忙了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a friendly Turtle. Today it got lost on the hill. Friends came to help immediately.</p>
                 `,
                 englishText: "There was a friendly Turtle. Today it got lost on the hill. Friends came to help immediately."
             },
             {
-                title: "璋冪毊鐨勭尨瀛?/ The naughty Monkey",
+                title: "调皮的猴子 / The naughty Monkey",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙皟鐨殑鐚村瓙锛屽畠浠婂ぉ鍦ㄨ崏鍦颁笂鎯宠鐫¤銆傚畠鍐冲畾鏄庡ぉ鍐嶆潵鐜┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在草地上想要睡觉。它决定明天再来玩。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a naughty Monkey. Today it wanted to sleep on the grass. It decided to come and play again tomorrow.</p>
                 `,
                 englishText: "There was a naughty Monkey. Today it wanted to sleep on the grass. It decided to come and play again tomorrow."
             },
             {
-                title: "蹇箰鐨勫ぇ璞?/ The happy Elephant",
+                title: "快乐的大象 / The happy Elephant",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙揩涔愮殑澶ц薄锛屽畠浠婂ぉ鍦ㄦ．鏋楅噷鍦ㄥ揩涔愬湴璺宠垶銆傛渶鍚庡畠瀹夊叏鍦板洖瀹朵簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在森林里在快乐地跳舞。最后它安全地回家了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a happy Elephant. Today it was dancing happily in the forest. Finally, it went home safely.</p>
                 `,
                 englishText: "There was a happy Elephant. Today it was dancing happily in the forest. Finally, it went home safely."
             },
             {
-                title: "楠勫偛鐨勮€侀紶 / The proud Mouse",
+                title: "骄傲的老鼠 / The proud Mouse",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙獎鍌茬殑鑰侀紶锛屽畠浠婂ぉ鍦ㄦ爲涓婂湪寮€蹇冨湴鍞辨瓕銆傚畠鏄庣櫧浜嗕竴涓噸瑕佺殑閬撶悊銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在树上在开心地唱歌。它明白了一个重要的道理。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a proud Mouse. Today it was singing happily in the tree. It understood an important truth.</p>
                 `,
                 englishText: "There was a proud Mouse. Today it was singing happily in the tree. It understood an important truth."
             },
             {
-                title: "濞佹鐨勭嫯瀛?/ The majestic Lion",
+                title: "威武的狮子 / The majestic Lion",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙▉姝︾殑鐙瓙锛屽畠浠婂ぉ鍦ㄦ渤杈规鍦ㄥ鎵炬按鍠濄€傚畠搴﹁繃浜嗛潪甯稿紑蹇冪殑涓€澶┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在河边正在寻找水喝。它度过了非常开心的一天。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a majestic Lion. Today it was looking for some water by the river. It had a very happy day.</p>
                 `,
                 englishText: "There was a majestic Lion. Today it was looking for some water by the river. It had a very happy day."
             },
             {
-                title: "鍕囨暍鐨勮€佽檸 / The brave Tiger",
+                title: "勇敢的老虎 / The brave Tiger",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙媷鏁㈢殑鑰佽檸锛屽畠浠婂ぉ鍦ㄨ姳鍥噷鍙戠幇浜嗕竴涓瀵嗐€傚畠鐢滅敎鍦扮潯鐫€浜嗐€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在花园里发现了一个秘密。它甜甜地睡着了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a brave Tiger. Today it discovered a secret in the garden. It fell asleep sweetly.</p>
                 `,
                 englishText: "There was a brave Tiger. Today it discovered a secret in the garden. It fell asleep sweetly."
             },
             {
-                title: "寮哄．鐨勫皬楦?/ The strong Bird",
+                title: "强壮的小鸟 / The strong Bird",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙己澹殑灏忛笩锛屽畠浠婂ぉ鍦ㄥ北娲為噷鎵惧埌浜嗕竴鍧楃編鍛崇殑椋熺墿銆傚畠鎶婇鐗╁垎浜粰浜嗗ぇ瀹躲€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在山洞里找到了一块美味的食物。它把食物分享给了大家。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a strong Bird. Today it found a piece of delicious food in the cave. It shared the food with everyone.</p>
                 `,
                 englishText: "There was a strong Bird. Today it found a piece of delicious food in the cave. It shared the food with everyone."
             },
             {
-                title: "璐悆鐨勫皬鐔?/ The greedy Bear",
+                title: "贪吃的小熊 / The greedy Bear",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙椽鍚冪殑灏忕唺锛屽畠浠婂ぉ鍦ㄥ北涓樹笂閬囧埌浜嗕竴浣嶆柊鏈嬪弸銆傛湅鍙嬩滑閮界珛鍒昏刀鏉ュ府蹇欎簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在山丘上遇到了一位新朋友。朋友们都立刻赶来帮忙了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a greedy Bear. Today it met a new friend on the hill. Friends came to help immediately.</p>
                 `,
                 englishText: "There was a greedy Bear. Today it met a new friend on the hill. Friends came to help immediately."
             },
             {
-                title: "鎱㈠悶鍚炵殑灏忕嫍 / The slow Dog",
+                title: "慢吞吞的小狗 / The slow Dog",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙參鍚炲悶鐨勫皬鐙楋紝瀹冧粖澶╁湪鑽夊湴涓婅糠璺簡銆傚畠鍐冲畾鏄庡ぉ鍐嶆潵鐜┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在草地上迷路了。它决定明天再来玩。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a slow Dog. Today it got lost on the grass. It decided to come and play again tomorrow.</p>
                 `,
                 englishText: "There was a slow Dog. Today it got lost on the grass. It decided to come and play again tomorrow."
             },
             {
-                title: "鐢熸皵鐨勫皬鐚?/ The angry Cat",
+                title: "生气的小猫 / The angry Cat",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙敓姘旂殑灏忕尗锛屽畠浠婂ぉ鍦ㄦ．鏋楅噷鎯宠鐫¤銆傛渶鍚庡畠瀹夊叏鍦板洖瀹朵簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在森林里想要睡觉。最后它安全地回家了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a angry Cat. Today it wanted to sleep in the forest. Finally, it went home safely.</p>
                 `,
                 englishText: "There was a angry Cat. Today it wanted to sleep in the forest. Finally, it went home safely."
             },
             {
-                title: "鑱槑鐨勭嫄鐙?/ The clever Fox",
+                title: "聪明的狐狸 / The clever Fox",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙仾鏄庣殑鐙愮嫺锛屽畠浠婂ぉ鍦ㄦ爲涓婂湪蹇箰鍦拌烦鑸炪€傚畠鏄庣櫧浜嗕竴涓噸瑕佺殑閬撶悊銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只聪明的狐狸，它今天在树上在快乐地跳舞。它明白了一个重要的道理。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a clever Fox. Today it was dancing happily in the tree. It understood an important truth.</p>
                 `,
                 englishText: "There was a clever Fox. Today it was dancing happily in the tree. It understood an important truth."
             },
             {
-                title: "鑳嗗皬鐨勫厰瀛?/ The timid Rabbit",
+                title: "胆小的兔子 / The timid Rabbit",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙儐灏忕殑鍏斿瓙锛屽畠浠婂ぉ鍦ㄦ渤杈瑰湪寮€蹇冨湴鍞辨瓕銆傚畠搴﹁繃浜嗛潪甯稿紑蹇冪殑涓€澶┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只胆小的兔子，它今天在河边在开心地唱歌。它度过了非常开心的一天。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a timid Rabbit. Today it was singing happily by the river. It had a very happy day.</p>
                 `,
                 englishText: "There was a timid Rabbit. Today it was singing happily by the river. It had a very happy day."
             },
             {
-                title: "鍙嬪ソ鐨勪箤榫?/ The friendly Turtle",
+                title: "友好的乌龟 / The friendly Turtle",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙弸濂界殑涔岄緹锛屽畠浠婂ぉ鍦ㄨ姳鍥噷姝ｅ湪瀵绘壘姘村枬銆傚畠鐢滅敎鍦扮潯鐫€浜嗐€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在花园里正在寻找水喝。它甜甜地睡着了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a friendly Turtle. Today it was looking for some water in the garden. It fell asleep sweetly.</p>
                 `,
                 englishText: "There was a friendly Turtle. Today it was looking for some water in the garden. It fell asleep sweetly."
             },
             {
-                title: "璋冪毊鐨勭尨瀛?/ The naughty Monkey",
+                title: "调皮的猴子 / The naughty Monkey",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙皟鐨殑鐚村瓙锛屽畠浠婂ぉ鍦ㄥ北娲為噷鍙戠幇浜嗕竴涓瀵嗐€傚畠鎶婇鐗╁垎浜粰浜嗗ぇ瀹躲€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在山洞里发现了一个秘密。它把食物分享给了大家。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a naughty Monkey. Today it discovered a secret in the cave. It shared the food with everyone.</p>
                 `,
                 englishText: "There was a naughty Monkey. Today it discovered a secret in the cave. It shared the food with everyone."
             },
             {
-                title: "蹇箰鐨勫ぇ璞?/ The happy Elephant",
+                title: "快乐的大象 / The happy Elephant",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙揩涔愮殑澶ц薄锛屽畠浠婂ぉ鍦ㄥ北涓樹笂鎵惧埌浜嗕竴鍧楃編鍛崇殑椋熺墿銆傛湅鍙嬩滑閮界珛鍒昏刀鏉ュ府蹇欎簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在山丘上找到了一块美味的食物。朋友们都立刻赶来帮忙了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a happy Elephant. Today it found a piece of delicious food on the hill. Friends came to help immediately.</p>
                 `,
                 englishText: "There was a happy Elephant. Today it found a piece of delicious food on the hill. Friends came to help immediately."
             },
             {
-                title: "楠勫偛鐨勮€侀紶 / The proud Mouse",
+                title: "骄傲的老鼠 / The proud Mouse",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙獎鍌茬殑鑰侀紶锛屽畠浠婂ぉ鍦ㄨ崏鍦颁笂閬囧埌浜嗕竴浣嶆柊鏈嬪弸銆傚畠鍐冲畾鏄庡ぉ鍐嶆潵鐜┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在草地上遇到了一位新朋友。它决定明天再来玩。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a proud Mouse. Today it met a new friend on the grass. It decided to come and play again tomorrow.</p>
                 `,
                 englishText: "There was a proud Mouse. Today it met a new friend on the grass. It decided to come and play again tomorrow."
             },
             {
-                title: "濞佹鐨勭嫯瀛?/ The majestic Lion",
+                title: "威武的狮子 / The majestic Lion",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙▉姝︾殑鐙瓙锛屽畠浠婂ぉ鍦ㄦ．鏋楅噷杩疯矾浜嗐€傛渶鍚庡畠瀹夊叏鍦板洖瀹朵簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在森林里迷路了。最后它安全地回家了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a majestic Lion. Today it got lost in the forest. Finally, it went home safely.</p>
                 `,
                 englishText: "There was a majestic Lion. Today it got lost in the forest. Finally, it went home safely."
             },
             {
-                title: "鍕囨暍鐨勮€佽檸 / The brave Tiger",
+                title: "勇敢的老虎 / The brave Tiger",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙媷鏁㈢殑鑰佽檸锛屽畠浠婂ぉ鍦ㄦ爲涓婃兂瑕佺潯瑙夈€傚畠鏄庣櫧浜嗕竴涓噸瑕佺殑閬撶悊銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在树上想要睡觉。它明白了一个重要的道理。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a brave Tiger. Today it wanted to sleep in the tree. It understood an important truth.</p>
                 `,
                 englishText: "There was a brave Tiger. Today it wanted to sleep in the tree. It understood an important truth."
             },
             {
-                title: "寮哄．鐨勫皬楦?/ The strong Bird",
+                title: "强壮的小鸟 / The strong Bird",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙己澹殑灏忛笩锛屽畠浠婂ぉ鍦ㄦ渤杈瑰湪蹇箰鍦拌烦鑸炪€傚畠搴﹁繃浜嗛潪甯稿紑蹇冪殑涓€澶┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在河边在快乐地跳舞。它度过了非常开心的一天。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a strong Bird. Today it was dancing happily by the river. It had a very happy day.</p>
                 `,
                 englishText: "There was a strong Bird. Today it was dancing happily by the river. It had a very happy day."
             },
             {
-                title: "璐悆鐨勫皬鐔?/ The greedy Bear",
+                title: "贪吃的小熊 / The greedy Bear",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙椽鍚冪殑灏忕唺锛屽畠浠婂ぉ鍦ㄨ姳鍥噷鍦ㄥ紑蹇冨湴鍞辨瓕銆傚畠鐢滅敎鍦扮潯鐫€浜嗐€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在花园里在开心地唱歌。它甜甜地睡着了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a greedy Bear. Today it was singing happily in the garden. It fell asleep sweetly.</p>
                 `,
                 englishText: "There was a greedy Bear. Today it was singing happily in the garden. It fell asleep sweetly."
             },
             {
-                title: "鎱㈠悶鍚炵殑灏忕嫍 / The slow Dog",
+                title: "慢吞吞的小狗 / The slow Dog",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙參鍚炲悶鐨勫皬鐙楋紝瀹冧粖澶╁湪灞辨礊閲屾鍦ㄥ鎵炬按鍠濄€傚畠鎶婇鐗╁垎浜粰浜嗗ぇ瀹躲€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在山洞里正在寻找水喝。它把食物分享给了大家。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a slow Dog. Today it was looking for some water in the cave. It shared the food with everyone.</p>
                 `,
                 englishText: "There was a slow Dog. Today it was looking for some water in the cave. It shared the food with everyone."
             },
             {
-                title: "鐢熸皵鐨勫皬鐚?/ The angry Cat",
+                title: "生气的小猫 / The angry Cat",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙敓姘旂殑灏忕尗锛屽畠浠婂ぉ鍦ㄥ北涓樹笂鍙戠幇浜嗕竴涓瀵嗐€傛湅鍙嬩滑閮界珛鍒昏刀鏉ュ府蹇欎簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在山丘上发现了一个秘密。朋友们都立刻赶来帮忙了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a angry Cat. Today it discovered a secret on the hill. Friends came to help immediately.</p>
                 `,
                 englishText: "There was a angry Cat. Today it discovered a secret on the hill. Friends came to help immediately."
             },
             {
-                title: "鑱槑鐨勭嫄鐙?/ The clever Fox",
+                title: "聪明的狐狸 / The clever Fox",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙仾鏄庣殑鐙愮嫺锛屽畠浠婂ぉ鍦ㄨ崏鍦颁笂鎵惧埌浜嗕竴鍧楃編鍛崇殑椋熺墿銆傚畠鍐冲畾鏄庡ぉ鍐嶆潵鐜┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只聪明的狐狸，它今天在草地上找到了一块美味的食物。它决定明天再来玩。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a clever Fox. Today it found a piece of delicious food on the grass. It decided to come and play again tomorrow.</p>
                 `,
                 englishText: "There was a clever Fox. Today it found a piece of delicious food on the grass. It decided to come and play again tomorrow."
             },
             {
-                title: "鑳嗗皬鐨勫厰瀛?/ The timid Rabbit",
+                title: "胆小的兔子 / The timid Rabbit",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙儐灏忕殑鍏斿瓙锛屽畠浠婂ぉ鍦ㄦ．鏋楅噷閬囧埌浜嗕竴浣嶆柊鏈嬪弸銆傛渶鍚庡畠瀹夊叏鍦板洖瀹朵簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只胆小的兔子，它今天在森林里遇到了一位新朋友。最后它安全地回家了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a timid Rabbit. Today it met a new friend in the forest. Finally, it went home safely.</p>
                 `,
                 englishText: "There was a timid Rabbit. Today it met a new friend in the forest. Finally, it went home safely."
             },
             {
-                title: "鍙嬪ソ鐨勪箤榫?/ The friendly Turtle",
+                title: "友好的乌龟 / The friendly Turtle",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙弸濂界殑涔岄緹锛屽畠浠婂ぉ鍦ㄦ爲涓婅糠璺簡銆傚畠鏄庣櫧浜嗕竴涓噸瑕佺殑閬撶悊銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在树上迷路了。它明白了一个重要的道理。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a friendly Turtle. Today it got lost in the tree. It understood an important truth.</p>
                 `,
                 englishText: "There was a friendly Turtle. Today it got lost in the tree. It understood an important truth."
             },
             {
-                title: "璋冪毊鐨勭尨瀛?/ The naughty Monkey",
+                title: "调皮的猴子 / The naughty Monkey",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙皟鐨殑鐚村瓙锛屽畠浠婂ぉ鍦ㄦ渤杈规兂瑕佺潯瑙夈€傚畠搴﹁繃浜嗛潪甯稿紑蹇冪殑涓€澶┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在河边想要睡觉。它度过了非常开心的一天。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a naughty Monkey. Today it wanted to sleep by the river. It had a very happy day.</p>
                 `,
                 englishText: "There was a naughty Monkey. Today it wanted to sleep by the river. It had a very happy day."
             },
             {
-                title: "蹇箰鐨勫ぇ璞?/ The happy Elephant",
+                title: "快乐的大象 / The happy Elephant",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙揩涔愮殑澶ц薄锛屽畠浠婂ぉ鍦ㄨ姳鍥噷鍦ㄥ揩涔愬湴璺宠垶銆傚畠鐢滅敎鍦扮潯鐫€浜嗐€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在花园里在快乐地跳舞。它甜甜地睡着了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a happy Elephant. Today it was dancing happily in the garden. It fell asleep sweetly.</p>
                 `,
                 englishText: "There was a happy Elephant. Today it was dancing happily in the garden. It fell asleep sweetly."
             },
             {
-                title: "楠勫偛鐨勮€侀紶 / The proud Mouse",
+                title: "骄傲的老鼠 / The proud Mouse",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙獎鍌茬殑鑰侀紶锛屽畠浠婂ぉ鍦ㄥ北娲為噷鍦ㄥ紑蹇冨湴鍞辨瓕銆傚畠鎶婇鐗╁垎浜粰浜嗗ぇ瀹躲€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在山洞里在开心地唱歌。它把食物分享给了大家。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a proud Mouse. Today it was singing happily in the cave. It shared the food with everyone.</p>
                 `,
                 englishText: "There was a proud Mouse. Today it was singing happily in the cave. It shared the food with everyone."
             },
             {
-                title: "濞佹鐨勭嫯瀛?/ The majestic Lion",
+                title: "威武的狮子 / The majestic Lion",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙▉姝︾殑鐙瓙锛屽畠浠婂ぉ鍦ㄥ北涓樹笂姝ｅ湪瀵绘壘姘村枬銆傛湅鍙嬩滑閮界珛鍒昏刀鏉ュ府蹇欎簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在山丘上正在寻找水喝。朋友们都立刻赶来帮忙了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a majestic Lion. Today it was looking for some water on the hill. Friends came to help immediately.</p>
                 `,
                 englishText: "There was a majestic Lion. Today it was looking for some water on the hill. Friends came to help immediately."
             },
             {
-                title: "鍕囨暍鐨勮€佽檸 / The brave Tiger",
+                title: "勇敢的老虎 / The brave Tiger",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙媷鏁㈢殑鑰佽檸锛屽畠浠婂ぉ鍦ㄨ崏鍦颁笂鍙戠幇浜嗕竴涓瀵嗐€傚畠鍐冲畾鏄庡ぉ鍐嶆潵鐜┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在草地上发现了一个秘密。它决定明天再来玩。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a brave Tiger. Today it discovered a secret on the grass. It decided to come and play again tomorrow.</p>
                 `,
                 englishText: "There was a brave Tiger. Today it discovered a secret on the grass. It decided to come and play again tomorrow."
             },
             {
-                title: "寮哄．鐨勫皬楦?/ The strong Bird",
+                title: "强壮的小鸟 / The strong Bird",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙己澹殑灏忛笩锛屽畠浠婂ぉ鍦ㄦ．鏋楅噷鎵惧埌浜嗕竴鍧楃編鍛崇殑椋熺墿銆傛渶鍚庡畠瀹夊叏鍦板洖瀹朵簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在森林里找到了一块美味的食物。最后它安全地回家了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a strong Bird. Today it found a piece of delicious food in the forest. Finally, it went home safely.</p>
                 `,
                 englishText: "There was a strong Bird. Today it found a piece of delicious food in the forest. Finally, it went home safely."
             },
             {
-                title: "璐悆鐨勫皬鐔?/ The greedy Bear",
+                title: "贪吃的小熊 / The greedy Bear",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙椽鍚冪殑灏忕唺锛屽畠浠婂ぉ鍦ㄦ爲涓婇亣鍒颁簡涓€浣嶆柊鏈嬪弸銆傚畠鏄庣櫧浜嗕竴涓噸瑕佺殑閬撶悊銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在树上遇到了一位新朋友。它明白了一个重要的道理。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a greedy Bear. Today it met a new friend in the tree. It understood an important truth.</p>
                 `,
                 englishText: "There was a greedy Bear. Today it met a new friend in the tree. It understood an important truth."
             },
             {
-                title: "鎱㈠悶鍚炵殑灏忕嫍 / The slow Dog",
+                title: "慢吞吞的小狗 / The slow Dog",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙參鍚炲悶鐨勫皬鐙楋紝瀹冧粖澶╁湪娌宠竟杩疯矾浜嗐€傚畠搴﹁繃浜嗛潪甯稿紑蹇冪殑涓€澶┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在河边迷路了。它度过了非常开心的一天。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a slow Dog. Today it got lost by the river. It had a very happy day.</p>
                 `,
                 englishText: "There was a slow Dog. Today it got lost by the river. It had a very happy day."
             },
             {
-                title: "鐢熸皵鐨勫皬鐚?/ The angry Cat",
+                title: "生气的小猫 / The angry Cat",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙敓姘旂殑灏忕尗锛屽畠浠婂ぉ鍦ㄨ姳鍥噷鎯宠鐫¤銆傚畠鐢滅敎鍦扮潯鐫€浜嗐€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在花园里想要睡觉。它甜甜地睡着了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a angry Cat. Today it wanted to sleep in the garden. It fell asleep sweetly.</p>
                 `,
                 englishText: "There was a angry Cat. Today it wanted to sleep in the garden. It fell asleep sweetly."
             },
             {
-                title: "鑱槑鐨勭嫄鐙?/ The clever Fox",
+                title: "聪明的狐狸 / The clever Fox",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙仾鏄庣殑鐙愮嫺锛屽畠浠婂ぉ鍦ㄥ北娲為噷鍦ㄥ揩涔愬湴璺宠垶銆傚畠鎶婇鐗╁垎浜粰浜嗗ぇ瀹躲€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只聪明的狐狸，它今天在山洞里在快乐地跳舞。它把食物分享给了大家。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a clever Fox. Today it was dancing happily in the cave. It shared the food with everyone.</p>
                 `,
                 englishText: "There was a clever Fox. Today it was dancing happily in the cave. It shared the food with everyone."
             },
             {
-                title: "鑳嗗皬鐨勫厰瀛?/ The timid Rabbit",
+                title: "胆小的兔子 / The timid Rabbit",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙儐灏忕殑鍏斿瓙锛屽畠浠婂ぉ鍦ㄥ北涓樹笂鍦ㄥ紑蹇冨湴鍞辨瓕銆傛湅鍙嬩滑閮界珛鍒昏刀鏉ュ府蹇欎簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只胆小的兔子，它今天在山丘上在开心地唱歌。朋友们都立刻赶来帮忙了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a timid Rabbit. Today it was singing happily on the hill. Friends came to help immediately.</p>
                 `,
                 englishText: "There was a timid Rabbit. Today it was singing happily on the hill. Friends came to help immediately."
             },
             {
-                title: "鍙嬪ソ鐨勪箤榫?/ The friendly Turtle",
+                title: "友好的乌龟 / The friendly Turtle",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙弸濂界殑涔岄緹锛屽畠浠婂ぉ鍦ㄨ崏鍦颁笂姝ｅ湪瀵绘壘姘村枬銆傚畠鍐冲畾鏄庡ぉ鍐嶆潵鐜┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在草地上正在寻找水喝。它决定明天再来玩。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a friendly Turtle. Today it was looking for some water on the grass. It decided to come and play again tomorrow.</p>
                 `,
                 englishText: "There was a friendly Turtle. Today it was looking for some water on the grass. It decided to come and play again tomorrow."
             },
             {
-                title: "璋冪毊鐨勭尨瀛?/ The naughty Monkey",
+                title: "调皮的猴子 / The naughty Monkey",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙皟鐨殑鐚村瓙锛屽畠浠婂ぉ鍦ㄦ．鏋楅噷鍙戠幇浜嗕竴涓瀵嗐€傛渶鍚庡畠瀹夊叏鍦板洖瀹朵簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在森林里发现了一个秘密。最后它安全地回家了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a naughty Monkey. Today it discovered a secret in the forest. Finally, it went home safely.</p>
                 `,
                 englishText: "There was a naughty Monkey. Today it discovered a secret in the forest. Finally, it went home safely."
             },
             {
-                title: "蹇箰鐨勫ぇ璞?/ The happy Elephant",
+                title: "快乐的大象 / The happy Elephant",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙揩涔愮殑澶ц薄锛屽畠浠婂ぉ鍦ㄦ爲涓婃壘鍒颁簡涓€鍧楃編鍛崇殑椋熺墿銆傚畠鏄庣櫧浜嗕竴涓噸瑕佺殑閬撶悊銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在树上找到了一块美味的食物。它明白了一个重要的道理。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a happy Elephant. Today it found a piece of delicious food in the tree. It understood an important truth.</p>
                 `,
                 englishText: "There was a happy Elephant. Today it found a piece of delicious food in the tree. It understood an important truth."
             },
             {
-                title: "楠勫偛鐨勮€侀紶 / The proud Mouse",
+                title: "骄傲的老鼠 / The proud Mouse",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙獎鍌茬殑鑰侀紶锛屽畠浠婂ぉ鍦ㄦ渤杈归亣鍒颁簡涓€浣嶆柊鏈嬪弸銆傚畠搴﹁繃浜嗛潪甯稿紑蹇冪殑涓€澶┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在河边遇到了一位新朋友。它度过了非常开心的一天。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a proud Mouse. Today it met a new friend by the river. It had a very happy day.</p>
                 `,
                 englishText: "There was a proud Mouse. Today it met a new friend by the river. It had a very happy day."
             },
             {
-                title: "濞佹鐨勭嫯瀛?/ The majestic Lion",
+                title: "威武的狮子 / The majestic Lion",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙▉姝︾殑鐙瓙锛屽畠浠婂ぉ鍦ㄨ姳鍥噷杩疯矾浜嗐€傚畠鐢滅敎鍦扮潯鐫€浜嗐€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在花园里迷路了。它甜甜地睡着了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a majestic Lion. Today it got lost in the garden. It fell asleep sweetly.</p>
                 `,
                 englishText: "There was a majestic Lion. Today it got lost in the garden. It fell asleep sweetly."
             },
             {
-                title: "鍕囨暍鐨勮€佽檸 / The brave Tiger",
+                title: "勇敢的老虎 / The brave Tiger",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙媷鏁㈢殑鑰佽檸锛屽畠浠婂ぉ鍦ㄥ北娲為噷鎯宠鐫¤銆傚畠鎶婇鐗╁垎浜粰浜嗗ぇ瀹躲€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在山洞里想要睡觉。它把食物分享给了大家。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a brave Tiger. Today it wanted to sleep in the cave. It shared the food with everyone.</p>
                 `,
                 englishText: "There was a brave Tiger. Today it wanted to sleep in the cave. It shared the food with everyone."
             },
             {
-                title: "寮哄．鐨勫皬楦?/ The strong Bird",
+                title: "强壮的小鸟 / The strong Bird",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙己澹殑灏忛笩锛屽畠浠婂ぉ鍦ㄥ北涓樹笂鍦ㄥ揩涔愬湴璺宠垶銆傛湅鍙嬩滑閮界珛鍒昏刀鏉ュ府蹇欎簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在山丘上在快乐地跳舞。朋友们都立刻赶来帮忙了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a strong Bird. Today it was dancing happily on the hill. Friends came to help immediately.</p>
                 `,
                 englishText: "There was a strong Bird. Today it was dancing happily on the hill. Friends came to help immediately."
             },
             {
-                title: "璐悆鐨勫皬鐔?/ The greedy Bear",
+                title: "贪吃的小熊 / The greedy Bear",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙椽鍚冪殑灏忕唺锛屽畠浠婂ぉ鍦ㄨ崏鍦颁笂鍦ㄥ紑蹇冨湴鍞辨瓕銆傚畠鍐冲畾鏄庡ぉ鍐嶆潵鐜┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在草地上在开心地唱歌。它决定明天再来玩。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a greedy Bear. Today it was singing happily on the grass. It decided to come and play again tomorrow.</p>
                 `,
                 englishText: "There was a greedy Bear. Today it was singing happily on the grass. It decided to come and play again tomorrow."
             },
             {
-                title: "鎱㈠悶鍚炵殑灏忕嫍 / The slow Dog",
+                title: "慢吞吞的小狗 / The slow Dog",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙參鍚炲悶鐨勫皬鐙楋紝瀹冧粖澶╁湪妫灄閲屾鍦ㄥ鎵炬按鍠濄€傛渶鍚庡畠瀹夊叏鍦板洖瀹朵簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在森林里正在寻找水喝。最后它安全地回家了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a slow Dog. Today it was looking for some water in the forest. Finally, it went home safely.</p>
                 `,
                 englishText: "There was a slow Dog. Today it was looking for some water in the forest. Finally, it went home safely."
             },
             {
-                title: "鐢熸皵鐨勫皬鐚?/ The angry Cat",
+                title: "生气的小猫 / The angry Cat",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙敓姘旂殑灏忕尗锛屽畠浠婂ぉ鍦ㄦ爲涓婂彂鐜颁簡涓€涓瀵嗐€傚畠鏄庣櫧浜嗕竴涓噸瑕佺殑閬撶悊銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在树上发现了一个秘密。它明白了一个重要的道理。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a angry Cat. Today it discovered a secret in the tree. It understood an important truth.</p>
                 `,
                 englishText: "There was a angry Cat. Today it discovered a secret in the tree. It understood an important truth."
             },
             {
-                title: "鑱槑鐨勭嫄鐙?/ The clever Fox",
+                title: "聪明的狐狸 / The clever Fox",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙仾鏄庣殑鐙愮嫺锛屽畠浠婂ぉ鍦ㄦ渤杈规壘鍒颁簡涓€鍧楃編鍛崇殑椋熺墿銆傚畠搴﹁繃浜嗛潪甯稿紑蹇冪殑涓€澶┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只聪明的狐狸，它今天在河边找到了一块美味的食物。它度过了非常开心的一天。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a clever Fox. Today it found a piece of delicious food by the river. It had a very happy day.</p>
                 `,
                 englishText: "There was a clever Fox. Today it found a piece of delicious food by the river. It had a very happy day."
             },
             {
-                title: "鑳嗗皬鐨勫厰瀛?/ The timid Rabbit",
+                title: "胆小的兔子 / The timid Rabbit",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙儐灏忕殑鍏斿瓙锛屽畠浠婂ぉ鍦ㄨ姳鍥噷閬囧埌浜嗕竴浣嶆柊鏈嬪弸銆傚畠鐢滅敎鍦扮潯鐫€浜嗐€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只胆小的兔子，它今天在花园里遇到了一位新朋友。它甜甜地睡着了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a timid Rabbit. Today it met a new friend in the garden. It fell asleep sweetly.</p>
                 `,
                 englishText: "There was a timid Rabbit. Today it met a new friend in the garden. It fell asleep sweetly."
             },
             {
-                title: "鍙嬪ソ鐨勪箤榫?/ The friendly Turtle",
+                title: "友好的乌龟 / The friendly Turtle",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙弸濂界殑涔岄緹锛屽畠浠婂ぉ鍦ㄥ北娲為噷杩疯矾浜嗐€傚畠鎶婇鐗╁垎浜粰浜嗗ぇ瀹躲€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在山洞里迷路了。它把食物分享给了大家。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a friendly Turtle. Today it got lost in the cave. It shared the food with everyone.</p>
                 `,
                 englishText: "There was a friendly Turtle. Today it got lost in the cave. It shared the food with everyone."
             },
             {
-                title: "璋冪毊鐨勭尨瀛?/ The naughty Monkey",
+                title: "调皮的猴子 / The naughty Monkey",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙皟鐨殑鐚村瓙锛屽畠浠婂ぉ鍦ㄥ北涓樹笂鎯宠鐫¤銆傛湅鍙嬩滑閮界珛鍒昏刀鏉ュ府蹇欎簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在山丘上想要睡觉。朋友们都立刻赶来帮忙了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a naughty Monkey. Today it wanted to sleep on the hill. Friends came to help immediately.</p>
                 `,
                 englishText: "There was a naughty Monkey. Today it wanted to sleep on the hill. Friends came to help immediately."
             },
             {
-                title: "蹇箰鐨勫ぇ璞?/ The happy Elephant",
+                title: "快乐的大象 / The happy Elephant",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙揩涔愮殑澶ц薄锛屽畠浠婂ぉ鍦ㄨ崏鍦颁笂鍦ㄥ揩涔愬湴璺宠垶銆傚畠鍐冲畾鏄庡ぉ鍐嶆潵鐜┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在草地上在快乐地跳舞。它决定明天再来玩。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a happy Elephant. Today it was dancing happily on the grass. It decided to come and play again tomorrow.</p>
                 `,
                 englishText: "There was a happy Elephant. Today it was dancing happily on the grass. It decided to come and play again tomorrow."
             },
             {
-                title: "楠勫偛鐨勮€侀紶 / The proud Mouse",
+                title: "骄傲的老鼠 / The proud Mouse",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙獎鍌茬殑鑰侀紶锛屽畠浠婂ぉ鍦ㄦ．鏋楅噷鍦ㄥ紑蹇冨湴鍞辨瓕銆傛渶鍚庡畠瀹夊叏鍦板洖瀹朵簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在森林里在开心地唱歌。最后它安全地回家了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a proud Mouse. Today it was singing happily in the forest. Finally, it went home safely.</p>
                 `,
                 englishText: "There was a proud Mouse. Today it was singing happily in the forest. Finally, it went home safely."
             },
             {
-                title: "濞佹鐨勭嫯瀛?/ The majestic Lion",
+                title: "威武的狮子 / The majestic Lion",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙▉姝︾殑鐙瓙锛屽畠浠婂ぉ鍦ㄦ爲涓婃鍦ㄥ鎵炬按鍠濄€傚畠鏄庣櫧浜嗕竴涓噸瑕佺殑閬撶悊銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在树上正在寻找水喝。它明白了一个重要的道理。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a majestic Lion. Today it was looking for some water in the tree. It understood an important truth.</p>
                 `,
                 englishText: "There was a majestic Lion. Today it was looking for some water in the tree. It understood an important truth."
             },
             {
-                title: "鍕囨暍鐨勮€佽檸 / The brave Tiger",
+                title: "勇敢的老虎 / The brave Tiger",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙媷鏁㈢殑鑰佽檸锛屽畠浠婂ぉ鍦ㄦ渤杈瑰彂鐜颁簡涓€涓瀵嗐€傚畠搴﹁繃浜嗛潪甯稿紑蹇冪殑涓€澶┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在河边发现了一个秘密。它度过了非常开心的一天。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a brave Tiger. Today it discovered a secret by the river. It had a very happy day.</p>
                 `,
                 englishText: "There was a brave Tiger. Today it discovered a secret by the river. It had a very happy day."
             },
             {
-                title: "寮哄．鐨勫皬楦?/ The strong Bird",
+                title: "强壮的小鸟 / The strong Bird",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙己澹殑灏忛笩锛屽畠浠婂ぉ鍦ㄨ姳鍥噷鎵惧埌浜嗕竴鍧楃編鍛崇殑椋熺墿銆傚畠鐢滅敎鍦扮潯鐫€浜嗐€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在花园里找到了一块美味的食物。它甜甜地睡着了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a strong Bird. Today it found a piece of delicious food in the garden. It fell asleep sweetly.</p>
                 `,
                 englishText: "There was a strong Bird. Today it found a piece of delicious food in the garden. It fell asleep sweetly."
             },
             {
-                title: "璐悆鐨勫皬鐔?/ The greedy Bear",
+                title: "贪吃的小熊 / The greedy Bear",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙椽鍚冪殑灏忕唺锛屽畠浠婂ぉ鍦ㄥ北娲為噷閬囧埌浜嗕竴浣嶆柊鏈嬪弸銆傚畠鎶婇鐗╁垎浜粰浜嗗ぇ瀹躲€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在山洞里遇到了一位新朋友。它把食物分享给了大家。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a greedy Bear. Today it met a new friend in the cave. It shared the food with everyone.</p>
                 `,
                 englishText: "There was a greedy Bear. Today it met a new friend in the cave. It shared the food with everyone."
             },
             {
-                title: "鎱㈠悶鍚炵殑灏忕嫍 / The slow Dog",
+                title: "慢吞吞的小狗 / The slow Dog",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙參鍚炲悶鐨勫皬鐙楋紝瀹冧粖澶╁湪灞变笜涓婅糠璺簡銆傛湅鍙嬩滑閮界珛鍒昏刀鏉ュ府蹇欎簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在山丘上迷路了。朋友们都立刻赶来帮忙了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a slow Dog. Today it got lost on the hill. Friends came to help immediately.</p>
                 `,
                 englishText: "There was a slow Dog. Today it got lost on the hill. Friends came to help immediately."
             },
             {
-                title: "鐢熸皵鐨勫皬鐚?/ The angry Cat",
+                title: "生气的小猫 / The angry Cat",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙敓姘旂殑灏忕尗锛屽畠浠婂ぉ鍦ㄨ崏鍦颁笂鎯宠鐫¤銆傚畠鍐冲畾鏄庡ぉ鍐嶆潵鐜┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在草地上想要睡觉。它决定明天再来玩。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a angry Cat. Today it wanted to sleep on the grass. It decided to come and play again tomorrow.</p>
                 `,
                 englishText: "There was a angry Cat. Today it wanted to sleep on the grass. It decided to come and play again tomorrow."
             },
             {
-                title: "鑱槑鐨勭嫄鐙?/ The clever Fox",
+                title: "聪明的狐狸 / The clever Fox",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙仾鏄庣殑鐙愮嫺锛屽畠浠婂ぉ鍦ㄦ．鏋楅噷鍦ㄥ揩涔愬湴璺宠垶銆傛渶鍚庡畠瀹夊叏鍦板洖瀹朵簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只聪明的狐狸，它今天在森林里在快乐地跳舞。最后它安全地回家了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a clever Fox. Today it was dancing happily in the forest. Finally, it went home safely.</p>
                 `,
                 englishText: "There was a clever Fox. Today it was dancing happily in the forest. Finally, it went home safely."
             },
             {
-                title: "鑳嗗皬鐨勫厰瀛?/ The timid Rabbit",
+                title: "胆小的兔子 / The timid Rabbit",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙儐灏忕殑鍏斿瓙锛屽畠浠婂ぉ鍦ㄦ爲涓婂湪寮€蹇冨湴鍞辨瓕銆傚畠鏄庣櫧浜嗕竴涓噸瑕佺殑閬撶悊銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只胆小的兔子，它今天在树上在开心地唱歌。它明白了一个重要的道理。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a timid Rabbit. Today it was singing happily in the tree. It understood an important truth.</p>
                 `,
                 englishText: "There was a timid Rabbit. Today it was singing happily in the tree. It understood an important truth."
             },
             {
-                title: "鍙嬪ソ鐨勪箤榫?/ The friendly Turtle",
+                title: "友好的乌龟 / The friendly Turtle",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙弸濂界殑涔岄緹锛屽畠浠婂ぉ鍦ㄦ渤杈规鍦ㄥ鎵炬按鍠濄€傚畠搴﹁繃浜嗛潪甯稿紑蹇冪殑涓€澶┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在河边正在寻找水喝。它度过了非常开心的一天。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a friendly Turtle. Today it was looking for some water by the river. It had a very happy day.</p>
                 `,
                 englishText: "There was a friendly Turtle. Today it was looking for some water by the river. It had a very happy day."
             },
             {
-                title: "璋冪毊鐨勭尨瀛?/ The naughty Monkey",
+                title: "调皮的猴子 / The naughty Monkey",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙皟鐨殑鐚村瓙锛屽畠浠婂ぉ鍦ㄨ姳鍥噷鍙戠幇浜嗕竴涓瀵嗐€傚畠鐢滅敎鍦扮潯鐫€浜嗐€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在花园里发现了一个秘密。它甜甜地睡着了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a naughty Monkey. Today it discovered a secret in the garden. It fell asleep sweetly.</p>
                 `,
                 englishText: "There was a naughty Monkey. Today it discovered a secret in the garden. It fell asleep sweetly."
             },
             {
-                title: "蹇箰鐨勫ぇ璞?/ The happy Elephant",
+                title: "快乐的大象 / The happy Elephant",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙揩涔愮殑澶ц薄锛屽畠浠婂ぉ鍦ㄥ北娲為噷鎵惧埌浜嗕竴鍧楃編鍛崇殑椋熺墿銆傚畠鎶婇鐗╁垎浜粰浜嗗ぇ瀹躲€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在山洞里找到了一块美味的食物。它把食物分享给了大家。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a happy Elephant. Today it found a piece of delicious food in the cave. It shared the food with everyone.</p>
                 `,
                 englishText: "There was a happy Elephant. Today it found a piece of delicious food in the cave. It shared the food with everyone."
             },
             {
-                title: "楠勫偛鐨勮€侀紶 / The proud Mouse",
+                title: "骄傲的老鼠 / The proud Mouse",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙獎鍌茬殑鑰侀紶锛屽畠浠婂ぉ鍦ㄥ北涓樹笂閬囧埌浜嗕竴浣嶆柊鏈嬪弸銆傛湅鍙嬩滑閮界珛鍒昏刀鏉ュ府蹇欎簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在山丘上遇到了一位新朋友。朋友们都立刻赶来帮忙了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a proud Mouse. Today it met a new friend on the hill. Friends came to help immediately.</p>
                 `,
                 englishText: "There was a proud Mouse. Today it met a new friend on the hill. Friends came to help immediately."
             },
             {
-                title: "濞佹鐨勭嫯瀛?/ The majestic Lion",
+                title: "威武的狮子 / The majestic Lion",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙▉姝︾殑鐙瓙锛屽畠浠婂ぉ鍦ㄨ崏鍦颁笂杩疯矾浜嗐€傚畠鍐冲畾鏄庡ぉ鍐嶆潵鐜┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在草地上迷路了。它决定明天再来玩。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a majestic Lion. Today it got lost on the grass. It decided to come and play again tomorrow.</p>
                 `,
                 englishText: "There was a majestic Lion. Today it got lost on the grass. It decided to come and play again tomorrow."
             },
             {
-                title: "鍕囨暍鐨勮€佽檸 / The brave Tiger",
+                title: "勇敢的老虎 / The brave Tiger",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙媷鏁㈢殑鑰佽檸锛屽畠浠婂ぉ鍦ㄦ．鏋楅噷鎯宠鐫¤銆傛渶鍚庡畠瀹夊叏鍦板洖瀹朵簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在森林里想要睡觉。最后它安全地回家了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a brave Tiger. Today it wanted to sleep in the forest. Finally, it went home safely.</p>
                 `,
                 englishText: "There was a brave Tiger. Today it wanted to sleep in the forest. Finally, it went home safely."
             },
             {
-                title: "寮哄．鐨勫皬楦?/ The strong Bird",
+                title: "强壮的小鸟 / The strong Bird",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙己澹殑灏忛笩锛屽畠浠婂ぉ鍦ㄦ爲涓婂湪蹇箰鍦拌烦鑸炪€傚畠鏄庣櫧浜嗕竴涓噸瑕佺殑閬撶悊銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在树上在快乐地跳舞。它明白了一个重要的道理。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a strong Bird. Today it was dancing happily in the tree. It understood an important truth.</p>
                 `,
                 englishText: "There was a strong Bird. Today it was dancing happily in the tree. It understood an important truth."
             },
             {
-                title: "璐悆鐨勫皬鐔?/ The greedy Bear",
+                title: "贪吃的小熊 / The greedy Bear",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙椽鍚冪殑灏忕唺锛屽畠浠婂ぉ鍦ㄦ渤杈瑰湪寮€蹇冨湴鍞辨瓕銆傚畠搴﹁繃浜嗛潪甯稿紑蹇冪殑涓€澶┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在河边在开心地唱歌。它度过了非常开心的一天。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a greedy Bear. Today it was singing happily by the river. It had a very happy day.</p>
                 `,
                 englishText: "There was a greedy Bear. Today it was singing happily by the river. It had a very happy day."
             },
             {
-                title: "鎱㈠悶鍚炵殑灏忕嫍 / The slow Dog",
+                title: "慢吞吞的小狗 / The slow Dog",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙參鍚炲悶鐨勫皬鐙楋紝瀹冧粖澶╁湪鑺卞洯閲屾鍦ㄥ鎵炬按鍠濄€傚畠鐢滅敎鍦扮潯鐫€浜嗐€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在花园里正在寻找水喝。它甜甜地睡着了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a slow Dog. Today it was looking for some water in the garden. It fell asleep sweetly.</p>
                 `,
                 englishText: "There was a slow Dog. Today it was looking for some water in the garden. It fell asleep sweetly."
             },
             {
-                title: "鐢熸皵鐨勫皬鐚?/ The angry Cat",
+                title: "生气的小猫 / The angry Cat",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙敓姘旂殑灏忕尗锛屽畠浠婂ぉ鍦ㄥ北娲為噷鍙戠幇浜嗕竴涓瀵嗐€傚畠鎶婇鐗╁垎浜粰浜嗗ぇ瀹躲€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在山洞里发现了一个秘密。它把食物分享给了大家。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a angry Cat. Today it discovered a secret in the cave. It shared the food with everyone.</p>
                 `,
                 englishText: "There was a angry Cat. Today it discovered a secret in the cave. It shared the food with everyone."
             },
             {
-                title: "鑱槑鐨勭嫄鐙?/ The clever Fox",
+                title: "聪明的狐狸 / The clever Fox",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙仾鏄庣殑鐙愮嫺锛屽畠浠婂ぉ鍦ㄥ北涓樹笂鎵惧埌浜嗕竴鍧楃編鍛崇殑椋熺墿銆傛湅鍙嬩滑閮界珛鍒昏刀鏉ュ府蹇欎簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只聪明的狐狸，它今天在山丘上找到了一块美味的食物。朋友们都立刻赶来帮忙了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a clever Fox. Today it found a piece of delicious food on the hill. Friends came to help immediately.</p>
                 `,
                 englishText: "There was a clever Fox. Today it found a piece of delicious food on the hill. Friends came to help immediately."
             },
             {
-                title: "鑳嗗皬鐨勫厰瀛?/ The timid Rabbit",
+                title: "胆小的兔子 / The timid Rabbit",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙儐灏忕殑鍏斿瓙锛屽畠浠婂ぉ鍦ㄨ崏鍦颁笂閬囧埌浜嗕竴浣嶆柊鏈嬪弸銆傚畠鍐冲畾鏄庡ぉ鍐嶆潵鐜┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只胆小的兔子，它今天在草地上遇到了一位新朋友。它决定明天再来玩。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a timid Rabbit. Today it met a new friend on the grass. It decided to come and play again tomorrow.</p>
                 `,
                 englishText: "There was a timid Rabbit. Today it met a new friend on the grass. It decided to come and play again tomorrow."
             },
             {
-                title: "鍙嬪ソ鐨勪箤榫?/ The friendly Turtle",
+                title: "友好的乌龟 / The friendly Turtle",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙弸濂界殑涔岄緹锛屽畠浠婂ぉ鍦ㄦ．鏋楅噷杩疯矾浜嗐€傛渶鍚庡畠瀹夊叏鍦板洖瀹朵簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在森林里迷路了。最后它安全地回家了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a friendly Turtle. Today it got lost in the forest. Finally, it went home safely.</p>
                 `,
                 englishText: "There was a friendly Turtle. Today it got lost in the forest. Finally, it went home safely."
             },
             {
-                title: "璋冪毊鐨勭尨瀛?/ The naughty Monkey",
+                title: "调皮的猴子 / The naughty Monkey",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙皟鐨殑鐚村瓙锛屽畠浠婂ぉ鍦ㄦ爲涓婃兂瑕佺潯瑙夈€傚畠鏄庣櫧浜嗕竴涓噸瑕佺殑閬撶悊銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在树上想要睡觉。它明白了一个重要的道理。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a naughty Monkey. Today it wanted to sleep in the tree. It understood an important truth.</p>
                 `,
                 englishText: "There was a naughty Monkey. Today it wanted to sleep in the tree. It understood an important truth."
             },
             {
-                title: "蹇箰鐨勫ぇ璞?/ The happy Elephant",
+                title: "快乐的大象 / The happy Elephant",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙揩涔愮殑澶ц薄锛屽畠浠婂ぉ鍦ㄦ渤杈瑰湪蹇箰鍦拌烦鑸炪€傚畠搴﹁繃浜嗛潪甯稿紑蹇冪殑涓€澶┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在河边在快乐地跳舞。它度过了非常开心的一天。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a happy Elephant. Today it was dancing happily by the river. It had a very happy day.</p>
                 `,
                 englishText: "There was a happy Elephant. Today it was dancing happily by the river. It had a very happy day."
             },
             {
-                title: "楠勫偛鐨勮€侀紶 / The proud Mouse",
+                title: "骄傲的老鼠 / The proud Mouse",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙獎鍌茬殑鑰侀紶锛屽畠浠婂ぉ鍦ㄨ姳鍥噷鍦ㄥ紑蹇冨湴鍞辨瓕銆傚畠鐢滅敎鍦扮潯鐫€浜嗐€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在花园里在开心地唱歌。它甜甜地睡着了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a proud Mouse. Today it was singing happily in the garden. It fell asleep sweetly.</p>
                 `,
                 englishText: "There was a proud Mouse. Today it was singing happily in the garden. It fell asleep sweetly."
             },
             {
-                title: "濞佹鐨勭嫯瀛?/ The majestic Lion",
+                title: "威武的狮子 / The majestic Lion",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙▉姝︾殑鐙瓙锛屽畠浠婂ぉ鍦ㄥ北娲為噷姝ｅ湪瀵绘壘姘村枬銆傚畠鎶婇鐗╁垎浜粰浜嗗ぇ瀹躲€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在山洞里正在寻找水喝。它把食物分享给了大家。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a majestic Lion. Today it was looking for some water in the cave. It shared the food with everyone.</p>
                 `,
                 englishText: "There was a majestic Lion. Today it was looking for some water in the cave. It shared the food with everyone."
             },
             {
-                title: "鍕囨暍鐨勮€佽檸 / The brave Tiger",
+                title: "勇敢的老虎 / The brave Tiger",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙媷鏁㈢殑鑰佽檸锛屽畠浠婂ぉ鍦ㄥ北涓樹笂鍙戠幇浜嗕竴涓瀵嗐€傛湅鍙嬩滑閮界珛鍒昏刀鏉ュ府蹇欎簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在山丘上发现了一个秘密。朋友们都立刻赶来帮忙了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a brave Tiger. Today it discovered a secret on the hill. Friends came to help immediately.</p>
                 `,
                 englishText: "There was a brave Tiger. Today it discovered a secret on the hill. Friends came to help immediately."
             },
             {
-                title: "寮哄．鐨勫皬楦?/ The strong Bird",
+                title: "强壮的小鸟 / The strong Bird",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙己澹殑灏忛笩锛屽畠浠婂ぉ鍦ㄨ崏鍦颁笂鎵惧埌浜嗕竴鍧楃編鍛崇殑椋熺墿銆傚畠鍐冲畾鏄庡ぉ鍐嶆潵鐜┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在草地上找到了一块美味的食物。它决定明天再来玩。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a strong Bird. Today it found a piece of delicious food on the grass. It decided to come and play again tomorrow.</p>
                 `,
                 englishText: "There was a strong Bird. Today it found a piece of delicious food on the grass. It decided to come and play again tomorrow."
             },
             {
-                title: "璐悆鐨勫皬鐔?/ The greedy Bear",
+                title: "贪吃的小熊 / The greedy Bear",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙椽鍚冪殑灏忕唺锛屽畠浠婂ぉ鍦ㄦ．鏋楅噷閬囧埌浜嗕竴浣嶆柊鏈嬪弸銆傛渶鍚庡畠瀹夊叏鍦板洖瀹朵簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在森林里遇到了一位新朋友。最后它安全地回家了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a greedy Bear. Today it met a new friend in the forest. Finally, it went home safely.</p>
                 `,
                 englishText: "There was a greedy Bear. Today it met a new friend in the forest. Finally, it went home safely."
             },
             {
-                title: "鎱㈠悶鍚炵殑灏忕嫍 / The slow Dog",
+                title: "慢吞吞的小狗 / The slow Dog",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙參鍚炲悶鐨勫皬鐙楋紝瀹冧粖澶╁湪鏍戜笂杩疯矾浜嗐€傚畠鏄庣櫧浜嗕竴涓噸瑕佺殑閬撶悊銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在树上迷路了。它明白了一个重要的道理。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a slow Dog. Today it got lost in the tree. It understood an important truth.</p>
                 `,
                 englishText: "There was a slow Dog. Today it got lost in the tree. It understood an important truth."
             },
             {
-                title: "鐢熸皵鐨勫皬鐚?/ The angry Cat",
+                title: "生气的小猫 / The angry Cat",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙敓姘旂殑灏忕尗锛屽畠浠婂ぉ鍦ㄦ渤杈规兂瑕佺潯瑙夈€傚畠搴﹁繃浜嗛潪甯稿紑蹇冪殑涓€澶┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在河边想要睡觉。它度过了非常开心的一天。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a angry Cat. Today it wanted to sleep by the river. It had a very happy day.</p>
                 `,
                 englishText: "There was a angry Cat. Today it wanted to sleep by the river. It had a very happy day."
             },
             {
-                title: "鑱槑鐨勭嫄鐙?/ The clever Fox",
+                title: "聪明的狐狸 / The clever Fox",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙仾鏄庣殑鐙愮嫺锛屽畠浠婂ぉ鍦ㄨ姳鍥噷鍦ㄥ揩涔愬湴璺宠垶銆傚畠鐢滅敎鍦扮潯鐫€浜嗐€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只聪明的狐狸，它今天在花园里在快乐地跳舞。它甜甜地睡着了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a clever Fox. Today it was dancing happily in the garden. It fell asleep sweetly.</p>
                 `,
                 englishText: "There was a clever Fox. Today it was dancing happily in the garden. It fell asleep sweetly."
             },
             {
-                title: "鑳嗗皬鐨勫厰瀛?/ The timid Rabbit",
+                title: "胆小的兔子 / The timid Rabbit",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙儐灏忕殑鍏斿瓙锛屽畠浠婂ぉ鍦ㄥ北娲為噷鍦ㄥ紑蹇冨湴鍞辨瓕銆傚畠鎶婇鐗╁垎浜粰浜嗗ぇ瀹躲€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只胆小的兔子，它今天在山洞里在开心地唱歌。它把食物分享给了大家。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a timid Rabbit. Today it was singing happily in the cave. It shared the food with everyone.</p>
                 `,
                 englishText: "There was a timid Rabbit. Today it was singing happily in the cave. It shared the food with everyone."
             },
             {
-                title: "鍙嬪ソ鐨勪箤榫?/ The friendly Turtle",
+                title: "友好的乌龟 / The friendly Turtle",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙弸濂界殑涔岄緹锛屽畠浠婂ぉ鍦ㄥ北涓樹笂姝ｅ湪瀵绘壘姘村枬銆傛湅鍙嬩滑閮界珛鍒昏刀鏉ュ府蹇欎簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只友好的乌龟，它今天在山丘上正在寻找水喝。朋友们都立刻赶来帮忙了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a friendly Turtle. Today it was looking for some water on the hill. Friends came to help immediately.</p>
                 `,
                 englishText: "There was a friendly Turtle. Today it was looking for some water on the hill. Friends came to help immediately."
             },
             {
-                title: "璋冪毊鐨勭尨瀛?/ The naughty Monkey",
+                title: "调皮的猴子 / The naughty Monkey",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙皟鐨殑鐚村瓙锛屽畠浠婂ぉ鍦ㄨ崏鍦颁笂鍙戠幇浜嗕竴涓瀵嗐€傚畠鍐冲畾鏄庡ぉ鍐嶆潵鐜┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只调皮的猴子，它今天在草地上发现了一个秘密。它决定明天再来玩。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a naughty Monkey. Today it discovered a secret on the grass. It decided to come and play again tomorrow.</p>
                 `,
                 englishText: "There was a naughty Monkey. Today it discovered a secret on the grass. It decided to come and play again tomorrow."
             },
             {
-                title: "蹇箰鐨勫ぇ璞?/ The happy Elephant",
+                title: "快乐的大象 / The happy Elephant",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙揩涔愮殑澶ц薄锛屽畠浠婂ぉ鍦ㄦ．鏋楅噷鎵惧埌浜嗕竴鍧楃編鍛崇殑椋熺墿銆傛渶鍚庡畠瀹夊叏鍦板洖瀹朵簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只快乐的大象，它今天在森林里找到了一块美味的食物。最后它安全地回家了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a happy Elephant. Today it found a piece of delicious food in the forest. Finally, it went home safely.</p>
                 `,
                 englishText: "There was a happy Elephant. Today it found a piece of delicious food in the forest. Finally, it went home safely."
             },
             {
-                title: "楠勫偛鐨勮€侀紶 / The proud Mouse",
+                title: "骄傲的老鼠 / The proud Mouse",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙獎鍌茬殑鑰侀紶锛屽畠浠婂ぉ鍦ㄦ爲涓婇亣鍒颁簡涓€浣嶆柊鏈嬪弸銆傚畠鏄庣櫧浜嗕竴涓噸瑕佺殑閬撶悊銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只骄傲的老鼠，它今天在树上遇到了一位新朋友。它明白了一个重要的道理。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a proud Mouse. Today it met a new friend in the tree. It understood an important truth.</p>
                 `,
                 englishText: "There was a proud Mouse. Today it met a new friend in the tree. It understood an important truth."
             },
             {
-                title: "濞佹鐨勭嫯瀛?/ The majestic Lion",
+                title: "威武的狮子 / The majestic Lion",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙▉姝︾殑鐙瓙锛屽畠浠婂ぉ鍦ㄦ渤杈硅糠璺簡銆傚畠搴﹁繃浜嗛潪甯稿紑蹇冪殑涓€澶┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只威武的狮子，它今天在河边迷路了。它度过了非常开心的一天。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a majestic Lion. Today it got lost by the river. It had a very happy day.</p>
                 `,
                 englishText: "There was a majestic Lion. Today it got lost by the river. It had a very happy day."
             },
             {
-                title: "鍕囨暍鐨勮€佽檸 / The brave Tiger",
+                title: "勇敢的老虎 / The brave Tiger",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙媷鏁㈢殑鑰佽檸锛屽畠浠婂ぉ鍦ㄨ姳鍥噷鎯宠鐫¤銆傚畠鐢滅敎鍦扮潯鐫€浜嗐€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只勇敢的老虎，它今天在花园里想要睡觉。它甜甜地睡着了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a brave Tiger. Today it wanted to sleep in the garden. It fell asleep sweetly.</p>
                 `,
                 englishText: "There was a brave Tiger. Today it wanted to sleep in the garden. It fell asleep sweetly."
             },
             {
-                title: "寮哄．鐨勫皬楦?/ The strong Bird",
+                title: "强壮的小鸟 / The strong Bird",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙己澹殑灏忛笩锛屽畠浠婂ぉ鍦ㄥ北娲為噷鍦ㄥ揩涔愬湴璺宠垶銆傚畠鎶婇鐗╁垎浜粰浜嗗ぇ瀹躲€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只强壮的小鸟，它今天在山洞里在快乐地跳舞。它把食物分享给了大家。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a strong Bird. Today it was dancing happily in the cave. It shared the food with everyone.</p>
                 `,
                 englishText: "There was a strong Bird. Today it was dancing happily in the cave. It shared the food with everyone."
             },
             {
-                title: "璐悆鐨勫皬鐔?/ The greedy Bear",
+                title: "贪吃的小熊 / The greedy Bear",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙椽鍚冪殑灏忕唺锛屽畠浠婂ぉ鍦ㄥ北涓樹笂鍦ㄥ紑蹇冨湴鍞辨瓕銆傛湅鍙嬩滑閮界珛鍒昏刀鏉ュ府蹇欎簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只贪吃的小熊，它今天在山丘上在开心地唱歌。朋友们都立刻赶来帮忙了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a greedy Bear. Today it was singing happily on the hill. Friends came to help immediately.</p>
                 `,
                 englishText: "There was a greedy Bear. Today it was singing happily on the hill. Friends came to help immediately."
             },
             {
-                title: "鎱㈠悶鍚炵殑灏忕嫍 / The slow Dog",
+                title: "慢吞吞的小狗 / The slow Dog",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙參鍚炲悶鐨勫皬鐙楋紝瀹冧粖澶╁湪鑽夊湴涓婃鍦ㄥ鎵炬按鍠濄€傚畠鍐冲畾鏄庡ぉ鍐嶆潵鐜┿€?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只慢吞吞的小狗，它今天在草地上正在寻找水喝。它决定明天再来玩。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a slow Dog. Today it was looking for some water on the grass. It decided to come and play again tomorrow.</p>
                 `,
                 englishText: "There was a slow Dog. Today it was looking for some water on the grass. It decided to come and play again tomorrow."
             },
             {
-                title: "鐢熸皵鐨勫皬鐚?/ The angry Cat",
+                title: "生气的小猫 / The angry Cat",
                 content: `
-                    <h4>銆愪腑鏂囨晠浜嬨€?/h4>
-                    <p>鏈変竴鍙敓姘旂殑灏忕尗锛屽畠浠婂ぉ鍦ㄦ．鏋楅噷鍙戠幇浜嗕竴涓瀵嗐€傛渶鍚庡畠瀹夊叏鍦板洖瀹朵簡銆?/p>
+                    <h4>【中文故事】</h4>
+                    <p>有一只生气的小猫，它今天在森林里发现了一个秘密。最后它安全地回家了。</p>
                     <hr>
-                    <h4>銆怑nglish Story銆?/h4>
+                    <h4>【English Story】</h4>
                     <p>There was a angry Cat. Today it discovered a secret in the forest. Finally, it went home safely.</p>
                 `,
                 englishText: "There was a angry Cat. Today it discovered a secret in the forest. Finally, it went home safely."
             }
         ];
 
-        // 姣忔棩褰遍煶搴?(浣跨敤B绔欒祫婧愶紝閫傚悎鍥藉唴璁块棶)
-        // 閲囩敤澶栭摼鏂瑰紡锛氱偣鍑诲悗鍦ㄦ柊鏍囩椤垫墦寮€B绔欒棰?
+                // 每日影音库 (使用B站资源，适合国内访问)
+        // 采用外链方式：点击后在新标签页打开B站视频
         const listeningMaterials = [
-            { title: "馃惙 灏忕尓浣╁鑻辨枃鐗?绗?闆?, url: "https://search.bilibili.com/all?keyword=%E5%B0%8F%E7%8C%AA%E4%BD%A9%E5%A5%87%E8%8B%B1%E6%96%87%E7%89%88+%E7%AC%AC1%E9%9B%86", desc: "Peppa Pig S1E1 - Muddy Puddles" },
-            { title: "馃幍 SSS鑻辫鍚挋鍎挎瓕 绗?棣?, url: "https://search.bilibili.com/all?keyword=SSS%E8%8B%B1%E8%AF%AD%E5%90%AF%E8%92%99%E5%84%BF%E6%AD%8C+Hello", desc: "Super Simple Songs - Hello!" },
-            { title: "馃惙 灏忕尓浣╁鑻辨枃鐗?绗?闆?, url: "https://search.bilibili.com/all?keyword=%E5%B0%8F%E7%8C%AA%E4%BD%A9%E5%A5%87%E8%8B%B1%E6%96%87%E7%89%88+%E7%AC%AC2%E9%9B%86", desc: "Peppa Pig S1E2 - Mr Dinosaur is Lost" },
-            { title: "馃幍 SSS鑻辫鍚挋鍎挎瓕 绗?棣?, url: "https://search.bilibili.com/all?keyword=SSS%E8%8B%B1%E8%AF%AD%E5%90%AF%E8%92%99%E5%84%BF%E6%AD%8C+BINGO", desc: "Super Simple Songs - BINGO" },
-            { title: "馃惙 灏忕尓浣╁鑻辨枃鐗?绗?闆?, url: "https://search.bilibili.com/all?keyword=%E5%B0%8F%E7%8C%AA%E4%BD%A9%E5%A5%87%E8%8B%B1%E6%96%87%E7%89%88+%E7%AC%AC3%E9%9B%86", desc: "Peppa Pig S1E3 - Best Friend" },
-            { title: "馃幍 SSS鑻辫鍚挋鍎挎瓕 绗?棣?, url: "https://search.bilibili.com/all?keyword=SSS%E8%8B%B1%E8%AF%AD%E5%90%AF%E8%92%99%E5%84%BF%E6%AD%8C+Twinkle+Twinkle", desc: "Super Simple Songs - Twinkle Twinkle Little Star" },
-            { title: "馃惙 灏忕尓浣╁鑻辨枃鐗?绗?闆?, url: "https://search.bilibili.com/all?keyword=%E5%B0%8F%E7%8C%AA%E4%BD%A9%E5%A5%87%E8%8B%B1%E6%96%87%E7%89%88+%E7%AC%AC4%E9%9B%86", desc: "Peppa Pig S1E4 - Polly Parrot" },
-            { title: "馃幍 SSS鑻辫鍚挋鍎挎瓕 绗?棣?, url: "https://search.bilibili.com/all?keyword=SSS%E8%8B%B1%E8%AF%AD%E5%90%AF%E8%92%99%E5%84%BF%E6%AD%8C+Old+MacDonald", desc: "Super Simple Songs - Old MacDonald Had a Farm" },
-            { title: "馃惙 灏忕尓浣╁鑻辨枃鐗?绗?闆?, url: "https://search.bilibili.com/all?keyword=%E5%B0%8F%E7%8C%AA%E4%BD%A9%E5%A5%87%E8%8B%B1%E6%96%87%E7%89%88+%E7%AC%AC5%E9%9B%86", desc: "Peppa Pig S1E5 - Hide and Seek" },
-            { title: "馃幍 SSS鑻辫鍚挋鍎挎瓕 绗?棣?, url: "https://search.bilibili.com/all?keyword=SSS%E8%8B%B1%E8%AF%AD%E5%90%AF%E8%92%99%E5%84%BF%E6%AD%8C+Head+Shoulders", desc: "Super Simple Songs - Head Shoulders Knees & Toes" },
-            { title: "馃惙 灏忕尓浣╁鑻辨枃鐗?绗?闆?, url: "https://search.bilibili.com/all?keyword=%E5%B0%8F%E7%8C%AA%E4%BD%A9%E5%A5%87%E8%8B%B1%E6%96%87%E7%89%88+%E7%AC%AC6%E9%9B%86", desc: "Peppa Pig S1E6 - The Playgroup" },
-            { title: "馃幍 SSS鑻辫鍚挋鍎挎瓕 绗?棣?, url: "https://search.bilibili.com/all?keyword=SSS%E8%8B%B1%E8%AF%AD%E5%90%AF%E8%92%99%E5%84%BF%E6%AD%8C+ABC+Song", desc: "Super Simple Songs - ABC Song" },
-            { title: "馃惙 灏忕尓浣╁鑻辨枃鐗?绗?闆?, url: "https://search.bilibili.com/all?keyword=%E5%B0%8F%E7%8C%AA%E4%BD%A9%E5%A5%87%E8%8B%B1%E6%96%87%E7%89%88+%E7%AC%AC7%E9%9B%86", desc: "Peppa Pig S1E7 - Mummy Pig at Work" },
-            { title: "馃幍 SSS鑻辫鍚挋鍎挎瓕 绗?棣?, url: "https://search.bilibili.com/all?keyword=SSS%E8%8B%B1%E8%AF%AD%E5%90%AF%E8%92%99%E5%84%BF%E6%AD%8C+Five+Little+Monkeys", desc: "Super Simple Songs - Five Little Monkeys" },
-            { title: "馃惙 灏忕尓浣╁鑻辨枃鐗?绗?闆?, url: "https://search.bilibili.com/all?keyword=%E5%B0%8F%E7%8C%AA%E4%BD%A9%E5%A5%87%E8%8B%B1%E6%96%87%E7%89%88+%E7%AC%AC8%E9%9B%86", desc: "Peppa Pig S1E8 - Piggy in the Middle" },
-            { title: "馃幍 SSS鑻辫鍚挋鍎挎瓕 绗?棣?, url: "https://search.bilibili.com/all?keyword=SSS%E8%8B%B1%E8%AF%AD%E5%90%AF%E8%92%99%E5%84%BF%E6%AD%8C+Itsy+Bitsy+Spider", desc: "Super Simple Songs - Itsy Bitsy Spider" },
-            { title: "馃惙 灏忕尓浣╁鑻辨枃鐗?绗?闆?, url: "https://search.bilibili.com/all?keyword=%E5%B0%8F%E7%8C%AA%E4%BD%A9%E5%A5%87%E8%8B%B1%E6%96%87%E7%89%88+%E7%AC%AC9%E9%9B%86", desc: "Peppa Pig S1E9 - Daddy Loses his Glasses" },
-            { title: "馃幍 SSS鑻辫鍚挋鍎挎瓕 绗?棣?, url: "https://search.bilibili.com/all?keyword=SSS%E8%8B%B1%E8%AF%AD%E5%90%AF%E8%92%99%E5%84%BF%E6%AD%8C+If+You%27re+Happy", desc: "Super Simple Songs - If You're Happy" },
-            { title: "馃惙 灏忕尓浣╁鑻辨枃鐗?绗?0闆?, url: "https://search.bilibili.com/all?keyword=%E5%B0%8F%E7%8C%AA%E4%BD%A9%E5%A5%87%E8%8B%B1%E6%96%87%E7%89%88+%E7%AC%AC10%E9%9B%86", desc: "Peppa Pig S1E10 - Gardening" },
-            { title: "馃幍 SSS鑻辫鍚挋鍎挎瓕 绗?0棣?, url: "https://search.bilibili.com/all?keyword=SSS%E8%8B%B1%E8%AF%AD%E5%90%AF%E8%92%99%E5%84%BF%E6%AD%8C+Baby+Shark", desc: "Super Simple Songs - Baby Shark" },
-            { title: "馃惙 灏忕尓浣╁鑻辨枃鐗?绗?1闆?, url: "https://search.bilibili.com/all?keyword=%E5%B0%8F%E7%8C%AA%E4%BD%A9%E5%A5%87%E8%8B%B1%E6%96%87%E7%89%88+%E7%AC%AC11%E9%9B%86", desc: "Peppa Pig S1E11 - Hiccups" },
-            { title: "馃幍 SSS鑻辫鍚挋鍎挎瓕 绗?1棣?, url: "https://search.bilibili.com/all?keyword=SSS%E8%8B%B1%E8%AF%AD%E5%90%AF%E8%92%99%E5%84%BF%E6%AD%8C+Rain+Rain+Go+Away", desc: "Super Simple Songs - Rain Rain Go Away" },
-            { title: "馃惙 灏忕尓浣╁鑻辨枃鐗?绗?2闆?, url: "https://search.bilibili.com/all?keyword=%E5%B0%8F%E7%8C%AA%E4%BD%A9%E5%A5%87%E8%8B%B1%E6%96%87%E7%89%88+%E7%AC%AC12%E9%9B%86", desc: "Peppa Pig S1E12 - Bicycles" },
-            { title: "馃幍 SSS鑻辫鍚挋鍎挎瓕 绗?2棣?, url: "https://search.bilibili.com/all?keyword=SSS%E8%8B%B1%E8%AF%AD%E5%90%AF%E8%92%99%E5%84%BF%E6%AD%8C+Wheels+On+The+Bus", desc: "Super Simple Songs - Wheels On The Bus" },
-            { title: "馃惙 灏忕尓浣╁鑻辨枃鐗?绗?3闆?, url: "https://search.bilibili.com/all?keyword=%E5%B0%8F%E7%8C%AA%E4%BD%A9%E5%A5%87%E8%8B%B1%E6%96%87%E7%89%88+%E7%AC%AC13%E9%9B%86", desc: "Peppa Pig S1E13 - Secrets" },
-            { title: "馃幍 SSS鑻辫鍚挋鍎挎瓕 绗?3棣?, url: "https://search.bilibili.com/all?keyword=SSS%E8%8B%B1%E8%AF%AD%E5%90%AF%E8%92%99%E5%84%BF%E6%AD%8C+Row+Row+Row+Your+Boat", desc: "Super Simple Songs - Row Row Row Your Boat" },
-            { title: "馃惙 灏忕尓浣╁鑻辨枃鐗?绗?4闆?, url: "https://search.bilibili.com/all?keyword=%E5%B0%8F%E7%8C%AA%E4%BD%A9%E5%A5%87%E8%8B%B1%E6%96%87%E7%89%88+%E7%AC%AC14%E9%9B%86", desc: "Peppa Pig S1E14 - Flying a Kite" },
-            { title: "馃幍 SSS鑻辫鍚挋鍎挎瓕 绗?4棣?, url: "https://search.bilibili.com/all?keyword=SSS%E8%8B%B1%E8%AF%AD%E5%90%AF%E8%92%99%E5%84%BF%E6%AD%8C+London+Bridge", desc: "Super Simple Songs - London Bridge Is Falling Down" },
-            { title: "馃惙 灏忕尓浣╁鑻辨枃鐗?绗?5闆?, url: "https://search.bilibili.com/all?keyword=%E5%B0%8F%E7%8C%AA%E4%BD%A9%E5%A5%87%E8%8B%B1%E6%96%87%E7%89%88+%E7%AC%AC15%E9%9B%86", desc: "Peppa Pig S1E15 - Picnic" },
-            { title: "馃幍 SSS鑻辫鍚挋鍎挎瓕 绗?5棣?, url: "https://search.bilibili.com/all?keyword=SSS%E8%8B%B1%E8%AF%AD%E5%90%AF%E8%92%99%E5%84%BF%E6%AD%8C+Mary+Had+A+Little+Lamb", desc: "Super Simple Songs - Mary Had A Little Lamb" }
+            { title: "🐷 小猪佩奇英文版 第1集", url: "https://search.bilibili.com/all?keyword=小猪佩奇英文版+第1集", desc: "Peppa Pig S1E1 - Muddy Puddles" },
+            { title: "🎵 SSS英语启蒙儿歌 第1首", url: "https://search.bilibili.com/all?keyword=SSS英语启蒙儿歌+Hello", desc: "Super Simple Songs - Hello!" },
+            { title: "🐷 小猪佩奇英文版 第2集", url: "https://search.bilibili.com/all?keyword=小猪佩奇英文版+第2集", desc: "Peppa Pig S1E2 - Mr Dinosaur is Lost" },
+            { title: "🎵 SSS英语启蒙儿歌 第2首", url: "https://search.bilibili.com/all?keyword=SSS英语启蒙儿歌+BINGO", desc: "Super Simple Songs - BINGO" },
+            { title: "🐷 小猪佩奇英文版 第3集", url: "https://search.bilibili.com/all?keyword=小猪佩奇英文版+第3集", desc: "Peppa Pig S1E3 - Best Friend" },
+            { title: "🎵 SSS英语启蒙儿歌 第3首", url: "https://search.bilibili.com/all?keyword=SSS英语启蒙儿歌+Twinkle+Twinkle", desc: "Super Simple Songs - Twinkle Twinkle Little Star" },
+            { title: "🐷 小猪佩奇英文版 第4集", url: "https://search.bilibili.com/all?keyword=小猪佩奇英文版+第4集", desc: "Peppa Pig S1E4 - Polly Parrot" },
+            { title: "🎵 SSS英语启蒙儿歌 第4首", url: "https://search.bilibili.com/all?keyword=SSS英语启蒙儿歌+Old+MacDonald", desc: "Super Simple Songs - Old MacDonald Had a Farm" },
+            { title: "🐷 小猪佩奇英文版 第5集", url: "https://search.bilibili.com/all?keyword=小猪佩奇英文版+第5集", desc: "Peppa Pig S1E5 - Hide and Seek" },
+            { title: "🎵 SSS英语启蒙儿歌 第5首", url: "https://search.bilibili.com/all?keyword=SSS英语启蒙儿歌+Head+Shoulders", desc: "Super Simple Songs - Head Shoulders Knees & Toes" },
+            { title: "🐷 小猪佩奇英文版 第6集", url: "https://search.bilibili.com/all?keyword=小猪佩奇英文版+第6集", desc: "Peppa Pig S1E6 - The Playgroup" },
+            { title: "🎵 SSS英语启蒙儿歌 第6首", url: "https://search.bilibili.com/all?keyword=SSS英语启蒙儿歌+ABC+Song", desc: "Super Simple Songs - ABC Song" },
+            { title: "🐷 小猪佩奇英文版 第7集", url: "https://search.bilibili.com/all?keyword=小猪佩奇英文版+第7集", desc: "Peppa Pig S1E7 - Mummy Pig at Work" },
+            { title: "🎵 SSS英语启蒙儿歌 第7首", url: "https://search.bilibili.com/all?keyword=SSS英语启蒙儿歌+Five+Little+Monkeys", desc: "Super Simple Songs - Five Little Monkeys" },
+            { title: "🐷 小猪佩奇英文版 第8集", url: "https://search.bilibili.com/all?keyword=小猪佩奇英文版+第8集", desc: "Peppa Pig S1E8 - Piggy in the Middle" },
+            { title: "🎵 SSS英语启蒙儿歌 第8首", url: "https://search.bilibili.com/all?keyword=SSS英语启蒙儿歌+Itsy+Bitsy+Spider", desc: "Super Simple Songs - Itsy Bitsy Spider" },
+            { title: "🐷 小猪佩奇英文版 第9集", url: "https://search.bilibili.com/all?keyword=小猪佩奇英文版+第9集", desc: "Peppa Pig S1E9 - Daddy Loses his Glasses" },
+            { title: "🎵 SSS英语启蒙儿歌 第9首", url: "https://search.bilibili.com/all?keyword=SSS英语启蒙儿歌+If+You+Are+Happy", desc: "Super Simple Songs - If You're Happy" },
+            { title: "🐷 小猪佩奇英文版 第10集", url: "https://search.bilibili.com/all?keyword=小猪佩奇英文版+第10集", desc: "Peppa Pig S1E10 - Gardening" },
+            { title: "🎵 SSS英语启蒙儿歌 第10首", url: "https://search.bilibili.com/all?keyword=SSS英语启蒙儿歌+Baby+Shark", desc: "Super Simple Songs - Baby Shark" },
+            { title: "🐷 小猪佩奇英文版 第11集", url: "https://search.bilibili.com/all?keyword=小猪佩奇英文版+第11集", desc: "Peppa Pig S1E11 - Hiccups" },
+            { title: "🎵 SSS英语启蒙儿歌 第11首", url: "https://search.bilibili.com/all?keyword=SSS英语启蒙儿歌+Rain+Rain+Go+Away", desc: "Super Simple Songs - Rain Rain Go Away" },
+            { title: "🐷 小猪佩奇英文版 第12集", url: "https://search.bilibili.com/all?keyword=小猪佩奇英文版+第12集", desc: "Peppa Pig S1E12 - Bicycles" },
+            { title: "🎵 SSS英语启蒙儿歌 第12首", url: "https://search.bilibili.com/all?keyword=SSS英语启蒙儿歌+Wheels+On+The+Bus", desc: "Super Simple Songs - Wheels On The Bus" },
+            { title: "🐷 小猪佩奇英文版 第13集", url: "https://search.bilibili.com/all?keyword=小猪佩奇英文版+第13集", desc: "Peppa Pig S1E13 - Secrets" },
+            { title: "🎵 SSS英语启蒙儿歌 第13首", url: "https://search.bilibili.com/all?keyword=SSS英语启蒙儿歌+Row+Row+Row+Your+Boat", desc: "Super Simple Songs - Row Row Row Your Boat" },
+            { title: "🐷 小猪佩奇英文版 第14集", url: "https://search.bilibili.com/all?keyword=小猪佩奇英文版+第14集", desc: "Peppa Pig S1E14 - Flying a Kite" },
+            { title: "🎵 SSS英语启蒙儿歌 第14首", url: "https://search.bilibili.com/all?keyword=SSS英语启蒙儿歌+London+Bridge", desc: "Super Simple Songs - London Bridge Is Falling Down" },
+            { title: "🐷 小猪佩奇英文版 第15集", url: "https://search.bilibili.com/all?keyword=小猪佩奇英文版+第15集", desc: "Peppa Pig S1E15 - Picnic" },
+            { title: "🎵 SSS英语启蒙儿歌 第15首", url: "https://search.bilibili.com/all?keyword=SSS英语启蒙儿歌+Mary+Had+A+Little+Lamb", desc: "Super Simple Songs - Mary Had A Little Lamb" }
         ];
 
         function openContent(type) {
@@ -1982,33 +1982,38 @@
             const title = document.getElementById('contentModalTitle');
             const body = document.getElementById('contentBody');
 
-            // 鏍规嵁褰撳墠鏄竴骞翠腑鐨勭鍑犲ぉ鏉ュ惊鐜€夋嫨鍐呭
+            // 根据当前是一年中的第几天来循环选择内容
             const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
 
             if (type === 'read') {
-                title.innerText = currentProfile === 'g3' ? '馃摉 浠婃棩涓嫳鍙岃闃呰' : '馃摉 浠婃棩涓枃闃呰';
+                title.innerText = currentProfile === 'g3' ? '📖 今日中英双语阅读' : '📖 今日中文阅读';
                 currentTaskId = 'task-habit-reading';
                 const material = readingMaterials[dayOfYear % readingMaterials.length];
 
                 if (currentProfile === 'g3') {
-                    // 涓夊勾绾э細鏄剧ず鍙岃鍜屾湕璇绘寜閽?
+                    // 三年级：显示双语和朗读按钮
                     const escapedText = material.englishText.replace(/'/g, "\\'");
                     body.innerHTML = `
                         <h3 style="color: var(--primary-color); text-align:center;">${material.title}</h3>
                         <div style="text-align: right; margin-bottom:-20px;">
-                            <button class="tts-btn" onclick="speakText('${escapedText}')" title="鏈楄鍏ㄧ瘒鑻辨枃">馃攰 鏈楄鑻辨枃</button>
-                            <button class="tts-btn" onclick="stopSpeaking()" title="鍋滄鏈楄" style="color:red; font-size:1rem;">鈴癸笍</button>
+                            <button class="tts-btn" onclick="speakText('${escapedText}')" title="朗读全篇英文">🔊 朗读英文</button>
+                            <button class="tts-btn" onclick="stopSpeaking()" title="停止朗读" style="color:red; font-size:1rem;">⏹️</button>
                         </div>
                         ${material.content}
                     `;
                 } else {
-                    // 浜屽勾绾э細鍙樉绀轰腑鏂囬儴鍒?
+                    // 二年级：只显示中文部分，隐藏英文内容和朗读按钮
+                    // Extract just the Chinese portion using a simple regex or string manipulation
+                    // Assuming the standard format generated by the script uses ####【中文故事】
                     let chineseOnlyContent = material.content;
                     const hrIndex = material.content.indexOf('<hr>');
                     if (hrIndex !== -1) {
                         chineseOnlyContent = material.content.substring(0, hrIndex);
                     }
+
+                    // remove " / English Title" from title
                     let chineseTitle = material.title.split(' / ')[0];
+
                     body.innerHTML = `
                         <h3 style="color: var(--primary-color); text-align:center;">${chineseTitle}</h3>
                         ${chineseOnlyContent}
@@ -2016,32 +2021,342 @@
                 }
 
             } else if (type === 'listen') {
-                title.innerText = '馃帶 浠婃棩鑻辫纾ㄨ€虫湹';
+                title.innerText = '🎧 今日英语磨耳朵';
                 currentTaskId = 'task-english-read';
                 const material = listeningMaterials[dayOfYear % listeningMaterials.length];
 
-                // 浣跨敤B绔欏閾炬柟寮忥紝鐐瑰嚮鎸夐挳鍦ㄦ柊鏍囩鎵撳紑B绔欐悳绱㈢粨鏋?
+                // 嵌入视频播放器
                 body.innerHTML = `
                     <h3 style="color: var(--primary-color); text-align:center;">${material.title}</h3>
-                    <p style="text-align: center; color: #555; font-size: 1em; margin: 15px 0;">${material.desc || ''}</p>
-                    <div style="text-align: center; padding: 30px 0;">
-                        <p style="font-size: 1.1em; margin-bottom: 20px;">馃摵 鐐瑰嚮涓嬫柟鎸夐挳锛屽埌B绔欒鐪嬩粖鏃ュ唴瀹?/p>
-                        <a href="${material.url}" target="_blank" rel="noopener noreferrer" 
-                           style="display: inline-block; background-color: #00a1d6; color: white; padding: 15px 30px; 
-                                  border-radius: 8px; text-decoration: none; font-size: 1.1em; font-weight: bold;
-                                  transition: background-color 0.3s;">
-                            馃幀 鎵撳紑B绔欒鐪?
-                        </a>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 8px;">
+                        <iframe src="${material.url}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allowfullscreen></iframe>
                     </div>
-                    <p style="text-align: center; color: #757575; margin-top: 15px; font-size: 0.9em;">
-                        瑙傜湅瀹屾瘯鍚庯紝鍥炲埌姝ら〉闈㈢偣鍑讳笅鏂?鎴戝凡瀹屾垚"鎸夐挳
-                    </p>
+                    <p style="text-align: center; color: #757575; margin-top: 15px; font-size: 0.9em;">请认真观看/收听，完成后点击下方按钮</p>
                 `;
             }
 
             modal.classList.add('active');
         }
-                createConfetti(checkbox); // 鍔犵偣灏忕壒鏁堥紦鍔?
+
+        function closeContent() {
+            document.getElementById('contentModal').classList.remove('active');
+            // 清空 iframe，防止后台继续播放声音
+            document.getElementById('contentBody').innerHTML = '';
+
+            // 停止朗读
+            stopSpeaking();
+        }
+
+        // --- 文本转语音 (TTS) 功能 ---
+        let currentUtterance = null;
+        function speakText(text) {
+            // 首先停止之前的所有朗读
+            stopSpeaking();
+
+            if ('speechSynthesis' in window) {
+                currentUtterance = new SpeechSynthesisUtterance(text);
+                currentUtterance.lang = 'en-US'; // 设置发音为美式英语
+                currentUtterance.rate = 0.9; // 稍微放慢一点语速，适合三年级
+                window.speechSynthesis.speak(currentUtterance);
+            } else {
+                alert("抱歉，您的浏览器不支持语音朗读功能。请尝试使用最新版的 Chrome、Edge 或 Safari。");
+            }
+        }
+
+        function stopSpeaking() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+        }
+
+        // --- 专注于倒计时功能 ---
+        let timerInterval = null;
+        let timeRemaining = 20 * 60; // 20 minutes in seconds
+
+        function startTimer() {
+            const btn = document.getElementById('timer-btn');
+            if (timerInterval) {
+                // If already running, do nothing or allow pause (here we just prevent multiple clicks)
+                return;
+            }
+
+            btn.innerText = '专注中...';
+            btn.disabled = true;
+
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    finishTimer();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const display = document.getElementById('timer-display');
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            display.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function finishTimer() {
+            const btn = document.getElementById('timer-btn');
+            const taskLi = document.getElementById('task-time-management');
+            const checkbox = taskLi.querySelector('input[type="checkbox"]');
+
+            btn.innerText = '已完成';
+            timeRemaining = 20 * 60; // Reset for next time if needed
+
+            // Auto check the box
+            checkbox.checked = true;
+            updateProgress(checkbox);
+
+            // Optional: Play a sound
+            // const audio = new Audio('path/to/bell.mp3');
+            // audio.play();
+        }
+
+        function markContentFinished() {
+            const taskLi = document.getElementById(currentTaskId);
+            const checkbox = taskLi.querySelector('input[type="checkbox"]');
+            const btn = taskLi.querySelector('.exercise-btn');
+
+            checkbox.disabled = false;
+            checkbox.checked = true;
+            checkbox.nextElementSibling.style.cursor = 'pointer';
+            checkbox.nextElementSibling.style.backgroundColor = '';
+            checkbox.nextElementSibling.title = '';
+
+            btn.innerText = '已完成';
+            btn.disabled = true;
+
+            updateProgress(checkbox);
+            closeContent();
+        }
+
+        function openExercise(type) {
+            currentExerciseType = type;
+            currentQuestionCount = 0; // 重置答题数
+            const modal = document.getElementById('exerciseModal');
+            const title = document.getElementById('modalTitle');
+            const questionElement = document.getElementById('questionText');
+            const inputElement = document.getElementById('answerInput');
+            const feedback = document.getElementById('exerciseFeedback');
+
+            inputElement.value = '';
+            feedback.innerText = '';
+            feedback.className = 'feedback';
+            if (type === 'math') {
+                title.innerText = `🧮 数学计算挑战(0 / ${totalQuestions})`;
+                generateMathProblem();
+                currentTaskId = 'task-math-calc';
+            } else if (type === 'english') {
+                title.innerText = `📚 英语单词挑战(0 / ${totalQuestions})`;
+                generateEnglishProblem();
+                currentTaskId = 'task-english-vocab';
+            } else if (type === 'chinese') {
+                title.innerText = `📝 语文基础练习(0 / ${totalQuestions})`;
+                generateChineseProblem();
+                currentTaskId = 'task-chinese-foundation';
+            }
+
+            modal.classList.add('active');
+            setTimeout(() => inputElement.focus(), 100);
+
+            // Allow checking answer with Enter key
+            inputElement.onkeydown = function (e) {
+                if (e.key === 'Enter') {
+                    submitAnswer();
+                }
+            };
+        }
+
+        function closeExercise() {
+            document.getElementById('exerciseModal').classList.remove('active');
+        }
+
+        function generateMathProblem() {
+            if (currentProfile === 'g2') {
+                // 二年级下册：1000以内加减，基础乘法，有余数的除法
+                const operations = ['+', '-', '*', '/_rem'];
+                const op = operations[Math.floor(Math.random() * operations.length)];
+                let num1, num2, answer;
+                let problemStr = '';
+
+                switch (op) {
+                    case '+':
+                        num1 = Math.floor(Math.random() * 500) + 100;
+                        num2 = Math.floor(Math.random() * 500) + 100;
+                        answer = num1 + num2;
+                        problemStr = `${num1} + ${num2} = ?`;
+                        break;
+                    case '-':
+                        num1 = Math.floor(Math.random() * 900) + 100;
+                        num2 = Math.floor(Math.random() * num1);
+                        answer = num1 - num2;
+                        problemStr = `${num1} - ${num2} = ?`;
+                        break;
+                    case '*':
+                        num1 = Math.floor(Math.random() * 9) + 1;
+                        num2 = Math.floor(Math.random() * 9) + 1;
+                        answer = num1 * num2;
+                        problemStr = `${num1} × ${num2} = ?`;
+                        break;
+                    case '/_rem':
+                        // 有余数的除法 (e.g., 25 / 4 = 6...1) -> 答案格式要求为 "6...1"
+                        num2 = Math.floor(Math.random() * 8) + 2; // 除数 2-9
+                        let quotient = Math.floor(Math.random() * 9) + 1; // 商 1-9
+                        let remainder = Math.floor(Math.random() * (num2 - 1)) + 1; // 余数 1 到 除数-1
+                        num1 = (num2 * quotient) + remainder;
+                        answer = `${quotient}...${remainder}`; // 特殊的答案格式验证
+                        problemStr = `${num1} ÷ ${num2} = ? (格式: 商...余数, 如 6...1)`;
+                        break;
+                }
+                currentAnswer = answer;
+                currentProblem = problemStr;
+                document.getElementById('questionText').innerText = `第 ${currentQuestionCount + 1}/${totalQuestions} 题：\n${problemStr}`;
+                return;
+            }
+
+            // 三年级下册（默认）：两位数乘以两位数，或者 除数是一位数且能整除的除法
+            const ops = ['*', '/']; // Re-declare ops for g3 scope
+            const op = ops[Math.floor(Math.random() * ops.length)];
+            let num1, num2;
+
+            if (op === '*') {
+                num1 = Math.floor(Math.random() * 90) + 10; // 10-99
+                num2 = Math.floor(Math.random() * 90) + 10; // 10-99
+                currentAnswer = num1 * num2;
+                currentProblem = `${num1} × ${num2} = ?`;
+            } else if (op === '/') {
+                num2 = Math.floor(Math.random() * 8) + 2; // Divisor 2-9
+                const multiplier = Math.floor(Math.random() * 110) + 10; // Quotient 10-119
+                num1 = num2 * multiplier; // Dividend (2-3 digits)
+                currentAnswer = multiplier;
+                currentProblem = `${num1} ÷ ${num2} = ?`;
+            }
+
+            document.getElementById('questionText').innerText = currentProblem;
+        }
+
+        function generateChineseProblem() {
+            // 根据档案选择对应的词库
+            const activeVocab = currentProfile === 'g3' ? chineseVocab : chineseVocabG2;
+            const item = activeVocab[Math.floor(Math.random() * activeVocab.length)];
+            currentAnswer = item.answer;
+
+            if (item.type === 'pinyin') {
+                currentProblem = `看拼音写词语: "${item.pinyin}"`;
+            } else if (item.type === 'idiom') {
+                currentProblem = `补充四字词语: "${item.text}"`;
+            }
+            // currentAnswer = item.answer; // This line was duplicated and is now handled above.
+
+            document.getElementById('questionText').innerText = currentProblem;
+        }
+
+        function generateEnglishProblem() {
+            // 中译英或英译中
+            const item = englishVocab[Math.floor(Math.random() * englishVocab.length)];
+            const isEnglishToChinese = Math.random() > 0.5;
+
+            if (isEnglishToChinese) {
+                currentProblem = `请写出单词的意思: "${item.word}"`;
+                currentAnswer = item.meaning;
+            } else {
+                currentProblem = `请拼写出英文: "${item.meaning}"`;
+                currentAnswer = item.word;
+            }
+
+            document.getElementById('questionText').innerText = currentProblem;
+        }
+
+        function submitAnswer() {
+            const userInput = document.getElementById('answerInput').value.trim().toLowerCase();
+            const feedback = document.getElementById('exerciseFeedback');
+            const title = document.getElementById('modalTitle');
+
+            if (!userInput) {
+                feedback.innerText = '请输入答案哦！';
+                feedback.className = 'feedback error';
+                return;
+            }
+
+            let isCorrect = false;
+            if (currentExerciseType === 'math') {
+                isCorrect = parseInt(userInput) === currentAnswer;
+            } else {
+                isCorrect = userInput === currentAnswer.toLowerCase();
+            }
+
+            if (isCorrect) {
+                currentQuestionCount++; // 答对增加计数
+
+                // 更新标题进度
+                let titlePrefix = currentExerciseType === 'math' ? '🧮 数学计算挑战' : currentExerciseType === 'chinese' ? '📝 语文基础练习' : '📚 英语单词挑战';
+                title.innerText = `${titlePrefix} (${currentQuestionCount}/${totalQuestions})`;
+
+                if (currentQuestionCount >= totalQuestions) {
+                    feedback.innerText = '🎉 太棒了！今天的挑战全部完成！';
+                    feedback.className = 'feedback success';
+
+                    // Mark associated task as complete
+                    setTimeout(() => {
+                        const taskLi = document.getElementById(currentTaskId);
+                        const checkbox = taskLi.querySelector('input[type="checkbox"]');
+                        const btn = taskLi.querySelector('.exercise-btn');
+
+                        checkbox.disabled = false;
+                        checkbox.checked = true;
+                        checkbox.nextElementSibling.style.cursor = 'pointer';
+                        checkbox.nextElementSibling.style.backgroundColor = ''; // Remove gray background
+                        checkbox.nextElementSibling.title = '';
+
+                        btn.innerText = '已完成';
+                        btn.disabled = true;
+
+                        updateProgress(checkbox); // Trigger Confetti and save
+                        closeExercise();
+                    }, 1500);
+                } else {
+                    feedback.innerText = '✅ 回答正确！准备下一题...';
+                    feedback.className = 'feedback success';
+                    document.getElementById('answerInput').value = ''; // clear input
+                    document.getElementById('answerInput').disabled = true; // prevent quick double enter
+
+                    setTimeout(() => {
+                        feedback.innerText = '';
+                        document.getElementById('answerInput').disabled = false;
+                        if (currentExerciseType === 'math') {
+                            generateMathProblem();
+                        } else if (currentExerciseType === 'chinese') {
+                            generateChineseProblem();
+                        } else {
+                            generateEnglishProblem();
+                        }
+                        document.getElementById('answerInput').focus();
+                    }, 1000); // 1秒后出下一题
+                }
+            } else {
+                feedback.innerText = '❌ 不太对哦，再想想再试一次吧！';
+                feedback.className = 'feedback error';
+                document.getElementById('answerInput').value = ''; // clear input
+                document.getElementById('answerInput').focus();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            switchProfile(currentProfile);
+        });
+
+        function updateProgress(checkbox) {
+            const listItem = checkbox.closest('.task-item');
+            if (checkbox.checked) {
+                listItem.classList.add('completed');
+                createConfetti(checkbox); // 加点小特效鼓励
             } else {
                 listItem.classList.remove('completed');
             }
@@ -2056,11 +2371,11 @@
             const textElement = document.getElementById('progressText');
 
             if (checked === 0) {
-                textElement.innerText = `浠婂ぉ鏈?${total} 涓皬鎸戞垬锛屽噯澶囧ソ浜嗗悧锛燄煔€`;
+                textElement.innerText = `今天有 ${total} 个小挑战，准备好了吗？🚀`;
             } else if (checked < total) {
-                textElement.innerText = `澶浜嗭紒宸茬粡瀹屾垚浜?${checked}/${total} 椤癸紝缁х画淇濇寔锛侌煉猔;
+                textElement.innerText = `太棒了！已经完成了 ${checked}/${total} 项，继续保持！💪`;
             } else {
-                textElement.innerText = `馃帀 婊″垎杈炬垚锛佷粖澶╃殑浣犺秴绾ф锛屼负浣犻獎鍌诧紒馃帀`;
+                textElement.innerText = `🎉 满分达成！今天的你超级棒，为你骄傲！🎉`;
             }
         }
 
@@ -2072,7 +2387,7 @@
             const storageKey = `habitTrackerState_${currentProfile}`;
             localStorage.setItem(storageKey, JSON.stringify(state));
 
-            // 璁板綍鏈€鍚庢墦鍗℃棩鏈燂紝鐢ㄤ簬璺ㄥぉ鑷姩閲嶇疆
+            // 记录最后打卡日期，用于跨天自动重置
             localStorage.setItem(`lastDate_${currentProfile}`, new Date().toDateString());
         }
 
@@ -2095,16 +2410,16 @@
                     cb.disabled = true;
                     cb.nextElementSibling.style.cursor = 'not-allowed';
                     cb.nextElementSibling.style.backgroundColor = '#f0f0f0';
-                    cb.nextElementSibling.title = '璇峰厛鐐瑰嚮宸︿晶鎸夐挳瀹屾垚鎸戞垬';
+                    cb.nextElementSibling.title = '请先点击左侧按钮完成挑战';
 
                     const btn = listItem.querySelector('.exercise-btn');
                     if (btn) {
                         btn.disabled = false;
-                        if (listItem.id === 'task-math-calc') btn.innerText = '寮€濮嬬畻鏈?;
-                        else if (listItem.id === 'task-chinese-foundation') btn.innerText = '寮€濮嬬粌瀛?;
-                        else if (listItem.id === 'task-english-vocab') btn.innerText = '寮€濮嬭儗璇?;
-                        else if (listItem.id === 'task-habit-reading') btn.innerText = '寮€濮嬮槄璇?;
-                        else if (listItem.id === 'task-english-read') btn.innerText = '寮€濮嬬（鑰虫湹';
+                        if (listItem.id === 'task-math-calc') btn.innerText = '开始算术';
+                        else if (listItem.id === 'task-chinese-foundation') btn.innerText = '开始练字';
+                        else if (listItem.id === 'task-english-vocab') btn.innerText = '开始背诵';
+                        else if (listItem.id === 'task-habit-reading') btn.innerText = '开始阅读';
+                        else if (listItem.id === 'task-english-read') btn.innerText = '开始磨耳朵';
                     }
                 }
             });
@@ -2115,10 +2430,10 @@
             const focusBtn = document.getElementById('startFocusBtn');
             if (focusBtn) {
                 focusBtn.disabled = false;
-                focusBtn.innerText = '寮€濮?0鍖轰笓娉?;
+                focusBtn.innerText = '开始20区专注';
             }
 
-            // 濡傛灉鏄柊鐨勪竴澶╋紝鑷姩閲嶇疆锛堜笉寮圭獥锛?
+            // 如果是新的一天，自动重置（不弹窗）
             if (lastDate && lastDate !== today) {
                 // Do nothing more, leaving it in the reset state
                 saveProgress(); // Save the reset state for the new day
@@ -2146,7 +2461,7 @@
 
                                 const btn = listItem.querySelector('.exercise-btn');
                                 if (btn) {
-                                    btn.innerText = '宸插畬鎴?;
+                                    btn.innerText = '已完成';
                                     btn.disabled = true;
                                 }
                             }
@@ -2163,11 +2478,11 @@
             // Update Main Title
             const mainTitle = document.getElementById('main-title');
             if (profileId === 'g3') {
-                mainTitle.innerText = '馃専 涓夊勾绾ц秴鑳芥墦鍗¤〃 馃専';
-                document.title = '涓夊勾绾т範鎯吇鎴愭墦鍗?;
+                mainTitle.innerText = '🌟 三年级超能打卡表 🌟';
+                document.title = '三年级习惯养成打卡';
             } else {
-                mainTitle.innerText = '馃専 浜屽勾绾ц秴鑳芥墦鍗¤〃 馃専';
-                document.title = '浜屽勾绾т範鎯吇鎴愭墦鍗?;
+                mainTitle.innerText = '🌟 二年级超能打卡表 🌟';
+                document.title = '二年级习惯养成打卡';
             }
 
             // Update UI switch buttons
@@ -2184,15 +2499,15 @@
                 if (englishGroup) englishGroup.style.display = 'none';
 
                 // Update descriptions for Grade 2
-                if (chineseText) chineseText.innerText = '澶熀纭€锛氱湅鎷奸煶鍐欏瓧銆佽ˉ鍏呰瘝璇粌涔?;
-                if (mathText) mathText.innerText = '缁冭绠楋細1000浠ュ唴鍔犲噺銆佸熀纭€涔樻硶锛屾湁浣欐暟鐨勯櫎娉?;
+                if (chineseText) chineseText.innerText = '夯基础：看拼音写字、补充词语练习';
+                if (mathText) mathText.innerText = '练计算：1000以内加减、基础乘法，有余数的除法';
             } else {
                 // Grade 3: Show English tasks
                 if (englishGroup) englishGroup.style.display = 'block';
 
                 // Update descriptions for Grade 3
-                if (chineseText) chineseText.innerText = '澶熀纭€锛氱湅鎷奸煶鍐欏瓧銆佽ˉ鍏呮垚璇粌涔?;
-                if (mathText) mathText.innerText = '缁冭绠楋細瀹屾垚姣忔棩鍙ｇ畻璁粌锛屼繚璇佸張蹇張鍑?;
+                if (chineseText) chineseText.innerText = '夯基础：看拼音写字、补充成语练习';
+                if (mathText) mathText.innerText = '练计算：完成每日口算训练，保证又快又准';
             }
 
             // Reload progress for the new profile
@@ -2200,7 +2515,7 @@
         }
 
         function resetCheckboxes(confirmPrompt = true) {
-            if (confirmPrompt && !confirm('纭畾瑕侀噸缃粖澶╃殑鎵撳崱璁板綍锛屽紑鍚柊鐨勪竴澶╁悧锛?)) {
+            if (confirmPrompt && !confirm('确定要重置今天的打卡记录，开启新的一天吗？')) {
                 return;
             }
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -2214,15 +2529,15 @@
                     cb.disabled = true;
                     cb.nextElementSibling.style.cursor = 'not-allowed';
                     cb.nextElementSibling.style.backgroundColor = '#e0e0e0';
-                    cb.nextElementSibling.title = '璇峰厛瀹屾垚浠诲姟';
+                    cb.nextElementSibling.title = '请先完成任务';
 
                     const btn = listItem.querySelector('.exercise-btn');
                     if (btn) {
-                        if (listItem.id === 'task-math-calc') btn.innerText = '寮€濮嬫寫鎴?;
-                        else if (listItem.id === 'task-english-vocab') btn.innerText = '寮€濮嬫祴璇?;
-                        else if (listItem.id === 'task-english-read') btn.innerText = '姣忔棩褰遍煶';
-                        else if (listItem.id === 'task-habit-reading') btn.innerText = '浠婃棩闃呰';
-                        else if (listItem.id === 'task-chinese-foundation') btn.innerText = '寮€濮嬬粌涔?;
+                        if (listItem.id === 'task-math-calc') btn.innerText = '开始挑战';
+                        else if (listItem.id === 'task-english-vocab') btn.innerText = '开始测试';
+                        else if (listItem.id === 'task-english-read') btn.innerText = '每日影音';
+                        else if (listItem.id === 'task-habit-reading') btn.innerText = '今日阅读';
+                        else if (listItem.id === 'task-chinese-foundation') btn.innerText = '开始练习';
                         btn.disabled = false;
                     }
                 }
@@ -2231,7 +2546,7 @@
             updateProgressText();
         }
 
-        // 绠€鍗曠殑绮掑瓙鐗规晥鎺夎惤 (鏇夸唬 confetti 搴擄紝淇濇寔鍗曟枃浠?
+        // 简单的粒子特效掉落 (替代 confetti 库，保持单文件)
         function createConfetti(element) {
             const rect = element.getBoundingClientRect();
             const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722'];
@@ -2252,7 +2567,7 @@
                 const angle = Math.random() * Math.PI * 2;
                 const velocity = 50 + Math.random() * 50;
                 const tx = Math.cos(angle) * velocity;
-                const ty = -Math.abs(Math.sin(angle)) * velocity - 20; // 鍚戜笂鎶?
+                const ty = -Math.abs(Math.sin(angle)) * velocity - 20; // 向上抛
 
                 confetto.animate([
                     { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
